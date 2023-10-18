@@ -10,13 +10,13 @@ export default function AreaChartCard(props: {
   label: string;
 }) {
   return (
-    <div className="bg-white flex flex-col items-center justify-center w-[640px] px-2 rounded-md py-6 ">
+    <div className="bg-white flex flex-col items-center justify-center w-full px-5 rounded-md py-6 ">
       <div className="flex w-full pt-2 pb-10">
-        <p className="font-semibold">{props.label}</p>
+        <p className="font-semibold text-[#3F3F3F] text-[18px] tracking-[0.3px] font-montserrat">{props.label}</p>
       </div>
       <AreaChart
         style={{ fontSize: "12px" }}
-        width={580}
+        width={800}
         height={250}
         data={props.data}
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}

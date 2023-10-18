@@ -1,5 +1,4 @@
 import { PieChart, Pie } from "recharts";
-import { RadialBarChart, RadialBar } from "recharts";
 
 interface PieChartData {
   label: string;
@@ -13,12 +12,12 @@ export default function PieChartCard(props: {
   sublabel?: string;
 }) {
   return (
-    <div className="w-[350px] h-[250px] bg-white rounded-md flex flex-col items-center justify-center px-2">
+    <div className="max-w-[266px] w-full border border-[#EAEAEA] rounded-[16px] px-[18px] min-h-[300px] bg-white  flex flex-col items-center py-5">
       <div className="flex flex-col w-full">
         <p>{props.label}</p>
         <p className="text-xs text-[#2B2B2B]">{props.sublabel}</p>
       </div>
-      <PieChart width={200} height={180}>
+      <PieChart  width={160} height={160}>
         <Pie
           data={props.data}
           dataKey="value"
@@ -30,8 +29,8 @@ export default function PieChartCard(props: {
         />
       </PieChart>
 
-      <div className="flex  w-full gap-x-2 items-center justify-center">
-        <div className="flex gap-x-2 text-xs">
+      <div className="flex flex-col w-full mt-4 gap-x-2">
+        <div className="flex gap-x-2 mb-3 text-xs">
           <div className={`h-[16px] w-[16px] bg-[#32C87D]`}></div>
           <div>{props.data[0].label}</div>
         </div>
