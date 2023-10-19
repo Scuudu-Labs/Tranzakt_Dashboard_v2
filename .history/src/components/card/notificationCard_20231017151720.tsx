@@ -1,0 +1,24 @@
+import React from 'react'
+import { ReactComponent as GroupImage } from "../../assets/icons/user-group.svg";
+const OneNotify = () => {
+    return (
+        <div className='w-full py-[16px] px-[16px] flex items-center'>
+            <div className='w-[44px] h-[44px] rounded-[44px] bg-[#EBF9F2] text-center flex items-center justify-center mr-2'>
+                <GroupImage />
+            </div>
+            <div className='flex flex-col'>
+                <h2 className='font-montserrat'>20 users completed their KYC</h2>
+            </div>
+        </div>
+    )
+}
+
+const NotificationCard = () => {
+  return (
+    <div className='w-[428px] h-[400px] right-0 top-[85px] p-[16px] absolute rounded-[8px] bg-white flex flex-col items-center justify-center'>
+        
+    </div>
+  )
+}
+
+export default NotificationCard
