@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ReactComponent as SortIcon } from "../../assets/icons/sort.svg";
+import StatusTag from "../ui/statusTag";
 
 interface MangageUserTableData {
   sn: string;
@@ -8,12 +9,7 @@ interface MangageUserTableData {
   date: string;
 }
 
-const StatusTag = ({text}: {text:string}) => {
-  const style = text === "completed" ? "text-[#32C87D] bg-[#EBF9F2]" : text === "pending" ? "text-[#F5A122] bg-[#FFF0D2]" :   "text-[#FF2636] bg-[#FFE8E8]"
-  return (
-    <button className={`capitalize px-[12px] py-[4px] rounded-[12px] text-[12px] ${style}`}>{text}</button>
-  )
-}
+
 
 export default function ManagerUserTable(props: {
   data: MangageUserTableData[];

@@ -1,7 +1,5 @@
 import DashboardSection from "../../components/dashboard/DashboardSection";
 import MainContainer from "../../components/layout/MainContainer";
-import LeftNavbar from "../../components/nav/LeftNav";
-import TopNavbar from "../../components/nav/TopNav";
 import { PiFunnelLight } from "react-icons/pi";
 
 export default function DashboardPage() {

@@ -8,7 +8,7 @@ export default function MainContainer(props: { children: ReactNode }) {
       <TopNavbar />
       <div className="h-[88%] flex w-full overflow-x-scroll">
         <LeftNavbar />
-        <div className="h-full bg-[#EEEEEE] w-[85%] pt-6 px-5">
+        <div className="min-h-screen bg-[#EEEEEE] w-[85%] pt-6 px-5">
           {props.children}
         </div>
       </div>
