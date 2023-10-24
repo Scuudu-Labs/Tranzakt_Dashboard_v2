@@ -18,7 +18,7 @@ export default function LoginForm() {
   }); 
 
   const navigate = useNavigate();
-  const onSumbit = (data) => {
+  const onSumbit = (data:object) => {
     console.log(data)
   };
 

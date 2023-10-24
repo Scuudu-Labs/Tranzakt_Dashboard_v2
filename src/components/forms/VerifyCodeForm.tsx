@@ -10,12 +10,12 @@ interface LoginData {
 }
 
 export default function VerifyCodeForm() {
-  const { register, handleSubmit } = useForm<LoginData>({
+  const { handleSubmit } = useForm<LoginData>({
     mode: "onTouched",
   }); 
 
   const navigate = useNavigate();
-  const onSumbit = (data) => {
+  const onSumbit = (data:object) => {
     console.log(data)
   };
   return (

@@ -1,4 +1,4 @@
-import React, { LegacyRef } from 'react'
+import { LegacyRef } from 'react'
 
 const ProfileCard = ({reference}: {reference:LegacyRef<HTMLDivElement>}) => {
   return (

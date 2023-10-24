@@ -19,7 +19,7 @@ export default function ChangePasswordForm() {
   const [hide, setHide] = useState(false)
   const [close, setClose] = useState(false)
   const navigate = useNavigate();
-  const onSumbit = (data) => {
+  const onSumbit = (data: object) => {
     console.log(data)
   };
   return (
@@ -40,7 +40,7 @@ export default function ChangePasswordForm() {
           <HideSvg />
         </div>
         <input
-          {...register("email", { required: true })}
+          {...register("password", { required: true })}
           className="w-full rounded-md py-2 border outline-none h-[48px] border-[#A1A1A1] w-full placeholder-[#A1A1A1] px-2"
           placeholder="********"
           type={close ? "text" : "password"}
