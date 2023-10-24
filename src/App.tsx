@@ -7,12 +7,14 @@ import VerifyAccount from "./pages/VerifyAccount";
 import NotFound from "./pages/NotFound";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import Success from "./pages/Success";
+import { Providers } from "./redux/provider";
 
 
 
 function App() {
 
   return (
+    <Providers>
     <div className="font-montserrat">
       <BrowserRouter>
         <Routes>
@@ -27,6 +29,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </Providers>
   );
 }
 
