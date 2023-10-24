@@ -1,5 +1,4 @@
-import React from 'react'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const BarCharts = () => {
     
@@ -75,9 +74,9 @@ const data = [
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-          <Bar dataKey="ur" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+          <Bar dataKey="pv" fill="#8884d8"   />
+          <Bar dataKey="uv" fill="#82ca9d"  />
+          <Bar dataKey="ur" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -9,7 +9,6 @@ import ProfileCard from "../card/profileCard";
 import NotificationCard from "../card/notificationCard";
 
 export default function TopNavbar() {
-  const [notificationCount, setNotificationCount] = useState(10);
   const [openProfile, setOpenProfile] = useState(false);
   const [notify, setNotify] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null)
@@ -42,15 +41,12 @@ export default function TopNavbar() {
       <div className="flex items-center justify-center gap-x-5 px-5">
         <div className="h-[50px] w-[50px] rounded-full bg-[#F2FFF7] cursor-pointer flex items-center justify-center " onClick={() => setNotify(!notify)}>
           <div className="relative w-[10px] mb-5 ml-3">
-            {notificationCount > 0 ? (
               <div className="h-[20px] w-[20px] rounded-[20px] bg-red text-[10px] bg-[#FF2636] absolute -top-3 -left-1 text-white z-10 flex items-center justify-center">
                 <p className="font-bold font-montserrat">
-                {notificationCount}
+                {10}
                 </p>
               </div>
-            ) : (
-              <></>
-            )}
+           
             <div className="absolute top-0 right-0">
               <Bell />
             </div>
