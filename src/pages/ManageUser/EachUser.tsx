@@ -1,4 +1,3 @@
-import React from 'react'
 import MainContainer from '../../components/layout/MainContainer'
 import { ReactComponent as GoBack } from "../../assets/icons/goBack.svg";
 import { ReactComponent as Mail} from "../../assets/icons/mail.svg";

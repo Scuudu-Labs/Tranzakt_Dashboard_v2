@@ -1,5 +1,3 @@
-import React from 'react'
-
 const DisplayBox = ({title, value}: {title:string, value: string}) => {
     return (
         <div className='w-full flex flex-col px-[16px] py-[8px]  border-[0.5px] border-[#A1A1A1] rounded-[8px]'>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ReactComponent as Credit} from "../../assets/icons/credit.svg";
 import { ReactComponent as Debit} from "../../assets/icons/debit.svg";
 
