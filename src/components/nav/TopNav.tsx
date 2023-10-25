@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactComponent as TranzaktLogo } from "../../assets/tranzaktlogo.svg";
-import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
-import { ReactComponent as Search } from "../../assets/icons/search.svg";
-import { ReactComponent as Dropdown } from "../../assets/icons/drop.svg";
+import { BellIcon, DropIcon, SearchIcon, TLogoIcon } from "../../assets";
 import { useEffect, useRef, useState } from "react";
 import ProfileCard from "../card/profileCard";
 import NotificationCard from "../card/notificationCard";
@@ -28,12 +25,12 @@ export default function TopNavbar() {
       {openProfile && <ProfileCard reference={profileRef} />}
       {notify && <NotificationCard reference={notificationRef} />}
       <div className="mx-4">
-        <TranzaktLogo />
+        <TLogoIcon />
       </div>
       <div className="flex justify-between px-6 w-full items-center">
         <div className="w-[648px] relative px-6">
           <div className="absolute left-10  top-[14px]">
-          <Search />
+          <SearchIcon />
           </div>
           <input type="text" className="w-full text-[16px] font-montserrat bg-[#F5F7F9] focus:outline-none rounded-[8px] px-[44px] text-[#3F3F3F] border-[#CFCFCF] border py-[11px]" placeholder="Query" />
         </div>
@@ -47,7 +44,7 @@ export default function TopNavbar() {
               </div>
            
             <div className="absolute top-0 right-0">
-              <Bell />
+              <BellIcon />
             </div>
           </div>
         </div>
@@ -57,7 +54,7 @@ export default function TopNavbar() {
           OK
         </div>
         <div className="cursor-pointer">
-          <Dropdown />
+          <DropIcon />
         </div>
        </div>
       </div>

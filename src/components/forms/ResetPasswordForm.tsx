@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { ReactComponent as Login } from "../../assets/logo.svg";
-import { ReactComponent as SecureSvg } from "../../assets/secure.svg";
 import { useNavigate } from "react-router-dom";
+import { LogoIcon, SecureIcon } from "../../assets";
 
 
 interface ResetPasswordData {
@@ -21,7 +20,7 @@ export default function LoginForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <Login />
+    <LogoIcon />
   </div>
     <form
       className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
@@ -48,7 +47,7 @@ export default function LoginForm() {
         Continue
       </button>
       <div className="absolute bottom-4">
-      <SecureSvg />
+      <SecureIcon />
     </div>
     </form>
     

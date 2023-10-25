@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ReactComponent as SortIcon } from "../../assets/icons/sort.svg";
 import StatusTag from "../ui/statusTag";
+import { SortIcon } from "../../assets";
 
 interface MangageUserTableData {
   sn: string;

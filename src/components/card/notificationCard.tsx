@@ -1,10 +1,10 @@
 import {LegacyRef} from 'react'
-import { ReactComponent as GroupImage } from "../../assets/icons/group.svg";
+import { GroupIcon } from '../../assets'
 const OneNotify = () => {
     return (
         <div className='w-full py-[16px] px-[16px] flex items-center border-b-[0.2px] border-[#A1A1A1]'>
             <div className='max-w-[44px] w-full h-full max-h-[44px] rounded-[44px] bg-[#EBF9F2] text-center flex items-center justify-center mr-4'>
-                <GroupImage />
+                <GroupIcon />
             </div>
             <div className='flex w-full flex-col'>
                 <h2 className='font-montserrat font-[600] text-[16px] tracking-[0.3px] mb-2 text-[#3F3F3F]'>20 users completed their KYC</h2>

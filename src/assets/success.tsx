@@ -1,4 +1,15 @@
+import { DetailedHTMLProps, FC, SVGProps } from 'react';
+
+
+export const SuccessIcon: FC<
+  DetailedHTMLProps<SVGProps<SVGSVGElement>, SVGSVGElement>
+> = () => (
+
 <svg width="106" height="105" viewBox="0 0 106 105" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="52.7867" cy="52.5" r="52.5" fill="#F2FFF7"/>
 <path d="M52.7867 27.7358L32.9753 36.741V50.2487C32.9753 62.7433 41.4282 74.4275 52.7867 77.2641C64.1452 74.4275 72.598 62.7433 72.598 50.2487V36.741L52.7867 27.7358ZM48.3841 63.7564L39.5791 54.7513L42.6829 51.577L48.3841 57.3853L62.8904 42.5493L65.9942 45.7461L48.3841 63.7564Z" fill="#32C87D"/>
 </svg>
+
+)
+
+

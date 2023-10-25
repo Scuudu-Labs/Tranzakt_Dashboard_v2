@@ -1,6 +1,5 @@
+import { CreditIcon, DebitIcon } from "../../assets";
 
-import { ReactComponent as Credit} from "../../assets/icons/credit.svg";
-import { ReactComponent as Debit} from "../../assets/icons/debit.svg";
 interface ITransact {
     type: string;
     text: string
@@ -12,7 +11,7 @@ const Transaction = ({type, text, details, amount, date}:ITransact ) => {
     return(
         <div className='py-4 px-4 flex items-center justify-between border-b last:border-none border-[#E3E3E3]'>
             <div className='flex items-center'>
-                {type === "credit" ? <Credit /> : <Debit /> }
+                {type === "credit" ? <CreditIcon /> : <DebitIcon /> }
                 <div className='flex flex-col ml-3'>
                     <span className='text-[12px] font-montserrat text-[#3F3F3F] tracking-[0.3px] font-[500]'>{text}</span>
                     <span className='text-[#A1A1A1] py-1 uppercase text-[12px] font-montserrat tracking-[0.3px] font-[500]'>{details}</span>

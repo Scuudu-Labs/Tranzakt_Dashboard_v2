@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
-import { ReactComponent as Login } from "../../assets/logo.svg";
-import { ReactComponent as SecureSvg } from "../../assets/secure.svg";
-import { ReactComponent as HideSvg } from "../../assets/icons/hide.svg";
+
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { HideIcon, LogoIcon, SecureIcon } from "../../assets";
 
 interface LoginData {
   password: string;
@@ -25,7 +24,7 @@ export default function ChangePasswordForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <Login />
+    <LogoIcon />
   </div>
     <form
       className="bg-white max-w-[500px] rounded-[8px] relative flex flex-col items-center justify-center mx-auto h-[500px]"
@@ -37,11 +36,11 @@ export default function ChangePasswordForm() {
       <div className="flex w-[400px] relative mx-auto flex-col mb-6 gap-y-2">
         <label className="text-[12px]">New Password</label>
         <div className="absolute right-4 cursor-pointer top-10" onClick={() => setClose(!close)}>
-          <HideSvg />
+          <HideIcon />
         </div>
         <input
           {...register("password", { required: true })}
-          className="w-full rounded-md py-2 border outline-none h-[48px] border-[#A1A1A1] w-full placeholder-[#A1A1A1] px-2"
+          className="rounded-md py-2 border outline-none h-[48px] border-[#A1A1A1] w-full placeholder-[#A1A1A1] px-2"
           placeholder="********"
           type={close ? "text" : "password"}
         ></input>
@@ -50,13 +49,13 @@ export default function ChangePasswordForm() {
         <label className="text-[12px]">Confirm Password</label>
         <input
           {...register("password", { required: true, minLength: 6 })}
-          className="w-full rounded-md py-2 h-[48px] border w-full outline-none border-[#A1A1A1] placeholder-[#A1A1A1] px-2"
+          className="rounded-md py-2 h-[48px] border w-full outline-none border-[#A1A1A1] placeholder-[#A1A1A1] px-2"
           placeholder="********"
           type={hide ? "text" : "password"}
 
         ></input>
         <div className="absolute right-4 cursor-pointer top-10" onClick={() => setHide(!hide)}>
-          <HideSvg />
+          <HideIcon />
         </div>
         <label
           className="text-[#A1A1A1] text-right text-[13px] cursor-pointer px-1"
@@ -72,7 +71,7 @@ export default function ChangePasswordForm() {
         Reset my password
       </button>
       <div className="absolute bottom-4">
-      <SecureSvg />
+      <SecureIcon />
     </div>
     </form>
     
