@@ -6,38 +6,55 @@ import {
   samplePieChartData2,
 } from "../../data";
 import PieChartCard from "../charts/PieChartCard";
+import TransactionCard from "./transactionCard";
+import BarCharts from "../charts/barChart";
 
 export default function DashboardSection() {
   return (
-    <div className="w-full flex justify-between my-2">
-      <div className="flex flex-col gap-y-3 ">
-        <div className="flex gap-x-5">
+    <div className="w-full flex flex-col my-2">
+      <div className="flex items-center">
+      <div className="flex mt-6 w-[800px] flex-col gap-y-3 ">
+        <div className="flex gap-x-3 w-full">
           <AmountInfoCard
             label="TOTAL USER BALANCE"
-            amount="₦300k"
+            amount="₦500,964.00"
             change="+15.2%"
           />
 
           <AmountInfoCard
             label="TOTAL CUSTOMER BALANCE"
-            amount="₦500k"
+            amount="₦300,964.00"
             change="+15.2%"
           />
 
           <AmountInfoCard
             label="TOTAL MERCHANT BALANCE"
-            amount="₦100k"
+            amount="₦200,964.00"
             change="+15.2%"
           />
         </div>
         <div>
           <AreaChartCard
             data={sampleAreaChartData}
-            label="Transaction Volume ₦"
+            label="Transaction Statistics ₦"
           />
         </div>
       </div>
-      <div className="flex flex-col gap-y-3">
+      <div className="ml-8 gap-y-4 mt-6 w-full flex flex-col">
+        <AmountInfoCard
+            label="TOTAL USER BALANCE"
+            amount="₦500,964.00"
+            change="+15.2%"
+          />
+        <AmountInfoCard
+            label="TOTAL USER BALANCE"
+            amount="₦500,964.00"
+            change="+15.2%"
+          />
+        <TransactionCard />
+      </div>
+      </div>
+      <div className="flex gap-6 my-6">
         <PieChartCard
           label={"Customers"}
           sublabel="500 users"
@@ -49,7 +66,9 @@ export default function DashboardSection() {
           sublabel="500 users"
           data={samplePieChartData2}
         />
+        <BarCharts />
       </div>
+
     </div>
   );
 }
