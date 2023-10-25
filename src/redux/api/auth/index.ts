@@ -5,16 +5,22 @@ export const authAPi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
         headers: { accept: 'application/json' },
-        baseUrl: `${BASE_URL}/admin`
+        baseUrl: `${BASE_URL}/admin/login`
     }),
     endpoints: builder => ({
-        adminLogin: builder.mutation<ISuccessResponse<ILoginResponse>, ILogin>({
+        adminLogin: builder.mutation<ISuccessResponse<IAdmin>, ILogin>({
             query: (data) => ({
-                url: '/login',
+                url: '/',
                 method: 'POST',
                 body: data
             }),
-        })
+            transformErrorResponse: (
+                response: { status: number; data:IErrorResponse },
+              ) => {
+                return response.data.error;
+              }
+        }),
+       
     })
 })
 

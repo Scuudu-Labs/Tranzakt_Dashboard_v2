@@ -1,3 +1,3 @@
-import {config} from 'dotenv'
-config();
-export const BASE_URL = process.env.REACT_APP_BASE_URL || ''
+// import {config} from 'dotenv'
+// config();
+export const BASE_URL =  'https://api.tranzakt.app/api/v1'

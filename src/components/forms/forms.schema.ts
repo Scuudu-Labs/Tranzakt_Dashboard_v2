@@ -5,4 +5,9 @@ const loginFormSchema = yup.object().shape({
     password: yup.string().min(8).max(32).required(),  
 })
 
-export {loginFormSchema}
+const initialLogin = {
+    email:'',
+    password: '',
+} 
+
+export {loginFormSchema, initialLogin} 

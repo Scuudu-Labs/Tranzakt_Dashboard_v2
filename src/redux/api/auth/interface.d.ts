@@ -3,7 +3,7 @@ interface ILogin {
     password: string;
 }
 
-interface ILoginResponse {
+interface ILoginResponse{
     email: string;
     role: string;
     status: string;
