@@ -1,4 +1,4 @@
-import React, {LegacyRef} from 'react'
+import {LegacyRef} from 'react'
 import { ReactComponent as GroupImage } from "../../assets/icons/group.svg";
 const OneNotify = () => {
     return (

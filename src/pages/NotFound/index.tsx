@@ -1,5 +1,4 @@
 import backgroundImage from "../../assets/background.svg";
-import ResetPasswordForm from "../../components/forms/ResetPasswordForm";
 
 
 export default function ResetPassword() {
