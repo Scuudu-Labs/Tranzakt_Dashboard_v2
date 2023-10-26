@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import  {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HideSvg } from "../../assets/icons/hide.svg";
 import { InputProps } from './types';

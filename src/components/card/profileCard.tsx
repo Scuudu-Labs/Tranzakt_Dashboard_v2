@@ -1,4 +1,4 @@
-import React, { LegacyRef } from 'react'
+import { LegacyRef } from 'react'
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
 import { useAppDispatch } from '../../redux/hooks';
 import { setToken, setUser } from '../../redux/slice/auth';
