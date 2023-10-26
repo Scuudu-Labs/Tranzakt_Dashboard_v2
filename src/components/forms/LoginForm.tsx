@@ -42,9 +42,8 @@ export default function LoginForm() {
     try {
       const res = await adminLogin(values).unwrap()
       toast.success(res.message);
-      console.log(res)
       resetForm();
-      dispatch(setToken(res.data.auth_token));
+      dispatch(setToken(res?.data?.auth_token as string));
       dispatch(setUser(res.data))
       navigate('/dashboard');
     } catch (error) {

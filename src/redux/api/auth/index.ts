@@ -5,12 +5,12 @@ export const authAPi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
         headers: { accept: 'application/json' },
-        baseUrl: `${BASE_URL}/admin/login`
+        baseUrl: `${BASE_URL}/admin`
     }),
     endpoints: builder => ({
         adminLogin: builder.mutation<ISuccessResponse<IAdmin>, ILogin>({
             query: (data) => ({
-                url: '/',
+                url: '/login',
                 method: 'POST',
                 body: data
             }),
@@ -20,8 +20,22 @@ export const authAPi = createApi({
                 return response.data.error;
               }
         }),
+
+        forgotPassword: builder.mutation<ISuccessResponse, Pick<ILogin, 'email'>>({
+            query: (data) => ({
+                url: '/forgot-password',
+                method: 'POST',
+                body: data
+
+            }),
+            transformErrorResponse: (
+                response: { status: number; data:IErrorResponse },
+              ) => {
+                return response;
+              }
+        })
        
     })
 })
 
-export const { useAdminLoginMutation } = authAPi;
+export const { useAdminLoginMutation, useForgotPasswordMutation } = authAPi;

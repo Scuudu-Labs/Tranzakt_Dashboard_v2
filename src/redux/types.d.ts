@@ -1,7 +1,7 @@
-interface ISuccessResponse<T> {
+interface ISuccessResponse<T=void> {
     success: boolean;
     message: string;
-    data: T
+    data: T | null
 }
 
 interface IErrorResponse {

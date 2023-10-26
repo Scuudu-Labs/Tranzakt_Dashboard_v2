@@ -23,12 +23,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<PublicPage><LoginPage /></PublicPage>} />
-          <Route path={"/change_password"} element={<ConfirmPassword />} />
-          <Route path={"/verify_account"} element={<VerifyAccount />} />
-          <Route path={"/reset_password"} element={<ResetPassword />} />
+          <Route path={"/change_password"} element={<PublicPage><ConfirmPassword /></PublicPage>} />
+          <Route path={"/verify_account"} element={<PublicPage><VerifyAccount /></PublicPage>} />
+          <Route path={"/reset_password"} element={<PublicPage><ResetPassword /></PublicPage>} />
           <Route path={"/dashboard"} element={<ProtectedPage><DashboardPage /></ProtectedPage>} />
           <Route path={"/manageuser"} element={<ProtectedPage><ManageUserPage /></ProtectedPage>} />
-          <Route path={"/success"} element={<Success />} />
+          <Route path={"/success"} element={<PublicPage><Success /></PublicPage>} />
           <Route path={"*"} element={<NotFound />} />
         </Routes>
       </BrowserRouter>

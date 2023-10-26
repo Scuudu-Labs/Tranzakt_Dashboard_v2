@@ -5,9 +5,18 @@ const loginFormSchema = yup.object().shape({
     password: yup.string().min(8).max(32).required(),  
 })
 
+
+const resetPasswordSchema = yup.object().shape({
+    email: yup.string().email().required(),
+})
+
 const initialLogin = {
     email:'',
     password: '',
 } 
 
-export {loginFormSchema, initialLogin} 
+const initialPasswordReset = {
+    email: ''
+  }
+
+export {loginFormSchema, initialLogin, resetPasswordSchema, initialPasswordReset} 
