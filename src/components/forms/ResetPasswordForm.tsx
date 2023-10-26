@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { LogoIcon, SecureIcon } from "../../assets";
+import IconWrap from "../ui/svgWrapper";
 
 
 interface ResetPasswordData {
@@ -20,7 +21,7 @@ export default function LoginForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <LogoIcon />
+     <IconWrap src={LogoIcon} />
   </div>
     <form
       className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
@@ -47,7 +48,8 @@ export default function LoginForm() {
         Continue
       </button>
       <div className="absolute bottom-4">
-      <SecureIcon />
+      <IconWrap src={SecureIcon} />
+    
     </div>
     </form>
     

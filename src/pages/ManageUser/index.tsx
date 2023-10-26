@@ -4,6 +4,7 @@ import { PiFunnelLight } from "react-icons/pi";
 import ManagerUserTable from "../../components/tables/ManageUserTable";
 import { sampleManageUserTableData } from "../../data";
 import { SearchIcon } from "../../assets";
+import IconWrap from "../../components/ui/svgWrapper";
 
 
 export default function ManageUserPage() {
@@ -37,7 +38,7 @@ export default function ManageUserPage() {
             <div className="w-[600px] h-[48px] flex items-center  ">
               <input type="text" name="search" className="h-[48px] text-[#3F3F3F] font-montserrat focus:outline-none rounded-[8px] rounded-r-none w-[90%] px-[16px]" placeholder="Search" />
               <div className="border bg-white border-[#EAEAEA]  rounded-[8px]  rounded-l-none   flex items-center justify-center w-[10%] h-[48px]">
-                <SearchIcon />
+              <IconWrap src={SearchIcon} />
               </div>
             </div>
           <button className="bg-white rounded-md mt-1 flex gap-x-2 px-5   h-[40px] justify-center items-center hover:bg-[#32C87D] hover:text-white">

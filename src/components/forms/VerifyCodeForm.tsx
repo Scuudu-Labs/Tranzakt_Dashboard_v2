@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import VerificationCodeInput from "../lib/customInput/index";
 import { LogoIcon, SecureIcon } from "../../assets";
+import IconWrap from "../ui/svgWrapper";
 
 interface LoginData {
   email: string;
@@ -20,7 +21,7 @@ export default function VerifyCodeForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <LogoIcon />
+     <IconWrap src={LogoIcon} />
   </div>
     <form
       className="bg-white max-w-[500px] rounded-[8px] relative flex flex-col items-center pt-14 mx-auto h-[500px]"
@@ -56,7 +57,7 @@ export default function VerifyCodeForm() {
           Didn't receive code? <span className="font-bold text-[#32C87D]">Resend</span>
         </label>
       <div className="absolute bottom-4">
-      <SecureIcon />
+      <IconWrap src={SecureIcon} />
     </div>
     </form>
     

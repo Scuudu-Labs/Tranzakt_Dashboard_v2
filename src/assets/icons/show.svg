@@ -1,14 +1,4 @@
-
-
-import { DetailedHTMLProps, FC, SVGProps } from 'react';
-
-
-export const ShowIcon: FC<
-  DetailedHTMLProps<SVGProps<SVGSVGElement>, SVGSVGElement>
-> = () => (
 <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2615 8.0531C13.2615 9.7991 11.8455 11.2141 10.0995 11.2141C8.35348 11.2141 6.93848 9.7991 6.93848 8.0531C6.93848 6.3061 8.35348 4.8911 10.0995 4.8911C11.8455 4.8911 13.2615 6.3061 13.2615 8.0531Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0981 15.3549C13.9061 15.3549 17.3891 12.6169 19.3501 8.0529C17.3891 3.4889 13.9061 0.7509 10.0981 0.7509H10.1021C6.2941 0.7509 2.8111 3.4889 0.850098 8.0529C2.8111 12.6169 6.2941 15.3549 10.1021 15.3549H10.0981Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-)
-

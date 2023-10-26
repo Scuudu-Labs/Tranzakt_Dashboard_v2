@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { HideIcon, LogoIcon, SecureIcon } from "../../assets";
+import IconWrap from "../ui/svgWrapper";
 
 interface LoginData {
   password: string;
@@ -24,7 +25,7 @@ export default function ChangePasswordForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <LogoIcon />
+      <IconWrap src={LogoIcon} />
   </div>
     <form
       className="bg-white max-w-[500px] rounded-[8px] relative flex flex-col items-center justify-center mx-auto h-[500px]"
@@ -36,7 +37,8 @@ export default function ChangePasswordForm() {
       <div className="flex w-[400px] relative mx-auto flex-col mb-6 gap-y-2">
         <label className="text-[12px]">New Password</label>
         <div className="absolute right-4 cursor-pointer top-10" onClick={() => setClose(!close)}>
-          <HideIcon />
+      <IconWrap src={HideIcon} />
+
         </div>
         <input
           {...register("password", { required: true })}
@@ -55,7 +57,8 @@ export default function ChangePasswordForm() {
 
         ></input>
         <div className="absolute right-4 cursor-pointer top-10" onClick={() => setHide(!hide)}>
-          <HideIcon />
+        <IconWrap src={HideIcon} />
+
         </div>
         <label
           className="text-[#A1A1A1] text-right text-[13px] cursor-pointer px-1"
@@ -71,7 +74,7 @@ export default function ChangePasswordForm() {
         Reset my password
       </button>
       <div className="absolute bottom-4">
-      <SecureIcon />
+      <IconWrap src={SecureIcon} />
     </div>
     </form>
     

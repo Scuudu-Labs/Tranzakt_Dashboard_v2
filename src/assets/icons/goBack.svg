@@ -1,18 +1,7 @@
-import { DetailedHTMLProps, FC, SVGProps } from 'react';
-
-
-export const GoBackIcon: FC<
-  DetailedHTMLProps<SVGProps<SVGSVGElement>, SVGSVGElement>
-> = () => (
-
 <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.8">
 <path d="M19.1904 4C19.3601 4 19.5336 4.06707 19.6638 4.19725C19.9242 4.4576 19.9242 4.88363 19.6638 5.14398L10.7525 14.0592L19.5336 22.8403C19.794 23.1006 19.794 23.5267 19.5336 23.787C19.2733 24.0474 18.8473 24.0474 18.5869 23.787L9.33247 14.5326C9.07212 14.2722 9.07212 13.8462 9.33247 13.5858L18.7171 4.19727C18.8473 4.06709 19.0208 4.00004 19.1904 4.00004L19.1904 4Z" fill="#3F3F3F"/>
 </g>
 </svg>
-
-
-)
-
 
 

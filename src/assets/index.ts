@@ -1,23 +1,23 @@
-import {BellIcon} from './icons/bell'
-import { CreditIcon } from './icons/credit'
-import { DebitIcon } from './icons/debit'
-import { DropIcon } from './icons/drop'
-import { GoBackIcon } from './icons/goBack'
-import { GroupIcon } from './icons/group'
-import { HideIcon } from './icons/hide'
-import { LogoutIcon } from './icons/logout'
-import { MailIcon } from './icons/mail'
-import { NetworkIcon } from './icons/network'
-import { SearchIcon } from './icons/search'
-import { SearchesIcon } from './icons/searches'
-import { ShowIcon } from './icons/show'
-import { SortIcon } from './icons/sort'
-import { UserLargeIcon } from './icons/user-large'
-import {Logincon} from './login'
-import { LogoIcon } from './logo'
-import { SecureIcon } from './secure'
-import { SuccessIcon } from './success'
-import { TLogoIcon } from './tranzaktlogo'
+import BellIcon from './icons/bell.svg'
+import  CreditIcon  from './icons/credit.svg'
+import  DebitIcon  from './icons/debit.svg'
+import  DropIcon  from './icons/drop.svg'
+import  GoBackIcon  from './icons/goBack.svg'
+import  GroupIcon  from './icons/group.svg'
+import  HideIcon  from './icons/hide.svg'
+import  LogoutIcon  from './icons/logout.svg'
+import  MailIcon  from './icons/mail.svg'
+import  NetworkIcon  from './icons/network.svg'
+import  SearchIcon  from './icons/search.svg'
+import  SearchesIcon  from './icons/searches.svg'
+import  ShowIcon  from './icons/show.svg'
+import  SortIcon  from './icons/sort.svg'
+import  UserLargeIcon  from './icons/user-large.svg'
+import Logincon from './login.svg'
+import  LogoIcon  from './logo.svg'
+import  SecureIcon  from './secure.svg'
+import  SuccessIcon  from './success.svg'
+import  TLogoIcon  from './tranzaktlogo.svg'
 
 export {
     BellIcon,
@@ -40,6 +40,5 @@ export {
     SecureIcon,
     SuccessIcon,
     TLogoIcon
-
-
 }
+

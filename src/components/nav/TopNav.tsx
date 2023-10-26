@@ -3,6 +3,7 @@ import { BellIcon, DropIcon, SearchIcon, TLogoIcon } from "../../assets";
 import { useEffect, useRef, useState } from "react";
 import ProfileCard from "../card/profileCard";
 import NotificationCard from "../card/notificationCard";
+import IconWrap from "../ui/svgWrapper";
 
 export default function TopNavbar() {
   const [openProfile, setOpenProfile] = useState(false);
@@ -25,12 +26,14 @@ export default function TopNavbar() {
       {openProfile && <ProfileCard reference={profileRef} />}
       {notify && <NotificationCard reference={notificationRef} />}
       <div className="mx-4">
-        <TLogoIcon />
+      <IconWrap src={TLogoIcon} />
+
       </div>
       <div className="flex justify-between px-6 w-full items-center">
         <div className="w-[648px] relative px-6">
           <div className="absolute left-10  top-[14px]">
-          <SearchIcon />
+          <IconWrap src={SearchIcon} />
+
           </div>
           <input type="text" className="w-full text-[16px] font-montserrat bg-[#F5F7F9] focus:outline-none rounded-[8px] px-[44px] text-[#3F3F3F] border-[#CFCFCF] border py-[11px]" placeholder="Query" />
         </div>
@@ -44,7 +47,7 @@ export default function TopNavbar() {
               </div>
            
             <div className="absolute top-0 right-0">
-              <BellIcon />
+            <IconWrap src={BellIcon} />
             </div>
           </div>
         </div>
@@ -54,7 +57,8 @@ export default function TopNavbar() {
           OK
         </div>
         <div className="cursor-pointer">
-          <DropIcon />
+        <IconWrap src={DropIcon} />
+        
         </div>
        </div>
       </div>

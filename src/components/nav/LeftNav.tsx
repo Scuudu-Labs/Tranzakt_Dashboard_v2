@@ -3,6 +3,7 @@ import { PiFlagBannerLight } from "react-icons/pi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { LogoutIcon } from "../../assets";
+import IconWrap from "../ui/svgWrapper";
 export default function LeftNavbar() {
   return (
     <div className="h-screen fixed w-[210px]  flex flex-col  py-5 justify-between">
@@ -50,7 +51,7 @@ export default function LeftNavbar() {
       </div>
       <button className="flex items-center gap-x-2 text-[#FF2636] px-5 py-2">
         <div>
-          <LogoutIcon />
+        <IconWrap src={LogoutIcon} />
         </div>
         <div className="text-[#A1A1A1] font-montserrat font-[18px]">Logout</div>
       </button>
