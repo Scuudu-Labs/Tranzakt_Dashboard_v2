@@ -50,6 +50,7 @@
   "license": "MIT",
   "lint-staged": {
     "*.{ts, tsx}": "eslint --fix ",
-    "*.{ts, tsx, css,md,html,json}": "prettier --cache --write"
+    "*.{ts, tsx, css,md,html,json}": "prettier --cache --write",
+    "*.{ts,tsx}": "eslint --cache --fix"
   }
 }
