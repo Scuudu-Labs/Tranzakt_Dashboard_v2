@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import DashboardPage from "./pages/Dashboard";
 import ManageUserPage from "./pages/ManageUser";
+import EachUser from "./pages/ManageUser/EachUser";  
 import ResetPassword from "./pages/ResetPassword";
 import VerifyAccount from "./pages/VerifyAccount";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ function App() {
           <Route path={"/reset_password"} element={<ResetPassword />} />
           <Route path={"/dashboard"} element={<DashboardPage />} />
           <Route path={"/manageuser"} element={<ManageUserPage />} />
+          <Route path={"/manageuser/:id"} element={<EachUser />} />
           <Route path={"/success"} element={<Success />} />
           <Route path={"*"} element={<NotFound />} />
         </Routes>

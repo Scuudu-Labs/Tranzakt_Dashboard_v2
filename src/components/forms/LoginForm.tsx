@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
-import { ReactComponent as Login } from "../../assets/logo.svg";
-import { ReactComponent as SecureSvg } from "../../assets/secure.svg";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as HideSvg } from "../../assets/icons/hide.svg";
 import { useState } from "react";
+import { HideIcon, LogoIcon, SecureIcon } from "../../assets";
+import IconWrap from "../ui/svgWrapper";
 
 
 interface LoginData {
@@ -27,7 +26,8 @@ export default function LoginForm() {
   return (
    <div className="w-full">
      <div className="flex justify-center mb-8 items-center ">
-    <Login />
+     <IconWrap src={LogoIcon} />
+
   </div>
     <form
       className="bg-white max-w-[500px] rounded-[8px] relative flex flex-col items-center justify-center mx-auto h-[500px]"
@@ -47,7 +47,8 @@ export default function LoginForm() {
       </div>
       <div className="flex w-[400px] mx-auto mb-6 relative flex-col gap-y-2">
       <div className="absolute right-4 cursor-pointer top-10" onClick={()=> setHide(!hide)}>
-          <HideSvg />
+      <IconWrap src={HideIcon} />
+
         </div>
         <label className="text-[12px]">Password</label>
         <input
@@ -70,7 +71,7 @@ export default function LoginForm() {
         Login
       </button>
       <div className="absolute bottom-4">
-      <SecureSvg />
+      <IconWrap src={SecureIcon} />
     </div>
     </form>
     
