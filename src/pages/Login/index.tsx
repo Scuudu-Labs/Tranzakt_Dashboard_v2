@@ -1,5 +1,5 @@
-import backgroundImage from "../../assets/background.svg";
-import LoginForm from "../../components/forms/LoginForm";
+import backgroundImage from '../../assets/background.svg';
+import LoginForm from '../../components/forms/LoginForm';
 
 export default function LoginPage() {
   return (

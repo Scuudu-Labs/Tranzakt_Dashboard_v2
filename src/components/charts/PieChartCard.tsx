@@ -1,4 +1,4 @@
-import { PieChart, Pie } from "recharts";
+import { PieChart, Pie } from 'recharts';
 
 interface PieChartData {
   label: string;
@@ -17,7 +17,7 @@ export default function PieChartCard(props: {
         <p>{props.label}</p>
         <p className="text-xs text-[#2B2B2B]">{props.sublabel}</p>
       </div>
-      <PieChart  width={160} height={160}>
+      <PieChart width={160} height={160}>
         <Pie
           data={props.data}
           dataKey="value"

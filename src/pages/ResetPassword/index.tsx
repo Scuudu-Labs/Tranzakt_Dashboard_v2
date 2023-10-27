@@ -1,6 +1,5 @@
-import backgroundImage from "../../assets/background.svg";
-import ResetPasswordForm from "../../components/forms/ResetPasswordForm";
-
+import backgroundImage from '../../assets/background.svg';
+import ResetPasswordForm from '../../components/forms/ResetPasswordForm';
 
 export default function ResetPassword() {
   return (
@@ -12,4 +11,3 @@ export default function ResetPassword() {
     </div>
   );
 }
-

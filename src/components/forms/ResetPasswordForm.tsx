@@ -1,24 +1,22 @@
-import { ReactComponent as Login } from "../../assets/logo.svg";
-import { ReactComponent as SecureSvg } from "../../assets/secure.svg";
-import { useNavigate } from "react-router-dom";
-import TextInput from "../Input/TextInput";
-import { useFormik } from "formik";
-import { initialPasswordReset, resetPasswordSchema } from "./forms.schema";
-import ButtonLoader from "../button/buttonLoader";
-import { useForgotPasswordMutation } from "../../redux/api/auth";
-import { toast } from "react-toastify";
-
-
+import { LogoIcon, SecureIcon } from '../../assets';
+import IconWrap from '../ui/svgWrapper';
+import { useNavigate } from 'react-router-dom';
+import TextInput from '../Input/TextInput';
+import { useFormik } from 'formik';
+import { initialPasswordReset, resetPasswordSchema } from './forms.schema';
+import ButtonLoader from '../button/buttonLoader';
+import { useForgotPasswordMutation } from '../../redux/api/auth';
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
-  const [forgotPassword,{isLoading} ] = useForgotPasswordMutation()
-  const formik = useFormik<Pick<ILogin, "email">>({
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  const formik = useFormik<Pick<ILogin, 'email'>>({
     initialValues: initialPasswordReset,
     validationSchema: resetPasswordSchema,
     onSubmit: () => {
-      onSumbit()
-    }
-  })
+      onSumbit();
+    },
+  });
 
   const {
     values,
@@ -31,46 +29,56 @@ export default function LoginForm() {
   } = formik;
   const navigate = useNavigate();
 
-  const onSumbit = async() => {
+  const onSumbit = async () => {
     try {
       const res = await forgotPassword(values).unwrap();
-      console.log(res);
       toast.success(res.message);
-      resetForm()
-      navigate('/verify_account')
+      resetForm();
+      navigate('/verify_account');
     } catch (error) {
-      toast.error(error as string)
+      toast.error(error as string);
     }
   };
 
-
-
   return (
-   <div className="w-full">
-     <div className="flex justify-center mb-8 items-center ">
-    <Login />
-  </div>
-    <form
-      className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex w-[400px] mx-auto flex-col mb-12 gap-y-2">
-        <h2 className="font-montserrat text-[32px] leading-[39px] text-[#272626] font-bold">Reset Password</h2>
-        <p className="text-[#A1A1A1] text-[14px] leading-[22px]">Enter your registered email and we will send an OTP to reset your password</p>
+    <div className="w-full">
+      <div className="flex justify-center mb-8 items-center ">
+        <IconWrap src={LogoIcon} />
       </div>
-      <TextInput label="Email Address" error={errors.email ? errors.email : ''} touched={touched.email}  name="email" onChange={handleChange} value={values.email} onBlur={handleBlur}  type="email" />
-    
-      <button
-        type="submit"
-        className="text-white bg-[#32C87D] flex items-center justify-center w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+      <form
+        className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
+        onSubmit={handleSubmit}
       >
-        {isLoading ? <ButtonLoader /> : 'Continue'}  
-      </button>
-      <div className="absolute bottom-4">
-      <SecureSvg />
+        <div className="flex w-[400px] mx-auto flex-col mb-12 gap-y-2">
+          <h2 className="font-montserrat text-[32px] leading-[39px] text-[#272626] font-bold">
+            Reset Password
+          </h2>
+          <p className="text-[#A1A1A1] text-[14px] leading-[22px]">
+            Enter your registered email and we will send an OTP to reset your
+            password
+          </p>
+        </div>
+        <TextInput
+          label="Email Address"
+          error={errors.email ? errors.email : ''}
+          touched={touched.email}
+          name="email"
+          onChange={handleChange}
+          value={values.email}
+          onBlur={handleBlur}
+          type="email"
+        />
+
+        <button
+          type="submit"
+          className="text-white bg-[#32C87D] flex items-center justify-center w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+        >
+          {isLoading ? <ButtonLoader /> : 'Continue'}
+        </button>
+        <div className="absolute bottom-4">
+          <IconWrap src={SecureIcon} />
+        </div>
+      </form>
     </div>
-    </form>
-    
-   </div>
   );
 }

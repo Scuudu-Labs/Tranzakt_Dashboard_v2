@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import LeftNavbar from "../nav/LeftNav";
-import TopNavbar from "../nav/TopNav";
+import { ReactNode } from 'react';
+import LeftNavbar from '../nav/LeftNav';
+import TopNavbar from '../nav/TopNav';
 
 export default function MainContainer(props: { children: ReactNode }) {
   return (

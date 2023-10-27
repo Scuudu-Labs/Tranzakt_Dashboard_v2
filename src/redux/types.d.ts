@@ -1,12 +1,12 @@
-interface ISuccessResponse<T=void> {
-    success: boolean;
-    message: string;
-    data: T | null
+interface ISuccessResponse<T = void> {
+  success: boolean;
+  message: string;
+  data: T | null;
 }
 
 interface IErrorResponse {
-    success: boolean;
-    error: string;
-    errors: string[];
-    
+  success: boolean;
+  status: number;
+  error: string;
+  errors: string[];
 }

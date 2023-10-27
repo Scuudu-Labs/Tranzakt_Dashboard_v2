@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 type IProps = { children: React.ReactNode };
 
 export function Providers({ children }: IProps) {
-  return <Provider store={store}>
-       <ToastContainer
+  return (
+    <Provider store={store}>
+      <ToastContainer
         position="top-right"
         autoClose={false}
         hideProgressBar={false}
@@ -18,5 +19,7 @@ export function Providers({ children }: IProps) {
         pauseOnHover
         theme="light"
       />
-    {children}</Provider>;
+      {children}
+    </Provider>
+  );
 }

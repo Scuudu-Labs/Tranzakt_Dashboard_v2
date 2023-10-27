@@ -1,6 +1,5 @@
-import backgroundImage from "../../assets/background.svg";
-import VerifyCodeFrom from "../../components/forms/VerifyCodeForm";
-
+import backgroundImage from '../../assets/background.svg';
+import VerifyCodeFrom from '../../components/forms/VerifyCodeForm';
 
 export default function VerifyCode() {
   return (
@@ -12,4 +11,3 @@ export default function VerifyCode() {
     </div>
   );
 }
-

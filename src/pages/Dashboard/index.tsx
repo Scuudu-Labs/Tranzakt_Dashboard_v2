@@ -1,12 +1,14 @@
-import DashboardSection from "../../components/dashboard/DashboardSection";
-import MainContainer from "../../components/layout/MainContainer";
-import { PiFunnelLight } from "react-icons/pi";
+import DashboardSection from '../../components/dashboard/DashboardSection';
+import MainContainer from '../../components/layout/MainContainer';
+import { PiFunnelLight } from 'react-icons/pi';
 
 export default function DashboardPage() {
   return (
     <MainContainer>
       <div className="flex items-center justify-between">
-          <h2 className="text-[24px] font-bold font-montserrat text-[#A1A1A1] ">Quick Overview</h2>
+        <h2 className="text-[24px] font-bold font-montserrat text-[#A1A1A1] ">
+          Quick Overview
+        </h2>
         <button className="bg-white rounded-md flex gap-x-2 px-5 h-[40px] justify-center items-center hover:bg-[#32C87D] hover:text-white">
           <div className="text-xl">
             <PiFunnelLight />

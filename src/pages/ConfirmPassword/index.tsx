@@ -1,6 +1,5 @@
-import backgroundImage from "../../assets/background.svg";
-import ConfirmPasswordForm from "../../components/forms/ChangePasswordForm";
-
+import backgroundImage from '../../assets/background.svg';
+import ConfirmPasswordForm from '../../components/forms/ChangePasswordForm';
 
 export default function ConfirmPassword() {
   return (
@@ -12,4 +11,3 @@ export default function ConfirmPassword() {
     </div>
   );
 }
-
