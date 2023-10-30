@@ -1,4 +1,4 @@
-import { Area, AreaChart, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface AreaData {
   label: string;
@@ -12,10 +12,12 @@ export default function AreaChartCard(props: {
   return (
     <div className="bg-white flex flex-col items-center justify-center w-full px-5 rounded-md py-6 ">
       <div className="flex w-full pt-2 pb-10">
-        <p className="font-semibold text-[#3F3F3F] text-[18px] tracking-[0.3px] font-montserrat">{props.label}</p>
+        <p className="font-semibold text-[#3F3F3F] text-[18px] tracking-[0.3px] font-montserrat">
+          {props.label}
+        </p>
       </div>
       <AreaChart
-        style={{ fontSize: "12px" }}
+        style={{ fontSize: '12px' }}
         width={800}
         height={250}
         data={props.data}

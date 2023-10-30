@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BellIcon, DropIcon, SearchIcon, TLogoIcon } from "../../assets";
-import { useEffect, useRef, useState } from "react";
-import ProfileCard from "../card/profileCard";
-import NotificationCard from "../card/notificationCard";
-import IconWrap from "../ui/svgWrapper";
+import { BellIcon, DropIcon, SearchIcon, TLogoIcon } from '../../assets';
+import { useEffect, useRef, useState } from 'react';
+import ProfileCard from '../card/profileCard';
+import NotificationCard from '../card/notificationCard';
+import IconWrap from '../ui/svgWrapper';
 
 export default function TopNavbar() {
   const [openProfile, setOpenProfile] = useState(false);
   const [notify, setNotify] = useState(false);
-  const profileRef = useRef<HTMLDivElement>(null)
-  const notificationRef = useRef<HTMLDivElement>(null)
+  const profileRef = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
-  const clickOutside = (e:any) => {
+  const clickOutside = (e: any) => {
     if (profileRef.current?.contains(e.target)) return;
     if (notificationRef.current?.contains(e.target)) return;
     setOpenProfile(false);
-    setNotify(false)
+    setNotify(false);
   };
   useEffect(() => {
     window.addEventListener('mousedown', clickOutside);
@@ -26,42 +26,43 @@ export default function TopNavbar() {
       {openProfile && <ProfileCard reference={profileRef} />}
       {notify && <NotificationCard reference={notificationRef} />}
       <div className="mx-4">
-      <IconWrap src={TLogoIcon} />
-
+        <IconWrap src={TLogoIcon} />
       </div>
       <div className="flex justify-between px-6 w-full items-center">
         <div className="w-[648px] relative px-6">
           <div className="absolute left-10  top-[14px]">
-          <IconWrap src={SearchIcon} />
-
+            <IconWrap src={SearchIcon} />
           </div>
-          <input type="text" className="w-full text-[16px] font-montserrat bg-[#F5F7F9] focus:outline-none rounded-[8px] px-[44px] text-[#3F3F3F] border-[#CFCFCF] border py-[11px]" placeholder="Query" />
+          <input
+            type="text"
+            className="w-full text-[16px] font-montserrat bg-[#F5F7F9] focus:outline-none rounded-[8px] px-[44px] text-[#3F3F3F] border-[#CFCFCF] border py-[11px]"
+            placeholder="Query"
+          />
         </div>
-      <div className="flex items-center justify-center gap-x-5 px-5">
-        <div className="h-[50px] w-[50px] rounded-full bg-[#F2FFF7] cursor-pointer flex items-center justify-center " onClick={() => setNotify(!notify)}>
-          <div className="relative w-[10px] mb-5 ml-3">
-              <div className="h-[20px] w-[20px] rounded-[20px] bg-red text-[10px] bg-[#FF2636] absolute -top-3 -left-1 text-white z-10 flex items-center justify-center">
-                <p className="font-bold font-montserrat">
-                {10}
-                </p>
-              </div>
-           
-            <div className="absolute top-0 right-0">
-            <IconWrap src={BellIcon} />
+        <div className="flex items-center  justify-center gap-x-5 px-5">
+          <div
+            className="h-[50px] w-[50px] rounded-full relative bg-[#F2FFF7] cursor-pointer flex items-center justify-center "
+            onClick={() => setNotify(!notify)}
+          >
+            <div className="h-[20px] w-[20px]  rounded-[20px] bg-red text-[10px] bg-[#FF2636] absolute top-0 right-2 text-white z-10 flex items-center justify-center">
+              <p className="font-bold font-montserrat">{10}</p>
+            </div>
+
+            <IconWrap src={BellIcon} style="w-[20px] h-[20px]" />
+          </div>
+
+          <div
+            className="flex items-center"
+            onClick={() => setOpenProfile(!openProfile)}
+          >
+            <div className="h-[40px] cursor-pointer mr-2 relative w-[40px] rounded-full bg-[#32C87D] flex items-center justify-center text-sm text-white">
+              OK
+            </div>
+            <div className="cursor-pointer">
+              <IconWrap src={DropIcon} />
             </div>
           </div>
         </div>
-
-       <div className="flex items-center" onClick={() => setOpenProfile(!openProfile)}>
-       <div className="h-[40px] cursor-pointer mr-2 relative w-[40px] rounded-full bg-[#32C87D] flex items-center justify-center text-sm text-white">
-          OK
-        </div>
-        <div className="cursor-pointer">
-        <IconWrap src={DropIcon} />
-        
-        </div>
-       </div>
-      </div>
       </div>
     </div>
   );

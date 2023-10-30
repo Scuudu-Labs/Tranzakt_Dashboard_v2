@@ -1,8 +1,16 @@
-import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 const BarCharts = () => {
-    
-const data = [
+  const data = [
     {
       name: 'Page A',
       uv: 4000,
@@ -55,9 +63,13 @@ const data = [
   ];
   return (
     <div className="bg-white  flex flex-col  w-full  rounded-md py-4 ">
-      <div className='px-4 mb-4'>
-      <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] font-[500]">TOTAL FEES</p>
-      <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">₦12,345.00</h2>
+      <div className="px-4 mb-4">
+        <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] font-[500]">
+          TOTAL FEES
+        </p>
+        <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">
+          ₦12,345.00
+        </h2>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -74,14 +86,13 @@ const data = [
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#8884d8"   />
-          <Bar dataKey="uv" fill="#82ca9d"  />
+          <Bar dataKey="pv" fill="#8884d8" />
+          <Bar dataKey="uv" fill="#82ca9d" />
           <Bar dataKey="ur" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
     </div>
+  );
+};
 
-  )
-}
-
-export default BarCharts
+export default BarCharts;

@@ -1,58 +1,84 @@
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { LogoIcon, SecureIcon } from "../../assets";
-import IconWrap from "../ui/svgWrapper";
-
-
-interface ResetPasswordData {
-  email: string;
-}
+import { LogoIcon, SecureIcon } from '../../assets';
+import IconWrap from '../ui/svgWrapper';
+import { useNavigate } from 'react-router-dom';
+import TextInput from '../Input/TextInput';
+import { useFormik } from 'formik';
+import { initialPasswordReset, resetPasswordSchema } from './forms.schema';
+import ButtonLoader from '../button/buttonLoader';
+import { useForgotPasswordMutation } from '../../redux/api/auth';
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
-  const { register, handleSubmit } = useForm<ResetPasswordData>({
-    mode: "onTouched",
-  }); 
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  const formik = useFormik<Pick<ILogin, 'email'>>({
+    initialValues: initialPasswordReset,
+    validationSchema: resetPasswordSchema,
+    onSubmit: () => {
+      onSumbit();
+    },
+  });
 
+  const {
+    values,
+    errors,
+    handleChange,
+    resetForm,
+    handleBlur,
+    touched,
+    handleSubmit,
+  } = formik;
   const navigate = useNavigate();
 
-  const onSumbit = (data:object) => {
-    console.log(data)
+  const onSumbit = async () => {
+    try {
+      const res = await forgotPassword(values).unwrap();
+      toast.success(res.message);
+      resetForm();
+      navigate('/verify_account');
+    } catch (error) {
+      toast.error(error as string);
+    }
   };
+
   return (
-   <div className="w-full">
-     <div className="flex justify-center mb-8 items-center ">
-     <IconWrap src={LogoIcon} />
-  </div>
-    <form
-      className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
-      onSubmit={handleSubmit(onSumbit)}
-    >
-      <div className="flex w-[400px] mx-auto flex-col mb-12 gap-y-2">
-        <h2 className="font-montserrat text-[32px] leading-[39px] text-[#272626] font-bold">Reset Password</h2>
-        <p className="text-[#A1A1A1] text-[14px] leading-[22px]">Enter your registered email and we will send an OTP to reset your password</p>
+    <div className="w-full">
+      <div className="flex justify-center mb-8 items-center ">
+        <IconWrap src={LogoIcon} />
       </div>
-      <div className="flex w-[400px] mx-auto flex-col mb-6 gap-y-2">
-        <label className="text-[12px]">Email Address</label>
-        <input
-          {...register("email", { required: true })}
-          className="w-full rounded-md py-2 border outline-none h-[48px] border-[#A1A1A1] w-full placeholder-[#A1A1A1] px-2"
-          placeholder="Enter email"
-        ></input>
-      </div>
-    
-      <button
-        type="submit"
-        onClick={() => navigate('/verify_account')}
-        className="text-white bg-[#32C87D] w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+      <form
+        className="bg-white max-w-[500px] relative flex flex-col items-center rounded-[8px] pt-14 mx-auto h-[500px]"
+        onSubmit={handleSubmit}
       >
-        Continue
-      </button>
-      <div className="absolute bottom-4">
-      <IconWrap src={SecureIcon} />
-    
+        <div className="flex w-[400px] mx-auto flex-col mb-12 gap-y-2">
+          <h2 className="font-montserrat text-[32px] leading-[39px] text-[#272626] font-bold">
+            Reset Password
+          </h2>
+          <p className="text-[#A1A1A1] text-[14px] leading-[22px]">
+            Enter your registered email and we will send an OTP to reset your
+            password
+          </p>
+        </div>
+        <TextInput
+          label="Email Address"
+          error={errors.email ? errors.email : ''}
+          touched={touched.email}
+          name="email"
+          onChange={handleChange}
+          value={values.email}
+          onBlur={handleBlur}
+          type="email"
+        />
+
+        <button
+          type="submit"
+          className="text-white bg-[#32C87D] flex items-center justify-center w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+        >
+          {isLoading ? <ButtonLoader /> : 'Continue'}
+        </button>
+        <div className="absolute bottom-4">
+          <IconWrap src={SecureIcon} />
+        </div>
+      </form>
     </div>
-    </form>
-    
-   </div>
   );
 }
