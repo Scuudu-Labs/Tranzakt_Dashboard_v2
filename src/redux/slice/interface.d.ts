@@ -10,3 +10,13 @@ interface AdminSlice {
   user: IAdmin | null;
   access_token: string | null;
 }
+
+interface IQuerySearch {
+  status: string | null;
+  sort_by: string | null;
+  search_txt: string | null;
+}
+
+interface ISearch {
+  search: IQuerySearch;
+}
