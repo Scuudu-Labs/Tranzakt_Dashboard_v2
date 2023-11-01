@@ -34,7 +34,6 @@ export default function ManagerUserTable() {
     queryData['search_txt'] = search.search_txt;
   }
 
-  console.log(queryData, search, 'data');
   const { data: users, isLoading } = useGetAllUsersQuery(queryData);
 
   const dataSource = useMemo(() => {
