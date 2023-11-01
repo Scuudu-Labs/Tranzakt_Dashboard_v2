@@ -23,6 +23,7 @@ const FilterModal = ({
           onChange={() => setChange('asc')}
           value={search.sort_by}
           checked={search.sort_by === 'asc'}
+          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
           Ascending order
@@ -34,6 +35,7 @@ const FilterModal = ({
           onChange={() => setChange('des')}
           value={search.sort_by}
           checked={search.sort_by === 'des'}
+          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
           Descending order
@@ -45,6 +47,7 @@ const FilterModal = ({
           onChange={() => setChange('des')}
           value={search.sort_by}
           checked={search.sort_by === 'des'}
+          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
           Date registered
