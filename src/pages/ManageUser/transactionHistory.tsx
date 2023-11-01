@@ -4,7 +4,7 @@ const transactions = [
   {
     type: 'credit',
     text: 'Bank Transfer',
-    details: '770 TF ALESSA AB...',
+    details: '770 TF ALESSA AB.',
     amount: '₦9,430.15',
     date: '14:37 | 10 AUG, 2023',
   },
