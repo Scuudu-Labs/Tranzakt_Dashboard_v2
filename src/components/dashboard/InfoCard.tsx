@@ -6,10 +6,10 @@ export default function AmountInfoCard(props: {
 }) {
   return (
     <div className="w-full h-[107px] flex flex-col rounded-[16px] bg-white border-[1px] p-[16px] border-[#EAEAEA]">
-      <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] font-[500]">
+      <p className="text-[#A1A1A1] font-montserrat text-[11px] tracking-[0.3px] font-[500]">
         {props.label}
       </p>
-      <h2 className="font-montserrat font-semibold tex-[24px] tracking-[0.5px] py-2 ">
+      <h2 className="font-montserrat font-semibold text-[21px] tracking-[0.5px] pt-1 pb-2 ">
         {props.amount}
       </h2>
       <div className="flex items-center">

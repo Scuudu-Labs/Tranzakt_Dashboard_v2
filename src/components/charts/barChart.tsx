@@ -9,60 +9,73 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+const ContentLegend = () => (
+  <div className="flex items-end top-0 absolute ">
+    <div className="flex items-center mr-9">
+      <span className="w-[15px] h-[15px] rounded-[15px] bg-green-500 mr-1 "></span>
+      <span className="text-[#3F3F3F] text-[13px]">Transaction Fee</span>
+    </div>
+    <div className="flex items-center mr-9">
+      <span className="w-[15px] h-[15px] rounded-[15px] bg-blue-400 mr-1"></span>
+      <span className="text-[#3F3F3F] text-[13px]">Withdrawal Fee</span>
+    </div>
+    <div className="flex items-center">
+      <span className="w-[15px] h-[15px] rounded-[15px] bg-green-200 mr-1"></span>
+      <span className="text-[#3F3F3F] font-montserrat  text-[13px]">
+        Bill payment
+      </span>
+    </div>
+  </div>
+);
+
 const BarCharts = () => {
   const data = [
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      ur: 400,
-      amt: 2400,
+      name: 'Sun',
+      'Transaction fee': 4000,
+      'Bill payment': 2400,
+      'Withdrawal fee': 400,
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      ur: 400,
-      amt: 2210,
+      name: 'Mon',
+      'Transaction fee': 3000,
+      'Bill payment': 1398,
+      'Withdrawal fee': 400,
     },
     {
-      name: 'Page C',
-      uv: 2000,
-      ur: 400,
-      pv: 9800,
-      amt: 2290,
+      name: 'Tues',
+      'Transaction fee': 2000,
+      'Withdrawal fee': 400,
+      'Bill payment': 9800,
     },
     {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      ur: 400,
-      amt: 2000,
+      name: 'Wed',
+      'Transaction fee': 2780,
+      'Bill payment': 3908,
+      'Withdrawal fee': 400,
     },
     {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      ur: 400,
-      amt: 2181,
+      name: 'Thurs',
+      'Transaction fee': 1890,
+      'Bill payment': 4800,
+      'Withdrawal fee': 400,
     },
     {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      ur: 400,
-      amt: 2500,
+      name: 'Fri',
+      'Transaction fee': 2390,
+      'Bill payment': 3800,
+      'Withdrawal fee': 400,
     },
     {
-      name: 'Page G',
-      uv: 3490,
-      ur: 400,
-      pv: 4300,
+      name: 'Sat',
+      'Transaction fee': 3490,
+      'Withdrawal fee': 400,
+      'Bill payment': 4300,
       amt: 2100,
     },
   ];
   return (
-    <div className="bg-white  flex flex-col  w-full  rounded-md py-4 ">
+    <div className="bg-white  flex flex-col  w-full  rounded-[16px] py-4 ">
       <div className="px-4 mb-4">
         <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] font-[500]">
           TOTAL FEES
@@ -74,7 +87,7 @@ const BarCharts = () => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={800}
-          height={300}
+          height={900}
           data={data}
           margin={{
             right: 16,
@@ -85,10 +98,14 @@ const BarCharts = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
-          <Bar dataKey="ur" fill="#82ca9d" />
+          <Legend
+            iconType="circle"
+            wrapperStyle={{ top: -60, left: 200, color: '#000' }}
+            content={<ContentLegend />}
+          />
+          <Bar dataKey="Transaction fee" fill="#32C87D" />
+          <Bar dataKey="Withdrawal fee" fill="#268EE9" />
+          <Bar dataKey="Bill payment" fill="#B7FFD5" />
         </BarChart>
       </ResponsiveContainer>
     </div>

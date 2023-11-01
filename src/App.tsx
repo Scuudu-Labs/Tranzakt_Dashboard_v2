@@ -11,7 +11,7 @@ import { Providers } from './redux/provider';
 import 'react-toastify/dist/ReactToastify.min.css';
 import ProtectedPage from './components/layout/ProtectedPage';
 import PublicPage from './components/layout/PublicPage';
-import EachUser from './pages/ManageUser/EachUser';
+import EachUser from './pages/ManageUser/eachUser';
 
 function App() {
   return (

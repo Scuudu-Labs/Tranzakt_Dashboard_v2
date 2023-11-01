@@ -16,19 +16,19 @@ export default function DashboardSection() {
         <div className="flex mt-6 w-[800px] flex-col gap-y-3 ">
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
-              label="TOTAL USER BALANCE"
+              label="TOTAL BALANCE"
               amount="₦500,964.00"
               change="+15.2%"
             />
 
             <AmountInfoCard
-              label="TOTAL CUSTOMER BALANCE"
+              label="CUSTOMERS BALANCE"
               amount="₦300,964.00"
               change="+15.2%"
             />
 
             <AmountInfoCard
-              label="TOTAL MERCHANT BALANCE"
+              label="MERCHANTS BALANCE"
               amount="₦200,964.00"
               change="+15.2%"
             />
@@ -42,12 +42,12 @@ export default function DashboardSection() {
         </div>
         <div className="ml-8 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
-            label="TOTAL USER BALANCE"
+            label="TOTAL OUTFLOW"
             amount="₦500,964.00"
             change="+15.2%"
           />
           <AmountInfoCard
-            label="TOTAL USER BALANCE"
+            label="TOTAL INFLOW"
             amount="₦500,964.00"
             change="+15.2%"
           />
@@ -56,14 +56,14 @@ export default function DashboardSection() {
       </div>
       <div className="flex gap-6 my-6">
         <PieChartCard
-          label={'Customers'}
+          label={'KYC Status'}
           sublabel="500 users"
           data={samplePieChartData}
         />
 
         <PieChartCard
-          label={'Merchants'}
-          sublabel="500 users"
+          label={'KYB Status'}
+          sublabel="300 users"
           data={samplePieChartData2}
         />
         <BarCharts />
