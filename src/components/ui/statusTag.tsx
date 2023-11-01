@@ -1,4 +1,4 @@
-const StatusTag = ({ text, id }: { text: string; id: string }) => {
+const StatusTag = ({ text, id }: { text: string; id?: string }) => {
   const style =
     id === 'ACTIVE'
       ? 'text-[#32C87D] bg-[#EBF9F2]'

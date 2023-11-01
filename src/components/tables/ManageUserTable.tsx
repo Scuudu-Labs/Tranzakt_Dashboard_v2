@@ -22,17 +22,17 @@ export default function ManagerUserTable() {
     limit: pageSize,
   };
 
-  // if (search.sort_by !== null) {
-  queryData['sort_by'] = search.sort_by;
-  // }
+  if (search.sort_by !== null) {
+    queryData['sort_by'] = search.sort_by;
+  }
 
-  // if (search.status !== null) {
-  queryData['status'] = search.status;
-  // }
+  if (search.status !== null) {
+    queryData['status'] = search.status;
+  }
 
-  // if (search.search_txt !== null) {
-  queryData['search_txt'] = search.search_txt;
-  // }
+  if (search.search_txt !== null) {
+    queryData['search_txt'] = search.search_txt;
+  }
 
   console.log(queryData, search, 'data');
   const { data: users, isLoading } = useGetAllUsersQuery(queryData);

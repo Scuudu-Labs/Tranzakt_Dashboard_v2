@@ -42,9 +42,9 @@ const FilterModal = ({
       <div className="flex items-center  cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('date')}
+          onChange={() => setChange('des')}
           value={search.sort_by}
-          checked={search.sort_by === 'date'}
+          checked={search.sort_by === 'des'}
         />
         <span className="font-montserrat text-[#111111] ml-2">
           Date registered
