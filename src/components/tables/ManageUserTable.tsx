@@ -12,10 +12,14 @@ import { useRef, useEffect } from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import useDebounce from '../hooks';
 
-export default function ManagerUserTable({ value }: { value: string }) {
+export default function ManagerUserTable({
+  searchValue,
+}: {
+  searchValue: string;
+}) {
   const filterRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedValue = useDebounce(searchValue, 500);
   const [pageSize, setPageSize] = useState(5);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState(false);

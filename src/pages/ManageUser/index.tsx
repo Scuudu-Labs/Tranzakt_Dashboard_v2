@@ -61,7 +61,7 @@ export default function ManageUserPage() {
           </button>
           {showFilter && <FilterModal reference={filterRef} />}
         </div>
-        <ManagerUserTable value={value} />
+        <ManagerUserTable searchValue={value} />
       </div>
     </MainContainer>
   );
