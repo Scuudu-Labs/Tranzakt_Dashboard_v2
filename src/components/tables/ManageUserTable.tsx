@@ -10,14 +10,16 @@ import { formatDate } from '../../lib/dateFormater';
 import FilterModal from '../modals/filterByDirection';
 import { useRef, useEffect } from 'react';
 import { useAppSelector } from '../../redux/hooks';
+import useDebounce from '../hooks';
 
-export default function ManagerUserTable() {
+export default function ManagerUserTable({ value }: { value: string }) {
   const filterRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
+  const debouncedValue = useDebounce(value, 500);
   const [pageSize, setPageSize] = useState(5);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState(false);
-  const queryData: IUserQuery = {
+  const queryData: IQueryString = {
     page: page,
     limit: pageSize,
   };
@@ -31,7 +33,7 @@ export default function ManagerUserTable() {
   }
 
   if (search.search_txt !== null) {
-    queryData['search_txt'] = search.search_txt;
+    queryData['search_txt'] = debouncedValue;
   }
 
   const { data: users, isLoading } = useGetAllUsersQuery(queryData);
@@ -50,9 +52,8 @@ export default function ManagerUserTable() {
     );
   }, [users]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const clickOutside = (e: any) => {
-    if (filterRef.current?.contains(e.target)) return;
+  const clickOutside = (e: MouseEvent) => {
+    if (filterRef.current?.contains(e.target as Node)) return;
     setSort(false);
   };
 

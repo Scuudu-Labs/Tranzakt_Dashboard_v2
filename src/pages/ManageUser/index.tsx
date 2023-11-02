@@ -9,10 +9,12 @@ export default function ManageUserPage() {
   const [selectedButton, setSelectedButton] = useState(0);
   const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const clickOutside = (e: any) => {
-    if (filterRef.current?.contains(e.target)) return;
+  const [value, setValue] = useState('');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+  const clickOutside = (e: MouseEvent) => {
+    if (filterRef.current?.contains(e.target as Node)) return;
     setShowFilter(false);
   };
 
@@ -47,7 +49,7 @@ export default function ManageUserPage() {
               Merchant
             </button>
           </div>
-          <SearchInput />
+          <SearchInput handleChange={handleChange} value={value} />
           <button
             className="bg-white rounded-md mt-1 flex gap-x-2 px-5   h-[40px] justify-center items-center hover:bg-[#32C87D] hover:text-white"
             onClick={() => setShowFilter(!showFilter)}
@@ -59,7 +61,7 @@ export default function ManageUserPage() {
           </button>
           {showFilter && <FilterModal reference={filterRef} />}
         </div>
-        <ManagerUserTable />
+        <ManagerUserTable value={value} />
       </div>
     </MainContainer>
   );

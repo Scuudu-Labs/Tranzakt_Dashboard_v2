@@ -9,3 +9,7 @@ interface IUserQuery extends Partial<IQuerySearch> {
   page: number;
   limit: number;
 }
+
+interface IQueryString {
+  [key: string]: string | number | boolean;
+}
