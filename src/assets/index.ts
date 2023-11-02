@@ -14,6 +14,7 @@ import ShowIcon from './icons/show.svg';
 import SortIcon from './icons/sort.svg';
 import UserLargeIcon from './icons/user-large.svg';
 import Logincon from './login.svg';
+import UserIcon from './icons/user.svg';
 import LogoIcon from './logo.svg';
 import SecureIcon from './secure.svg';
 import SuccessIcon from './success.svg';
@@ -39,5 +40,6 @@ export {
   LogoIcon,
   SecureIcon,
   SuccessIcon,
+  UserIcon,
   TLogoIcon,
 };

@@ -14,8 +14,8 @@ export default function PieChartCard(props: {
   return (
     <div className="max-w-[266px] w-full border border-[#EAEAEA] rounded-[16px] px-[18px] min-h-[300px] bg-white  flex flex-col items-center py-5">
       <div className="flex flex-col w-full">
-        <p>{props.label}</p>
-        <p className="text-xs text-[#2B2B2B]">{props.sublabel}</p>
+        <p className="font-[600]">{props.label}</p>
+        <p className="text-xs text-[#A1A1A1]">{props.sublabel}</p>
       </div>
       <PieChart width={160} height={160}>
         <Pie

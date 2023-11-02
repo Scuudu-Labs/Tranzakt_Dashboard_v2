@@ -16,7 +16,7 @@ const OneNotify = () => {
             Fri, 2:00pm
           </span>
           <span className="text-[#3F3F3F] text-[14px] tracking-[0.3px] font-[500] font-montserrat">
-            Fri, 2:00pm
+            Aug 24, 2023
           </span>
         </div>
       </div>
@@ -32,8 +32,11 @@ const NotificationCard = ({
   return (
     <div
       ref={reference}
-      className="w-[432px] h-[400px] right-3 top-[85px] py-[16px] shadow-md z-50 absolute rounded-[8px] bg-white flex flex-col items-center"
+      className="w-[432px] overflow-y-auto h-[400px] right-3 top-[85px] py-[16px] shadow-md z-50 absolute rounded-[8px] bg-white flex flex-col items-center"
     >
+      <OneNotify />
+      <OneNotify />
+      <OneNotify />
       <OneNotify />
       <OneNotify />
       <OneNotify />
