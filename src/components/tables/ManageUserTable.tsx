@@ -103,14 +103,14 @@ export default function ManagerUserTable({
           to={`/manageuser/${index}`}
           className="py-4 text-[#32C87D] font-montserrat underline font-bold"
         >
-          view
+          View
         </Link>
       ),
     },
   ];
 
   return (
-    <div className="w-full bg-white my-6 rounded-[16px] p-6  border border-[#EAEAEA] min-h-[72vh]">
+    <div className="w-full bg-white my-6 rounded-[16px] p-6  border border-[#EAEAEA] min-h-fit">
       <div className="flex justify-between items-center">
         <p className="text-[18px] font-montserrat pb-3 font-semibold">
           KYC Management
@@ -137,7 +137,7 @@ export default function ManagerUserTable({
             setPage(1);
             setPageSize(size);
           },
-          total: users?.data?.length ?? 0,
+          total: 17,
           pageSize: pageSize,
           onChange: (page) => {
             setPage(page);
