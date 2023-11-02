@@ -1,3 +1,3 @@
 export const tagTypes = {
-  Ports: 'Ports',
+  User: 'Users',
 };

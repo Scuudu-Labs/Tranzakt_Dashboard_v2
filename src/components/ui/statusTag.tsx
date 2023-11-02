@@ -1,6 +1,6 @@
-const StatusTag = ({ text }: { text: string }) => {
+const StatusTag = ({ text, id }: { text: string; id?: string }) => {
   const style =
-    text === 'completed'
+    id === 'ACTIVE'
       ? 'text-[#32C87D] bg-[#EBF9F2]'
       : text === 'pending'
       ? 'text-[#F5A122] bg-[#FFF0D2]'

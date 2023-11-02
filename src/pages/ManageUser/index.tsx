@@ -1,13 +1,28 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import MainContainer from '../../components/layout/MainContainer';
 import { PiFunnelLight } from 'react-icons/pi';
 import ManagerUserTable from '../../components/tables/ManageUserTable';
-import { sampleManageUserTableData } from '../../data';
-import { SearchIcon } from '../../assets';
-import IconWrap from '../../components/ui/svgWrapper';
+import FilterModal from '../../components/modals/filter';
+import SearchInput from '../../components/Input/searchInput';
 
 export default function ManageUserPage() {
   const [selectedButton, setSelectedButton] = useState(0);
+  const [showFilter, setShowFilter] = useState(false);
+  const filterRef = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState('');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+  const clickOutside = (e: MouseEvent) => {
+    if (filterRef.current?.contains(e.target as Node)) return;
+    setShowFilter(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('mousedown', clickOutside);
+    return () => window.removeEventListener('mousedown', clickOutside);
+  }, []);
+
   return (
     <MainContainer>
       <div className="w-full">
@@ -34,25 +49,19 @@ export default function ManageUserPage() {
               Merchant
             </button>
           </div>
-          <div className="w-[600px] h-[48px] flex items-center  ">
-            <input
-              type="text"
-              name="search"
-              className="h-[48px] text-[#3F3F3F] font-montserrat focus:outline-none rounded-[8px] rounded-r-none w-[90%] px-[16px]"
-              placeholder="Search"
-            />
-            <div className="border bg-white border-[#EAEAEA]  rounded-[8px]  rounded-l-none   flex items-center justify-center w-[10%] h-[48px]">
-              <IconWrap src={SearchIcon} />
-            </div>
-          </div>
-          <button className="bg-white rounded-md mt-1 flex gap-x-2 px-5   h-[40px] justify-center items-center hover:bg-[#32C87D] hover:text-white">
+          <SearchInput handleChange={handleChange} value={value} />
+          <button
+            className="bg-white rounded-md mt-1 flex gap-x-2 px-5   h-[40px] justify-center items-center hover:bg-[#32C87D] hover:text-white"
+            onClick={() => setShowFilter(!showFilter)}
+          >
             <div className="text-xl">
               <PiFunnelLight />
             </div>
-            <div className="pt-1">Filter</div>
+            <span className="pt-1">Filter</span>
           </button>
+          {showFilter && <FilterModal reference={filterRef} />}
         </div>
-        <ManagerUserTable data={sampleManageUserTableData} />
+        <ManagerUserTable searchValue={value} />
       </div>
     </MainContainer>
   );

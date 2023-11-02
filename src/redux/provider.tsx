@@ -1,6 +1,8 @@
 import { ToastContainer } from 'react-toastify';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import { ConfigProvider } from 'antd';
+import { antdTheme } from '../theme/antd.theme';
 
 type IProps = { children: React.ReactNode };
 
@@ -19,7 +21,7 @@ export function Providers({ children }: IProps) {
         pauseOnHover
         theme="light"
       />
-      {children}
+      <ConfigProvider theme={antdTheme}>{children}</ConfigProvider>
     </Provider>
   );
 }
