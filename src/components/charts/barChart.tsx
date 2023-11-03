@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 
 const ContentLegend = () => (
-  <div className="flex items-end top-0 left-[200px] absolute ">
+  <div className="flex items-end top-3 left-[200px] absolute ">
     <div className="flex items-center mr-9">
       <span className="w-[15px] h-[15px] rounded-[15px] bg-green-500 mr-1 "></span>
       <span className="text-[#3F3F3F] text-[13px]">Transaction Fee</span>
