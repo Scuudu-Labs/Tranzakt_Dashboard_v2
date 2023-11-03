@@ -22,7 +22,7 @@ export default function TopNavbar() {
     return () => window.removeEventListener('mousedown', clickOutside);
   }, []);
   return (
-    <div className="sticky z-20 top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
+    <div className="sticky  top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
       {openProfile && <ProfileCard reference={profileRef} />}
       {notify && <NotificationCard reference={notificationRef} />}
       <div className="mx-4">

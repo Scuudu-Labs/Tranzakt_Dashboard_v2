@@ -2,8 +2,10 @@ import { useState } from 'react';
 import CampaignCard from '../modal/campaignCard';
 import IconWrap from '../ui/svgWrapper';
 import { plusIcon } from '../../assets';
+import ModalWraper from '../modal';
 export default function CampaignSection() {
   const [openModal, setOpenModal] = useState(false);
+  const close = () => setOpenModal(false);
   return (
     <div className="w-full px-4">
       <div className="flex items-center w-full justify-between py-4">
@@ -20,7 +22,11 @@ export default function CampaignSection() {
         </button>
       </div>{' '}
       <div className="flex   h-screen w-full  justify-center">
-        {openModal && <CampaignCard close={() => setOpenModal(false)} />}{' '}
+        {openModal && (
+          <ModalWraper close={close} show={openModal}>
+            <CampaignCard close={close} />
+          </ModalWraper>
+        )}{' '}
       </div>
     </div>
   );
