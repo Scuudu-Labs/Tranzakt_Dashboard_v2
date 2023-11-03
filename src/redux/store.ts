@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { Reducer } from 'redux';
-import { authReducer } from './slice';
+import { authReducer, queryReducer } from './slice';
 import { getPreloadedState } from './getPreloadedState';
 import axios from 'axios';
 import { setUser } from './slice/auth';
@@ -9,6 +9,7 @@ import { baseApi } from './api/baseApi';
 const reducers = {
   api: baseApi.reducer,
   auth: authReducer.default,
+  query: queryReducer.default,
 };
 
 const combinedReducer: Reducer = combineReducers<typeof reducers>(reducers);
