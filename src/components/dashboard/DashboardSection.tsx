@@ -13,7 +13,7 @@ export default function DashboardSection() {
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
-        <div className="flex mt-6 w-[800px] flex-col gap-y-3 ">
+        <div className="flex mt-6 w-[900px] flex-col gap-y-3 ">
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
               label="TOTAL BALANCE"
@@ -40,7 +40,7 @@ export default function DashboardSection() {
             />
           </div>
         </div>
-        <div className="ml-8 gap-y-4 mt-6 w-full flex flex-col">
+        <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
             label="TOTAL OUTFLOW"
             amount="₦500,964.00"
