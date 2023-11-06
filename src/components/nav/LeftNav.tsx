@@ -1,4 +1,4 @@
-import { IoPeopleOutline } from 'react-icons/io5';
+import { IoPeopleOutline, IoDocument } from 'react-icons/io5';
 import { PiFlagBannerLight } from 'react-icons/pi';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { LogoutIcon } from '../../assets';
@@ -66,6 +66,17 @@ export default function LeftNavbar() {
             <PiFlagBannerLight
               style={{
                 color: `${pathname === '/campaign' ? '#fff' : '#A1A1A1'}`,
+              }}
+            />
+          }
+        />
+        <Navigation
+          link="/content"
+          title="Content"
+          icon={
+            <IoDocument
+              style={{
+                color: `${pathname === '/content' ? '#fff' : '#A1A1A1'}`,
               }}
             />
           }
