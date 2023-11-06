@@ -20,7 +20,7 @@ const PersonalDetails = () => {
       <div className="h-[380px] overflow-auto">
         <div className="grid grid-rows-5  overflow-y-auto  px-4 grid-cols-2 gap-4">
           <DisplayBox title="first name" value="Alessa" />
-          <DisplayBox title="lirst name" value="Abubakar" />
+          <DisplayBox title="Last name" value="Abubakar" />
           <DisplayBox title="DOB" value="2/02/2002" />
           <DisplayBox title="Gender" value="Female" />
           <div className="col-span-2">
