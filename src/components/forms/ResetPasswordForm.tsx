@@ -58,25 +58,28 @@ export default function LoginForm() {
             password
           </p>
         </div>
-        <TextInput
-          label="Email Address"
-          error={errors.email ? errors.email : ''}
-          touched={touched.email}
-          name="email"
-          onChange={handleChange}
-          value={values.email}
-          onBlur={handleBlur}
-          type="email"
-        />
+        <div className="w-[400px] flex flex-col items-center justify-center">
+          <TextInput
+            label="Email Address"
+            error={errors.email ? errors.email : ''}
+            touched={touched.email}
+            name="email"
+            placeholder="Enter email"
+            onChange={handleChange}
+            value={values.email}
+            onBlur={handleBlur}
+            type="email"
+          />
 
-        <button
-          type="submit"
-          className="text-white bg-[#32C87D] flex items-center justify-center w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
-        >
-          {isLoading ? <ButtonLoader /> : 'Continue'}
-        </button>
-        <div className="absolute bottom-4">
-          <IconWrap src={SecureIcon} />
+          <button
+            type="submit"
+            className="text-white bg-[#32C87D] flex items-center justify-center w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+          >
+            {isLoading ? <ButtonLoader /> : 'Continue'}
+          </button>
+          <div className="absolute bottom-4">
+            <IconWrap src={SecureIcon} />
+          </div>
         </div>
       </form>
     </div>

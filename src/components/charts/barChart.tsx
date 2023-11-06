@@ -10,18 +10,18 @@ import {
 } from 'recharts';
 
 const ContentLegend = () => (
-  <div className="flex items-end top-0 left-[200px] absolute ">
-    <div className="flex items-center mr-9">
-      <span className="w-[15px] h-[15px] rounded-[15px] bg-green-500 mr-1 "></span>
-      <span className="text-[#3F3F3F] text-[13px]">Transaction Fee</span>
+  <div className="flex items-end top-0 left-[130px] absolute ">
+    <div className="flex items-center mr-4">
+      <span className="w-[12px] h-[12px] rounded-[12px] bg-green-500 mr-[2px] "></span>
+      <span className="text-[#3F3F3F] text-[12px]">Transaction Fee</span>
     </div>
-    <div className="flex items-center mr-9">
-      <span className="w-[15px] h-[15px] rounded-[15px] bg-blue-400 mr-1"></span>
-      <span className="text-[#3F3F3F] text-[13px]">Withdrawal Fee</span>
+    <div className="flex items-center mr-4">
+      <span className="w-[12px] h-[12px] rounded-[12px] bg-blue-400 mr-[2px]"></span>
+      <span className="text-[#3F3F3F] text-[12px]">Withdrawal Fee</span>
     </div>
     <div className="flex items-center">
-      <span className="w-[15px] h-[15px] rounded-[15px] bg-green-200 mr-1"></span>
-      <span className="text-[#3F3F3F] font-montserrat  text-[13px]">
+      <span className="w-[12px] h-[12px] rounded-[12px] bg-green-200 mr-[2px]"></span>
+      <span className="text-[#3F3F3F] font-montserrat  text-[12px]">
         Bill payment
       </span>
     </div>

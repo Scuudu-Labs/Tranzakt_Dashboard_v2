@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import ProfileCard from '../card/profileCard';
 import NotificationCard from '../card/notificationCard';
 import IconWrap from '../ui/svgWrapper';
+import ModalWraper from '../modal';
 
 export default function TopNavbar() {
   const [openProfile, setOpenProfile] = useState(false);
@@ -22,9 +23,17 @@ export default function TopNavbar() {
     return () => window.removeEventListener('mousedown', clickOutside);
   }, []);
   return (
-    <div className="sticky z-20 top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
-      {openProfile && <ProfileCard reference={profileRef} />}
-      {notify && <NotificationCard reference={notificationRef} />}
+    <div className="sticky  top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
+      {openProfile && (
+        <ModalWraper show={openProfile} close={() => setOpenProfile(false)}>
+          <ProfileCard reference={profileRef} />
+        </ModalWraper>
+      )}
+      {notify && (
+        <ModalWraper show={notify} close={() => setNotify(false)}>
+          <NotificationCard reference={notificationRef} />
+        </ModalWraper>
+      )}
       <div className="mx-4">
         <IconWrap src={TLogoIcon} />
       </div>
