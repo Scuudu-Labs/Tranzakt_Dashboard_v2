@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import MainContainer from '../../components/layout/MainContainer';
 import { PiFunnelLight } from 'react-icons/pi';
 import ManagerUserTable from '../../components/tables/ManageUserTable';
-import FilterModal from '../../components/modals/filter';
+import FilterModal from '../../components/modal/filter';
 import SearchInput from '../../components/Input/searchInput';
 
 export default function ManageUserPage() {
