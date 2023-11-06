@@ -35,13 +35,8 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
-              change={
-                (data?.data?.customers?.balance_percentage_change as number) ??
-                0
-              }
-              amount={
-                currencyFormatter(data?.data?.customers?.balance as number) ?? 0
-              }
+              change={data?.data?.customers?.balance_percentage_change ?? 0}
+              amount={currencyFormatter(data?.data?.customers?.balance ?? 0)}
               filterType={filterType}
               isReduction={
                 data?.data?.customers?.balance_percentage_change_direction ===
@@ -51,14 +46,8 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
-              amount={
-                currencyFormatter(data?.data?.businesses?.balance as number) ??
-                0
-              }
-              change={
-                (data?.data?.businesses?.balance_percentage_change as number) ??
-                0
-              }
+              amount={currencyFormatter(data?.data?.businesses?.balance ?? 0)}
+              change={data?.data?.businesses?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.businesses?.balance_percentage_change_direction ===
                 'down'

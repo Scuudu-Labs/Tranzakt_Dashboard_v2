@@ -3,5 +3,10 @@ export const formatText = (text: string): string => {
 };
 
 export const currencyFormatter = (currency: number) => {
-  return Intl.NumberFormat('en-NG').format(currency);
+  return Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+  })
+    .format(currency)
+    .replace(/(\.|,)00$/g, '');
 };
