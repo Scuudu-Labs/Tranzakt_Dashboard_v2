@@ -12,3 +12,16 @@ interface IBalanceOverView {
   customers: IBalance;
   businesses: IBalance;
 }
+
+interface IStats {
+  totalUsers: number;
+  role: string;
+  totalCompletedKYC: number;
+  totalPendingKYC: number;
+  percentageCompletedKYC: number;
+  percentagePendingKYC: number;
+  totalCompletedKYB: number;
+  totalPendingKYB: number;
+  percentageCompletedKYB: number;
+  percentagePendingKYB: number;
+}

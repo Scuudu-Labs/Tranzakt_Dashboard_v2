@@ -1,14 +1,14 @@
 import AreaChartCard from '../charts/AreaChartCard';
 import AmountInfoCard from './InfoCard';
-import {
-  sampleAreaChartData,
-  samplePieChartData,
-  samplePieChartData2,
-} from '../../data';
+import { sampleAreaChartData } from '../../data';
 import PieChartCard from '../charts/PieChartCard';
 import TransactionCard from './transactionCard';
 import BarCharts from '../charts/barChart';
-import { useGetBalanceQuery } from '../../redux/api/balanceOverview';
+import {
+  useGetBalanceQuery,
+  useGetStatisticsQuery,
+} from '../../redux/api/balanceOverview';
+import { currencyFormatter } from '../../lib/text_formater';
 
 type IProp = {
   filterType: string;
@@ -16,7 +16,7 @@ type IProp = {
 
 export default function DashboardSection({ filterType }: IProp) {
   const { data } = useGetBalanceQuery(filterType);
-  console.log(data, 'balacne');
+  const { data: stats } = useGetStatisticsQuery();
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -24,20 +24,46 @@ export default function DashboardSection({ filterType }: IProp) {
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
               label="TOTAL BALANCE"
-              amount="₦500,964.00"
-              change="+15.2%"
+              amount={currencyFormatter(data?.data?.users?.balance ?? 0)}
+              change={data?.data?.users?.balance_percentage_change ?? 0}
+              isReduction={
+                data?.data?.users?.balance_percentage_change_direction ===
+                'down'
+              }
+              filterType={filterType}
             />
 
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
-              amount="₦300,964.00"
-              change="+15.2%"
+              change={
+                (data?.data?.customers?.balance_percentage_change as number) ??
+                0
+              }
+              amount={
+                currencyFormatter(data?.data?.customers?.balance as number) ?? 0
+              }
+              filterType={filterType}
+              isReduction={
+                data?.data?.customers?.balance_percentage_change_direction ===
+                'down'
+              }
             />
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
-              amount="₦200,964.00"
-              change="+15.2%"
+              amount={
+                currencyFormatter(data?.data?.businesses?.balance as number) ??
+                0
+              }
+              change={
+                (data?.data?.businesses?.balance_percentage_change as number) ??
+                0
+              }
+              isReduction={
+                data?.data?.businesses?.balance_percentage_change_direction ===
+                'down'
+              }
+              filterType={filterType}
             />
           </div>
           <div>
@@ -51,12 +77,24 @@ export default function DashboardSection({ filterType }: IProp) {
           <AmountInfoCard
             label="TOTAL OUTFLOW"
             amount="₦500,964.00"
-            change="+15.2%"
+            isReduction={
+              data?.data?.users?.balance_percentage_change_direction === 'down'
+            }
+            filterType={filterType}
+            change={
+              (data?.data?.businesses?.balance_percentage_change as number) ?? 0
+            }
           />
           <AmountInfoCard
             label="TOTAL INFLOW"
             amount="₦500,964.00"
-            change="+15.2%"
+            change={
+              (data?.data?.businesses?.balance_percentage_change as number) ?? 0
+            }
+            isReduction={
+              data?.data?.users?.balance_percentage_change_direction === 'down'
+            }
+            filterType={filterType}
           />
           <TransactionCard />
         </div>
@@ -64,14 +102,22 @@ export default function DashboardSection({ filterType }: IProp) {
       <div className="flex gap-6 my-6">
         <PieChartCard
           label={'KYC Status'}
-          sublabel="500 users"
-          data={samplePieChartData}
+          sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
+          type="KYC"
+          data={{
+            completed: stats?.data?.[1]?.totalCompletedKYC ?? 0,
+            pending: stats?.data?.[1]?.totalPendingKYC ?? 0,
+          }}
         />
 
         <PieChartCard
           label={'KYB Status'}
-          sublabel="300 users"
-          data={samplePieChartData2}
+          sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
+          type="KYB"
+          data={{
+            completed: stats?.data?.[0]?.totalCompletedKYB ?? 0,
+            pending: stats?.data?.[0]?.totalPendingKYB ?? 0,
+          }}
         />
         <BarCharts />
       </div>
