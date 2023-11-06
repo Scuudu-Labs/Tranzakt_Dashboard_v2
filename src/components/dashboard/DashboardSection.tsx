@@ -8,8 +8,15 @@ import {
 import PieChartCard from '../charts/PieChartCard';
 import TransactionCard from './transactionCard';
 import BarCharts from '../charts/barChart';
+import { useGetBalanceQuery } from '../../redux/api/balanceOverview';
 
-export default function DashboardSection() {
+type IProp = {
+  filterType: string;
+};
+
+export default function DashboardSection({ filterType }: IProp) {
+  const { data } = useGetBalanceQuery(filterType);
+  console.log(data, 'balacne');
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">

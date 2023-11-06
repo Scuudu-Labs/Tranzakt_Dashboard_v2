@@ -19,7 +19,7 @@ import LogoIcon from './logo.svg';
 import SecureIcon from './secure.svg';
 import SuccessIcon from './success.svg';
 import TLogoIcon from './tranzaktlogo.svg';
-
+import DateIcon from './icons/date.svg';
 export {
   BellIcon,
   CreditIcon,
@@ -34,6 +34,7 @@ export {
   SearchesIcon,
   NetworkIcon,
   ShowIcon,
+  DateIcon,
   SortIcon,
   UserLargeIcon,
   Logincon,
