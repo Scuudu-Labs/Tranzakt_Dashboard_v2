@@ -15,7 +15,7 @@ const PasswordInput = ({ error, touched, label, ...props }: InputProps) => {
       >
         <HideSvg />
       </div>
-      <label className="text-[12px]">{label}</label>
+      <label className="text-[14px] font-montserrat font-[500]">{label}</label>
       <input
         className={`w-full rounded-md py-2 h-[48px] text-[13px] border outline-none border-[#A1A1A1] placeholder-[#A1A1A1] px-2 ${
           touched && error

@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import ProtectedPage from './components/layout/ProtectedPage';
 import PublicPage from './components/layout/PublicPage';
 import EachUser from './pages/ManageUser/individualUser';
+import Campaign from './pages/Campaign';
+import Content from './pages/Content';
 
 function App() {
   return (
@@ -72,6 +74,22 @@ function App() {
               element={
                 <ProtectedPage>
                   <EachUser />
+                </ProtectedPage>
+              }
+            />
+            <Route
+              path={'/campaign'}
+              element={
+                <ProtectedPage>
+                  <Campaign />
+                </ProtectedPage>
+              }
+            />
+            <Route
+              path={'/content'}
+              element={
+                <ProtectedPage>
+                  <Content />
                 </ProtectedPage>
               }
             />

@@ -18,9 +18,18 @@ import UserIcon from './icons/user.svg';
 import LogoIcon from './logo.svg';
 import SecureIcon from './secure.svg';
 import SuccessIcon from './success.svg';
+import plusIcon from './icons/plus.svg';
 import TLogoIcon from './tranzaktlogo.svg';
+import closeIcon from './icons/close.svg';
+import ArrowUp from './icons/arrow-up.svg';
+import ArrowDown from './icons/arrow-down.svg';
+import Danger from './icons/danger.svg';
 
 export {
+  closeIcon,
+  ArrowDown,
+  ArrowUp,
+  Danger,
   BellIcon,
   CreditIcon,
   DebitIcon,
@@ -33,6 +42,7 @@ export {
   SearchIcon,
   SearchesIcon,
   NetworkIcon,
+  plusIcon,
   ShowIcon,
   SortIcon,
   UserLargeIcon,
