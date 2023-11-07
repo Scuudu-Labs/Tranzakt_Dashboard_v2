@@ -24,7 +24,7 @@ export default function AmountInfoCard(props: {
           {`${props.isReduction ? '' : '+'} ${props.change}%`}
         </span>
         <span className="text-[#A1A1A1] text-[12px] lowercase font-[400] tracking-[0.3px] ml-2">
-          {formatText(props.filterType)}
+          than {formatText(props.filterType)}
         </span>
       </div>
     </div>

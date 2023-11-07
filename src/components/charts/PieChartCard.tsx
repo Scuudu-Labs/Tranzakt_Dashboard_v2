@@ -7,19 +7,24 @@ interface PieChartData {
 }
 
 export default function PieChartCard(props: {
-  data: { completed: number; pending: number };
+  data: {
+    completed: number;
+    pending: number;
+    percentCompleted: number;
+    percentPending: number;
+  };
   label: string;
   sublabel?: number;
   type: string;
 }) {
   const data_one: PieChartData = {
-    label: `${props.data.completed} completed ${props.type}`,
+    label: `${props.data.percentCompleted}% completed ${props.type}`,
     value: props.data.completed,
     fill: '#32C87D',
   };
 
   const data_two: PieChartData = {
-    label: `${props.data.pending} pending ${props.type}`,
+    label: `${props.data.percentPending}% pending ${props.type}`,
     value: props.data.pending,
     fill: '#DCFFEA',
   };
@@ -45,7 +50,7 @@ export default function PieChartCard(props: {
       <div className="flex flex-col w-full mt-4 gap-x-2">
         <div className="flex gap-x-2 mb-3 text-xs">
           <div className={`h-[16px] w-[16px] bg-[#32C87D]`}></div>
-          <span>{data_one.label}%</span>
+          <span>{data_one.label}</span>
         </div>
 
         <div className="flex capitalize gap-x-2 text-xs ">

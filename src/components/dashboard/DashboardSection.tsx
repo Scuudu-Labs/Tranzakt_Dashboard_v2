@@ -9,10 +9,16 @@ import {
   useGetStatisticsQuery,
 } from '../../redux/api/balanceOverview';
 import { currencyFormatter } from '../../lib/text_formater';
+import { Direction } from '../../redux/types';
 
 type IProp = {
   filterType: string;
 };
+
+enum Direction {
+  UP = 'up',
+  DOWN = 'down',
+}
 
 export default function DashboardSection({ filterType }: IProp) {
   const { data } = useGetBalanceQuery(filterType);
@@ -28,7 +34,7 @@ export default function DashboardSection({ filterType }: IProp) {
               change={data?.data?.users?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.users?.balance_percentage_change_direction ===
-                'down'
+                Direction.DOWN
               }
               filterType={filterType}
             />
@@ -40,7 +46,7 @@ export default function DashboardSection({ filterType }: IProp) {
               filterType={filterType}
               isReduction={
                 data?.data?.customers?.balance_percentage_change_direction ===
-                'down'
+                Direction.DOWN
               }
             />
 
@@ -50,7 +56,7 @@ export default function DashboardSection({ filterType }: IProp) {
               change={data?.data?.businesses?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.businesses?.balance_percentage_change_direction ===
-                'down'
+                Direction.DOWN
               }
               filterType={filterType}
             />
@@ -67,7 +73,8 @@ export default function DashboardSection({ filterType }: IProp) {
             label="TOTAL OUTFLOW"
             amount="₦500,964.00"
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction === 'down'
+              data?.data?.users?.balance_percentage_change_direction ===
+              Direction.DOWN
             }
             filterType={filterType}
             change={
@@ -77,11 +84,10 @@ export default function DashboardSection({ filterType }: IProp) {
           <AmountInfoCard
             label="TOTAL INFLOW"
             amount="₦500,964.00"
-            change={
-              (data?.data?.businesses?.balance_percentage_change as number) ?? 0
-            }
+            change={data?.data?.businesses?.balance_percentage_change ?? 0}
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction === 'down'
+              data?.data?.users?.balance_percentage_change_direction ===
+              Direction.DOWN
             }
             filterType={filterType}
           />
@@ -94,8 +100,10 @@ export default function DashboardSection({ filterType }: IProp) {
           sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
           type="KYC"
           data={{
-            completed: stats?.data?.[1]?.totalCompletedKYC ?? 0,
-            pending: stats?.data?.[1]?.totalPendingKYC ?? 0,
+            percentCompleted: stats?.data?.[0]?.percentageCompletedKYC ?? 0,
+            percentPending: stats?.data?.[0]?.percentagePendingKYC ?? 0,
+            completed: stats?.data?.[0]?.totalCompletedKYC ?? 0,
+            pending: stats?.data?.[0]?.totalPendingKYC ?? 0,
           }}
         />
 
@@ -104,8 +112,10 @@ export default function DashboardSection({ filterType }: IProp) {
           sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
           type="KYB"
           data={{
-            completed: stats?.data?.[0]?.totalCompletedKYB ?? 0,
-            pending: stats?.data?.[0]?.totalPendingKYB ?? 0,
+            percentCompleted: stats?.data?.[1]?.percentageCompletedKYB ?? 0,
+            percentPending: stats?.data?.[1]?.percentagePendingKYB ?? 0,
+            completed: stats?.data?.[1]?.totalCompletedKYB ?? 0,
+            pending: stats?.data?.[1]?.totalPendingKYB ?? 0,
           }}
         />
         <BarCharts />
