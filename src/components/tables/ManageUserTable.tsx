@@ -7,7 +7,7 @@ import { Table } from 'antd';
 import { useMemo } from 'react';
 import { useGetAllUsersQuery } from '../../redux/api/mangerUser';
 import { formatDate } from '../../lib/dateFormater';
-import FilterModal from '../modals/filterByDirection';
+import FilterModal from '../modal/filterByDirection';
 import { useRef, useEffect } from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import useDebounce from '../hooks';
