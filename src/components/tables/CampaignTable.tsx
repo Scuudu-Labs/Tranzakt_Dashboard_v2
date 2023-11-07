@@ -5,12 +5,23 @@ import { Table } from 'antd';
 import StatusTag from '../ui/statusTag';
 import IconWrap from '../ui/svgWrapper';
 import { DeleteIcon, EditIcon } from '../../assets';
-import { Link } from 'react-router-dom';
+import ModalWraper from '../modal';
+import CampaignCard from '../modal/campaignCard';
+import DeleteModal from '../modal/deleteModal';
 
 const CampaignTable = () => {
   const { data: campaigns, isLoading } = useGetAllCampaignsQuery();
   const [pageSize, setPageSize] = useState(5);
   const [page, setPage] = useState(1);
+  const [action, setAction] = useState({
+    view: false,
+    edit: false,
+    delete: false,
+  });
+  const viewAction = (id: string) => {
+    console.log(id);
+    setAction({ ...action, view: true });
+  };
   console.log(page);
   const dataSource = useMemo(() => {
     return campaigns?.data?.map((campaign) => {
@@ -61,9 +72,17 @@ const CampaignTable = () => {
       dataIndex: 'action',
       key: 'id',
       render: () => (
-        <div className="flex items-center">
-          <IconWrap src={EditIcon} style="mr-8 cursor-pointer" />
-          <IconWrap src={DeleteIcon} style="cursor-pointer" />
+        <div className="flex gap-x-8 items-center">
+          <IconWrap
+            src={EditIcon}
+            style="cursor-pointer"
+            click={() => setAction({ ...action, edit: true })}
+          />
+          <IconWrap
+            src={DeleteIcon}
+            style="cursor-pointer"
+            click={() => setAction({ ...action, delete: true })}
+          />
         </div>
       ),
     },
@@ -72,19 +91,46 @@ const CampaignTable = () => {
       title: '',
       dataIndex: 'view',
       key: 'index',
-      render: (index: number) => (
-        <Link
-          to={`/campaign/${index}`}
-          className="py-4 text-[#32C87D] hover:text-[#32C87D] px-8 font-montserrat underline font-bold"
+      render: (index: string) => (
+        <span
+          onClick={() => viewAction(index)}
+          className="py-4 text-[#32C87D] hover:text-[#32C87D] cursor-pointer px-8 font-montserrat underline font-bold"
         >
           View
-        </Link>
+        </span>
       ),
     },
   ];
 
   return (
     <div className="mt-3">
+      {action.edit && (
+        <ModalWraper
+          show={action.edit}
+          close={() => setAction({ ...action, edit: false })}
+        >
+          <CampaignCard close={() => setAction({ ...action, edit: false })} />
+        </ModalWraper>
+      )}
+      {action.view && (
+        <ModalWraper
+          show={action.view}
+          close={() => setAction({ ...action, view: false })}
+        >
+          <CampaignCard close={() => setAction({ ...action, view: false })} />
+        </ModalWraper>
+      )}
+      {action.delete && (
+        <ModalWraper
+          show={action.delete}
+          close={() => setAction({ ...action, delete: false })}
+        >
+          <DeleteModal
+            text="You are about to to delete this advert. Do you want to proceed?"
+            close={() => setAction({ ...action, delete: false })}
+          />
+        </ModalWraper>
+      )}
       <Table
         columns={columns}
         dataSource={dataSource}

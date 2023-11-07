@@ -26,6 +26,7 @@ import ArrowDown from './icons/arrow-down.svg';
 import Danger from './icons/danger.svg';
 import DeleteIcon from './icons/delete-icon.svg';
 import EditIcon from './icons/edit-icon.svg';
+import UploadIcon from './icons/upload.svg';
 
 export {
   closeIcon,
@@ -34,6 +35,7 @@ export {
   DeleteIcon,
   EditIcon,
   Danger,
+  UploadIcon,
   BellIcon,
   CreditIcon,
   DebitIcon,
