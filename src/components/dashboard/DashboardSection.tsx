@@ -9,7 +9,6 @@ import {
   useGetStatisticsQuery,
 } from '../../redux/api/balanceOverview';
 import { currencyFormatter } from '../../lib/text_formater';
-import { Direction } from '../../redux/types';
 
 type IProp = {
   filterType: string;
