@@ -4,7 +4,7 @@ import { tagTypes } from '../baseApi/tagTypes';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUsers: builder.query<ISuccessResponse<IUser[]>, IQueryString>({
+    getAllUsers: builder.query<ISuccessResponse<IUserDetails>, IQueryString>({
       query: (query) => {
         const params = generateQueryString(query);
         return {

@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 10;
+    z-index: 20;
   }
 
   .modal {

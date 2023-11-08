@@ -20,6 +20,7 @@ import SecureIcon from './secure.svg';
 import SuccessIcon from './success.svg';
 import plusIcon from './icons/plus.svg';
 import TLogoIcon from './tranzaktlogo.svg';
+import DateIcon from './icons/date.svg';
 import closeIcon from './icons/close.svg';
 import ArrowUp from './icons/arrow-up.svg';
 import ArrowDown from './icons/arrow-down.svg';
@@ -50,6 +51,7 @@ export {
   NetworkIcon,
   plusIcon,
   ShowIcon,
+  DateIcon,
   SortIcon,
   UserLargeIcon,
   Logincon,
