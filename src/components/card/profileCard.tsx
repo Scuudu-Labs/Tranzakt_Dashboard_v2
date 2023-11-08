@@ -21,9 +21,9 @@ const ProfileCard = ({
   return (
     <div
       ref={reference}
-      className="w-[309px] min-h-[287px]  -top-[290px] left-[430px] py-[16px] absolute rounded-[8px] shadow-md bg-white flex flex-col items-center justify-center"
+      className="w-[309px] min-h-[287px]  -top-[340px] left-[500px] py-[16px] absolute rounded-[8px] shadow-md bg-white flex flex-col items-center justify-center"
     >
-      <div className="w-[71px] h-[71px] rounded-[71px] bg-[#EBF9F2] flex items-center justify-center">
+      <div className="w-[71px] h-[71px] mt-4 rounded-[71px] bg-[#EBF9F2] flex items-center justify-center">
         <h2 className="uppercase text-[#3F3F3F] font-montserrat font-semibold text-center text-[25px]">
           OK
         </h2>

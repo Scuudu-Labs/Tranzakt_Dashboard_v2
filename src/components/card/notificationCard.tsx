@@ -32,7 +32,7 @@ const NotificationCard = ({
   return (
     <div
       ref={reference}
-      className="w-[432px] -top-[290px] left-[300px] overflow-y-auto h-[400px] right-3   py-[16px] shadow-md z-50 absolute rounded-[8px] bg-white flex flex-col items-center"
+      className="w-[432px] -top-[340px] left-[380px] overflow-y-auto h-[400px] right-3   py-[16px] shadow-md z-50 absolute rounded-[8px] bg-white flex flex-col items-center"
     >
       <OneNotify />
       <OneNotify />

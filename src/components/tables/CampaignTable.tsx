@@ -132,6 +132,7 @@ const CampaignTable = () => {
         </ModalWraper>
       )}
       <Table
+        // className='z-10'
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
