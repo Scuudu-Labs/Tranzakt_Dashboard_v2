@@ -1,4 +1,5 @@
 import { baseApi } from '../baseApi';
+import { tagTypes } from '../baseApi/tagTypes';
 
 export const campaignApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,6 +10,7 @@ export const campaignApi = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
+      providesTags: [tagTypes.Campaign],
     }),
   }),
 });

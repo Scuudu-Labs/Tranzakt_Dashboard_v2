@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMemo, useState } from 'react';
 import { useGetAllCampaignsQuery } from '../../redux/api/campaign';
 import { formatDate } from '../../lib/dateFormater';
@@ -18,11 +19,9 @@ const CampaignTable = () => {
     edit: false,
     delete: false,
   });
-  const viewAction = (id: string) => {
-    console.log(id);
+  const viewAction = () => {
     setAction({ ...action, view: true });
   };
-  console.log(page);
   const dataSource = useMemo(() => {
     return campaigns?.data?.map((campaign) => {
       const duration = `${formatDate(campaign.starts_at)} - ${formatDate(
