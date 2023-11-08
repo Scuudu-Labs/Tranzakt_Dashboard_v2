@@ -21,6 +21,7 @@ export const balanceApi = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
+      providesTags: [tagTypes.Stats],
     }),
   }),
 });

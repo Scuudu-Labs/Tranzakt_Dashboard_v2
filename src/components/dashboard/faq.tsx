@@ -59,7 +59,7 @@ const Faq = ({ question, answer }: IFaq) => {
       )}
       {open.edit && (
         <ModalWraper show={open.edit} close={closeEdit}>
-          <FaqCard close={closeEdit} />
+          <FaqCard close={closeEdit} isEdit />
         </ModalWraper>
       )}
       {open.delete && (
