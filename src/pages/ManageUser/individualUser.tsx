@@ -1,13 +1,16 @@
 import MainContainer from '../../components/layout/MainContainer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StatusTag from '../../components/ui/statusTag';
 import TransactionHistory from './transactionHistory';
 import PersonalDetails from './personalDetails';
 import { GoBackIcon, MailIcon, NetworkIcon, ShowIcon } from '../../assets';
 import IconWrap from '../../components/ui/svgWrapper';
+import { useGetAUserQuery } from '../../redux/api/mangerUser';
 
 const EachUser = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const { data: user } = useGetAUserQuery(id as string);
   return (
     <MainContainer>
       <div
@@ -28,7 +31,7 @@ const EachUser = () => {
           />
           <div className="flex flex-col">
             <h2 className="font-montserrat text-[24px]  font-semibold tracking-[0.3px] text-[#3F3F3F]">
-              Alessa Abubakar
+              {user?.data?.full_name ?? '...'}
             </h2>
             <div className="flex mb-2 items-center">
               <IconWrap src={MailIcon} />

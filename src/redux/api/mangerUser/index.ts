@@ -14,7 +14,18 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: (_result, _err, query) => [{ type: tagTypes.User, query }],
     }),
+    getAUser: builder.query<ISuccessResponse<IUser>, string>({
+      query: (id) => {
+        return {
+          url: `/users/${id}`,
+          method: 'GET',
+        };
+      },
+      providesTags: (_result, _err, query) => [
+        { type: tagTypes.User, id: query },
+      ],
+    }),
   }),
 });
 
-export const { useGetAllUsersQuery } = userApi;
+export const { useGetAllUsersQuery, useGetAUserQuery } = userApi;

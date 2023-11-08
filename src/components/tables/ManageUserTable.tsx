@@ -96,7 +96,7 @@ export default function ManagerUserTable({
     },
     {
       title: 'View',
-      dataIndex: 'view',
+      dataIndex: 'index',
       key: 'index',
       render: (index: number) => (
         <Link
