@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMemo, useState } from 'react';
 import { useGetAllCampaignsQuery } from '../../redux/api/campaign';
 import { formatDate } from '../../lib/dateFormater';
@@ -13,7 +12,7 @@ import DeleteModal from '../modal/deleteModal';
 const CampaignTable = () => {
   const { data: campaigns, isLoading } = useGetAllCampaignsQuery();
   const [pageSize, setPageSize] = useState(5);
-  const [page, setPage] = useState(1);
+  const [, setPage] = useState(1);
   const [action, setAction] = useState({
     view: false,
     edit: false,
