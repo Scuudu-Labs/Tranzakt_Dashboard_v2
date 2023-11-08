@@ -44,7 +44,7 @@ export default function ManagerUserTable({
 
   const dataSource = useMemo(() => {
     return (
-      users?.data?.map((user, index) => {
+      users?.data?.users?.map((user, index) => {
         return {
           sn: `#0${index + 1 < 10 ? `0${index + 1}` : index + 1} `,
           name: user.full_name,
@@ -137,7 +137,7 @@ export default function ManagerUserTable({
             setPage(1);
             setPageSize(size);
           },
-          total: 17,
+          total: users?.data?.meta?.count,
           pageSize: pageSize,
           onChange: (page) => {
             setPage(page);

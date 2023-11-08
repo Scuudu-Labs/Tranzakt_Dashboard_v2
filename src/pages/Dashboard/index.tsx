@@ -3,7 +3,7 @@ import { DateIcon, DropIcon } from '../../assets';
 import DashboardSection from '../../components/dashboard/DashboardSection';
 import MainContainer from '../../components/layout/MainContainer';
 import IconWrap from '../../components/ui/svgWrapper';
-import DateFilterModal from '../../components/modals/filterByDate';
+import DateFilterModal from '../../components/modal/filterByDate';
 import { formatText } from '../../lib/text_formater';
 
 export default function DashboardPage() {

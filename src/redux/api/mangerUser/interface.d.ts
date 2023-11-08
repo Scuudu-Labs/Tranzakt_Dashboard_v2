@@ -5,6 +5,11 @@ interface IUser {
   date: string;
 }
 
+interface IUserDetails {
+  users: IUser[];
+  meta: { count: number };
+}
+
 interface IUserQuery extends Partial<IQuerySearch> {
   page: number;
   limit: number;
