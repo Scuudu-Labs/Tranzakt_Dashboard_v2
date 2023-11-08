@@ -124,7 +124,7 @@ export default function ContentSection() {
             setState={() => setCurrentState('faqs')}
           />
           <ContentNavigation
-            value={`Terms of services`}
+            value={`Terms of Service`}
             isActive={currentState === 'terms'}
             setState={() => setCurrentState('terms')}
           />
