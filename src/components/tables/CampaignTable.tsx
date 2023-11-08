@@ -90,9 +90,9 @@ const CampaignTable = () => {
       title: '',
       dataIndex: 'view',
       key: 'index',
-      render: (index: string) => (
+      render: () => (
         <span
-          onClick={() => viewAction(index)}
+          onClick={() => viewAction()}
           className="py-4 text-[#32C87D] hover:text-[#32C87D] cursor-pointer px-8 font-montserrat underline font-bold"
         >
           View
