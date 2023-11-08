@@ -9,6 +9,10 @@ type IProps = {
 };
 
 const EditContentCards = ({ header, close }: IProps) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    close();
+  };
   return (
     <div className="w-[500px] h-[480px]  p-8 rounded-[12px] bg-white ">
       <div className="flex items-center mb-4 justify-between">
@@ -17,7 +21,10 @@ const EditContentCards = ({ header, close }: IProps) => {
         </h2>
         <IconWrap src={closeIcon} style="cursor-pointer" close={close} />
       </div>
-      <form className="flex flex-col h-full items-center w-full">
+      <form
+        className="flex flex-col h-full items-center w-full"
+        onSubmit={handleSubmit}
+      >
         <TextInput error="" label="Title" placeholder="Enter Title" />
         <TextArea
           error=""
