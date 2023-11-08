@@ -10,7 +10,7 @@ export const campaignApi = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
-      providesTags: [tagTypes.Campaign],
+      providesTags: [{ type: tagTypes.Campaign }],
     }),
   }),
 });
