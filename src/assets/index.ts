@@ -24,12 +24,18 @@ import closeIcon from './icons/close.svg';
 import ArrowUp from './icons/arrow-up.svg';
 import ArrowDown from './icons/arrow-down.svg';
 import Danger from './icons/danger.svg';
+import DeleteIcon from './icons/delete-icon.svg';
+import EditIcon from './icons/edit-icon.svg';
+import UploadIcon from './icons/upload.svg';
 
 export {
   closeIcon,
   ArrowDown,
   ArrowUp,
+  DeleteIcon,
+  EditIcon,
   Danger,
+  UploadIcon,
   BellIcon,
   CreditIcon,
   DebitIcon,

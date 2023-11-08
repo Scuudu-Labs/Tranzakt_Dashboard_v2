@@ -3,6 +3,7 @@ import CampaignCard from '../modal/campaignCard';
 import IconWrap from '../ui/svgWrapper';
 import { plusIcon } from '../../assets';
 import ModalWraper from '../modal';
+import CampaignTable from '../tables/CampaignTable';
 export default function CampaignSection() {
   const [openModal, setOpenModal] = useState(false);
   const close = () => setOpenModal(false);
@@ -21,13 +22,12 @@ export default function CampaignSection() {
           New Campaign
         </button>
       </div>{' '}
-      <div className="flex   h-screen w-full  justify-center">
-        {openModal && (
-          <ModalWraper close={close} show={openModal}>
-            <CampaignCard close={close} />
-          </ModalWraper>
-        )}{' '}
-      </div>
+      {openModal && (
+        <ModalWraper close={close} show={openModal}>
+          <CampaignCard close={close} />
+        </ModalWraper>
+      )}{' '}
+      <CampaignTable />
     </div>
   );
 }
