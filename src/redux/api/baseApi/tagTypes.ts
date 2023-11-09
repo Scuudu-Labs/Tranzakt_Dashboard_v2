@@ -3,4 +3,5 @@ export const tagTypes = {
   Balance: 'Balance',
   Stats: 'Stats',
   Campaign: 'Campaigns',
+  Faqs: 'Faqs',
 };
