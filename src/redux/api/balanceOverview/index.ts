@@ -1,3 +1,4 @@
+import { generateQueryString } from '../../../lib/generateQueryKey';
 import { baseApi } from '../baseApi';
 import { tagTypes } from '../baseApi/tagTypes';
 
@@ -23,7 +24,34 @@ export const balanceApi = baseApi.injectEndpoints({
       },
       providesTags: [{ type: tagTypes.Stats }],
     }),
+    getGraphData: builder.query<IFormatData[], IQueryString>({
+      query: (query) => {
+        const params = generateQueryString(query);
+        return {
+          url: `/transaction-statistics/?${params}`,
+          method: 'GET',
+        };
+      },
+      transformResponse: (response: ISuccessResponse<IGraphData[]>) => {
+        console.log(response);
+        const formatedData = response?.data?.map((data) => {
+          return {
+            label: data.legend,
+            amount: data.total_amount,
+            valueLabel: 'amount',
+          };
+        });
+        return formatedData as IFormatData[];
+      },
+      providesTags: (_result, _err, query) => [
+        { type: tagTypes.GraphData, query },
+      ],
+    }),
   }),
 });
 
-export const { useGetBalanceQuery, useGetStatisticsQuery } = balanceApi;
+export const {
+  useGetBalanceQuery,
+  useGetStatisticsQuery,
+  useGetGraphDataQuery,
+} = balanceApi;

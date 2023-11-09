@@ -1,4 +1,5 @@
 import { PieChart, Pie } from 'recharts';
+import ButtonLoader from '../button/buttonLoader';
 
 interface PieChartData {
   label: string;
@@ -16,6 +17,7 @@ export default function PieChartCard(props: {
   label: string;
   sublabel?: number;
   type: string;
+  loading: boolean;
 }) {
   const data_one: PieChartData = {
     label: `${props.data.percentCompleted}% completed ${props.type}`,
@@ -35,17 +37,24 @@ export default function PieChartCard(props: {
         <p className="font-[600]">{props.label}</p>
         <p className="text-xs text-[#A1A1A1]">{props.sublabel} users</p>
       </div>
-      <PieChart width={160} height={160}>
-        <Pie
-          data={[data_one, data_two]}
-          dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
-          innerRadius={40}
-          outerRadius={80}
-        />
-      </PieChart>
+
+      {props.loading ? (
+        <div className="h-[120px] w-full flex items-center justify-center">
+          <ButtonLoader />
+        </div>
+      ) : (
+        <PieChart width={160} height={160}>
+          <Pie
+            data={[data_one, data_two]}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={40}
+            outerRadius={80}
+          />
+        </PieChart>
+      )}
 
       <div className="flex flex-col w-full mt-4 gap-x-2">
         <div className="flex gap-x-2 mb-3 text-xs">
