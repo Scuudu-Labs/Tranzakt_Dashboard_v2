@@ -40,7 +40,7 @@ const DynamicContent = ({ header, content, openEdit }: IProps) => {
         <ModalWraper show={deleteModal} close={() => setDeleteModal(false)}>
           <DeleteModal
             text="You are about to to delete this FAQ. Do you want to proceed?"
-            close={() => setDeleteModal(false)}
+            action={() => setDeleteModal(false)}
           />
         </ModalWraper>
       )}

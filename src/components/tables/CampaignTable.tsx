@@ -125,7 +125,7 @@ const CampaignTable = () => {
         >
           <DeleteModal
             text="You are about to to delete this advert. Do you want to proceed?"
-            close={() => setAction({ ...action, delete: false })}
+            action={() => setAction({ ...action, delete: false })}
           />
         </ModalWraper>
       )}
