@@ -7,15 +7,14 @@ const AllFaqs = () => {
   return (
     <div>
       {isLoading && <ButtonLoader />}
-      {!isLoading &&
-        faqs?.data?.map((faq) => (
-          <Faq
-            key={faq.id}
-            id={faq.id}
-            question={faq.question}
-            answer={faq.answer}
-          />
-        ))}
+      {faqs?.data?.map((faq) => (
+        <Faq
+          key={faq.id}
+          id={faq.id}
+          question={faq.question}
+          answer={faq.answer}
+        />
+      ))}
     </div>
   );
 };
