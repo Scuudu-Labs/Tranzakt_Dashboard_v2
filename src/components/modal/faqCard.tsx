@@ -5,11 +5,7 @@ import TextArea from '../Input/TextArea';
 import IconWrap from '../ui/svgWrapper';
 import { useFormik } from 'formik';
 import { faqFormSchema } from './modal.schema';
-import {
-  useCreateFaqMutation,
-  useEditFaqMutation,
-  useGetOneFaqQuery,
-} from '../../redux/api/faq';
+import { useCreateFaqMutation, useEditFaqMutation } from '../../redux/api/faq';
 import { toast } from 'react-toastify';
 import ButtonLoader from '../button/buttonLoader';
 import { useEffect } from 'react';
@@ -19,21 +15,22 @@ interface IFaqData {
   answer: string;
 }
 
-const initialFaq = {
-  question: '',
-  answer: '',
-};
+interface IProps extends Partial<IFaqData> {
+  close: () => void;
+  id?: string;
+}
 
-const FaqCard = ({ close, id }: { close: () => void; id?: string }) => {
+const FaqCard = ({ close, question, id, answer }: IProps) => {
+  const initialFaq = {
+    question: '',
+    answer: '',
+  };
+
   const [createFaq, { isLoading }] = useCreateFaqMutation();
   const [editFaq, { isLoading: editing }] = useEditFaqMutation();
-  const { data: faq } = useGetOneFaqQuery(id as string, {
-    skip: id === undefined,
-  });
   const formik = useFormik<IFaqData>({
     initialValues: initialFaq,
     validationSchema: faqFormSchema,
-    enableReinitialize: true,
     onSubmit: () => {
       onSubmit();
     },
@@ -67,9 +64,9 @@ const FaqCard = ({ close, id }: { close: () => void; id?: string }) => {
   };
 
   useEffect(() => {
-    setFieldValue('question', faq?.data?.question);
-    setFieldValue('answer', faq?.data?.answer);
-  }, [faq]);
+    setFieldValue('question', question);
+    setFieldValue('answer', answer);
+  }, [question, answer]);
 
   return (
     <div className="w-[500px] min-h-[480px]  p-8 rounded-[12px] bg-white ">
