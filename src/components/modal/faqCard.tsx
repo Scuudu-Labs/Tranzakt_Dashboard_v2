@@ -8,7 +8,6 @@ import { faqFormSchema } from './modal.schema';
 import { useCreateFaqMutation, useEditFaqMutation } from '../../redux/api/faq';
 import { toast } from 'react-toastify';
 import ButtonLoader from '../button/buttonLoader';
-import { useEffect } from 'react';
 
 interface IFaqData {
   question: string;
@@ -20,16 +19,14 @@ interface IProps extends Partial<IFaqData> {
   id?: string;
 }
 
-const FaqCard = ({ close, question, id, answer }: IProps) => {
-  const initialFaq = {
-    question: '',
-    answer: '',
-  };
-
+const FaqCard = ({ close, question = '', id, answer = '' }: IProps) => {
   const [createFaq, { isLoading }] = useCreateFaqMutation();
   const [editFaq, { isLoading: editing }] = useEditFaqMutation();
   const formik = useFormik<IFaqData>({
-    initialValues: initialFaq,
+    initialValues: {
+      question,
+      answer,
+    },
     validationSchema: faqFormSchema,
     onSubmit: () => {
       onSubmit();
@@ -44,7 +41,6 @@ const FaqCard = ({ close, question, id, answer }: IProps) => {
     handleBlur,
     touched,
     handleSubmit,
-    setFieldValue,
   } = formik;
 
   const onSubmit = async () => {
@@ -62,11 +58,6 @@ const FaqCard = ({ close, question, id, answer }: IProps) => {
       toast.error(error.error);
     }
   };
-
-  useEffect(() => {
-    setFieldValue('question', question);
-    setFieldValue('answer', answer);
-  }, [question, answer]);
 
   return (
     <div className="w-[500px] min-h-[480px]  p-8 rounded-[12px] bg-white ">
