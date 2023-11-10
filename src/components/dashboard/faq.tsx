@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import IconWrap from '../ui/svgWrapper';
 import { ArrowDown, ArrowUp } from '../../assets';
 import ModalWraper from '../modal';
 import FaqCard from '../modal/faqCard';
 import DeleteModal from '../modal/deleteModal';
+import { useDeleteFaqMutation } from '../../redux/api/faq';
+import { toast } from 'react-toastify';
 type IFaq = {
   question: string;
+  id: string;
   answer: string;
 };
 
-const Faq = ({ question, answer }: IFaq) => {
+const Faq = ({ question, answer, id }: IFaq) => {
+  const [deleteFaq, { isLoading }] = useDeleteFaqMutation();
   const [open, setOpen] = useState({
     create: false,
     edit: false,
@@ -21,11 +26,21 @@ const Faq = ({ question, answer }: IFaq) => {
   const openDelete = () => setOpen({ ...open, delete: true });
   const closeDelete = () => setOpen({ ...open, delete: false });
 
+  const deleteFaqAction = async () => {
+    try {
+      await deleteFaq(id).unwrap();
+      toast.success('Faq deleted successfully');
+      closeDelete();
+    } catch (error: any) {
+      toast.error(error.error);
+    }
+  };
+
   return (
     <div className="flex flex-col py-6 w-full border-b  border-shade-300">
       <div
-        className="flex items-center justify-between cursor-pointer"
         onClick={toggle}
+        className="flex items-center w-full justify-between cursor-pointer"
       >
         <h2 className="font-semibold leading-[16px] tracking-[0.3px] font-montserrat text-shade-200">
           {question}
@@ -59,14 +74,20 @@ const Faq = ({ question, answer }: IFaq) => {
       )}
       {open.edit && (
         <ModalWraper show={open.edit} close={closeEdit}>
-          <FaqCard close={closeEdit} isEdit />
+          <FaqCard
+            close={closeEdit}
+            id={id}
+            question={question}
+            answer={answer}
+          />
         </ModalWraper>
       )}
       {open.delete && (
         <ModalWraper show={open.delete} close={closeDelete}>
           <DeleteModal
             text="You are about to to delete this FAQ. Do you want to proceed?"
-            close={closeDelete}
+            loading={isLoading}
+            action={deleteFaqAction}
           />
         </ModalWraper>
       )}

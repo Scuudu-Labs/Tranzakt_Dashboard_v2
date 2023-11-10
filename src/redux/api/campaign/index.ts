@@ -6,7 +6,7 @@ export const campaignApi = baseApi.injectEndpoints({
     getAllCampaigns: builder.query<ISuccessResponse<ICampaign[]>, void>({
       query: () => {
         return {
-          url: `/campaign`,
+          url: `/admin/campaign`,
           method: 'GET',
         };
       },

@@ -4,7 +4,7 @@ import { tagTypes } from './tagTypes';
 
 export const baseApi = createApi({
   baseQuery: axiosBaseQuery({
-    baseUrl: 'https://api.tranzakt.app/api/v1/admin',
+    baseUrl: 'https://api.tranzakt.app/api/v1',
     baseHeaders: {
       'Content-Type': 'application/json',
     },

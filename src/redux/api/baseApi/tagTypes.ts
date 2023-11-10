@@ -4,4 +4,5 @@ export const tagTypes = {
   Stats: 'Stats',
   Campaign: 'Campaigns',
   GraphData: 'GraphData',
+  Faqs: 'Faqs',
 };
