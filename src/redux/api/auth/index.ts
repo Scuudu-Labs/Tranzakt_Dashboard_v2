@@ -4,7 +4,7 @@ export const authAPi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     adminLogin: builder.mutation<ISuccessResponse<IAdmin>, ILogin>({
       query: (data) => ({
-        url: '/login',
+        url: '/admin/login',
         method: 'POST',
         data: data,
       }),
@@ -12,7 +12,7 @@ export const authAPi = baseApi.injectEndpoints({
 
     forgotPassword: builder.mutation<ISuccessResponse, Pick<ILogin, 'email'>>({
       query: (data) => ({
-        url: '/forgot-password',
+        url: '/admin/forgot-password',
         method: 'POST',
         data: data,
       }),

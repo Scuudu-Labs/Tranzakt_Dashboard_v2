@@ -6,7 +6,7 @@ export const balanceApi = baseApi.injectEndpoints({
     getBalance: builder.query<ISuccessResponse<IBalanceOverView>, string>({
       query: (query) => {
         return {
-          url: `/users-balances?period=${query}`,
+          url: `/admin/users-balances?period=${query}`,
           method: 'GET',
         };
       },
@@ -17,7 +17,7 @@ export const balanceApi = baseApi.injectEndpoints({
     getStatistics: builder.query<ISuccessResponse<IStats[]>, void>({
       query: () => {
         return {
-          url: '/ky-users-statistics',
+          url: '/admin/ky-users-statistics',
           method: 'GET',
         };
       },
