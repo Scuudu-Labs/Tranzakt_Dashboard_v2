@@ -33,7 +33,6 @@ export const balanceApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: ISuccessResponse<IGraphData[]>) => {
-        console.log(response);
         const formatedData = response?.data?.map((data) => {
           return {
             label: data.legend,
