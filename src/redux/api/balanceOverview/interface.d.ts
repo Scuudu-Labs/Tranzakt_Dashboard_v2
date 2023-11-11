@@ -25,3 +25,17 @@ interface IStats {
   percentageCompletedKYB: number;
   percentagePendingKYB: number;
 }
+
+interface IGraphData {
+  total_amount: number;
+  number_of_transactions: number;
+  legend: string;
+  previous_total_amount: number;
+  previous_number_of_transactions: number;
+}
+
+interface IFormatData {
+  label: string;
+  amount: number;
+  valueLabel: string;
+}
