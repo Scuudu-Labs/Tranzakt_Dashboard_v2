@@ -28,7 +28,7 @@ export const balanceApi = baseApi.injectEndpoints({
       query: (query) => {
         const params = generateQueryString(query);
         return {
-          url: `/transaction-statistics/?${params}`,
+          url: `/admin/transaction-statistics/?${params}`,
           method: 'GET',
         };
       },

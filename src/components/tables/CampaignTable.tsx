@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { useGetAllCampaignsQuery } from '../../redux/api/campaign';
 import { formatDate } from '../../lib/dateFormater';
 import { Table } from 'antd';
 import StatusTag from '../ui/statusTag';
@@ -9,8 +8,12 @@ import ModalWraper from '../modal';
 import CampaignCard from '../modal/campaignCard';
 import DeleteModal from '../modal/deleteModal';
 
-const CampaignTable = () => {
-  const { data: campaigns, isLoading } = useGetAllCampaignsQuery();
+type IProps = {
+  campaigns: ISuccessResponse<ICampaign[]>;
+  isLoading: boolean;
+};
+
+const CampaignTable = ({ campaigns, isLoading }: IProps) => {
   const [pageSize, setPageSize] = useState(5);
   const [, setPage] = useState(1);
   const [action, setAction] = useState({
