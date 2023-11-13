@@ -36,7 +36,7 @@ export default function AreaChartCard(props: {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey={props.data[0].valueLabel}
+            dataKey={props?.data ? props.data[0]?.valueLabel : ''}
             stroke="#82ca9d"
             fillOpacity={1}
             fill="url(#colorPv)"

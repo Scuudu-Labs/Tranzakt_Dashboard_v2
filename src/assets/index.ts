@@ -28,6 +28,7 @@ import Danger from './icons/danger.svg';
 import DeleteIcon from './icons/delete-icon.svg';
 import EditIcon from './icons/edit-icon.svg';
 import UploadIcon from './icons/upload.svg';
+import EmptyState from './emptyState.svg';
 
 export {
   closeIcon,
@@ -35,6 +36,7 @@ export {
   ArrowUp,
   DeleteIcon,
   EditIcon,
+  EmptyState,
   Danger,
   UploadIcon,
   BellIcon,
