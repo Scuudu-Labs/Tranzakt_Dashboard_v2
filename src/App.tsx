@@ -32,15 +32,15 @@ function App() {
             <Route
               path={'/change_password'}
               element={
-                <PublicPage>
+                <ProtectedPage>
                   <ConfirmPassword />
-                </PublicPage>
+                </ProtectedPage>
               }
             />
             <Route
               path={'/verify_account'}
               element={
-                <PublicPage>
+                <PublicPage link="change_password">
                   <VerifyAccount />
                 </PublicPage>
               }
@@ -96,9 +96,9 @@ function App() {
             <Route
               path={'/success'}
               element={
-                <PublicPage>
+                <ProtectedPage>
                   <Success />
-                </PublicPage>
+                </ProtectedPage>
               }
             />
             <Route path={'*'} element={<NotFound />} />
