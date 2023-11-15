@@ -33,6 +33,7 @@ export default function LoginForm() {
     try {
       const res = await forgotPassword(values).unwrap();
       toast.success(res.message);
+      localStorage.setItem('email', JSON.stringify(res?.data?.email));
       resetForm();
       navigate('/verify_account');
     } catch (error) {

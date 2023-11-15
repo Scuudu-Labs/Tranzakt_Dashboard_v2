@@ -5,4 +5,5 @@ interface InputProps
   error: string | undefined;
   label: string;
   touched?: boolean;
+  isForget?: boolean;
 }

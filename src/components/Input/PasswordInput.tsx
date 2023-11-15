@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HideSvg } from '../../assets/icons/hide.svg';
 import { InputProps } from './types';
 
-const PasswordInput = ({ error, touched, label, ...props }: InputProps) => {
+const PasswordInput = ({
+  error,
+  touched,
+  label,
+  isForget,
+  ...props
+}: InputProps) => {
   const [hide, setHide] = useState(false);
   const navigate = useNavigate();
 
@@ -31,13 +37,15 @@ const PasswordInput = ({ error, touched, label, ...props }: InputProps) => {
       <p className="text-[12px] text-red-500 -mt-1">
         {touched && error ? error : ''}
       </p>
-      <label
-        className="text-[#A1A1A1] text-right text-[13px] cursor-pointer px-1"
-        onClick={() => navigate('/reset_password')}
-      >
-        Forgot password?{' '}
-        <span className="font-bold text-[#32C87D]">Click here</span>
-      </label>
+      {isForget && (
+        <label
+          className="text-[#A1A1A1] text-right text-[13px] cursor-pointer px-1"
+          onClick={() => navigate('/reset_password')}
+        >
+          Forgot password?{' '}
+          <span className="font-bold text-[#32C87D]">Click here</span>
+        </label>
+      )}
     </div>
   );
 };

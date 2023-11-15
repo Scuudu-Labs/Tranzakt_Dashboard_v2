@@ -14,3 +14,8 @@ interface ILoginResponse {
   created_at: string;
   updated_at: string;
 }
+
+interface IReset {
+  email: string;
+  pin: string;
+}

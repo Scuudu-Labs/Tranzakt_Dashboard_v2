@@ -9,6 +9,7 @@ interface IAdmin extends ILoginResponse {
 interface AdminSlice {
   user: IAdmin | null;
   access_token: string | null;
+  email: string | null;
 }
 
 interface IQuerySearch {
