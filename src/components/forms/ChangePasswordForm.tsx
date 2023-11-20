@@ -1,24 +1,53 @@
-import { useForm } from 'react-hook-form';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { HideIcon, LogoIcon, SecureIcon } from '../../assets';
+import { LogoIcon, SecureIcon } from '../../assets';
 import IconWrap from '../ui/svgWrapper';
+import { useFormik } from 'formik';
+import { changePasswordSchema } from './forms.schema';
+import PasswordInput from '../Input/PasswordInput';
+import { useResetPasswordMutation } from '../../redux/api/auth';
+import { toast } from 'react-toastify';
+import ButtonLoader from '../button/buttonLoader';
 
-interface LoginData {
+interface changePasswrordData {
   password: string;
   confirm_password: string;
 }
 
 export default function ChangePasswordForm() {
-  const { register, handleSubmit } = useForm<LoginData>({
-    mode: 'onTouched',
-  });
-  const [hide, setHide] = useState(false);
-  const [close, setClose] = useState(false);
+  const [resetPasswword, { isLoading }] = useResetPasswordMutation();
   const navigate = useNavigate();
-  const onSumbit = (data: object) => {
-    console.log(data);
+  const formik = useFormik<changePasswrordData>({
+    initialValues: {
+      password: '',
+      confirm_password: '',
+    },
+    validationSchema: changePasswordSchema,
+    onSubmit: () => {
+      onSubmit();
+    },
+  });
+
+  const {
+    values,
+    errors,
+    handleChange,
+    resetForm,
+    handleBlur,
+    touched,
+    handleSubmit,
+  } = formik;
+
+  const onSubmit = async () => {
+    try {
+      const res = await resetPasswword({ password: values.password }).unwrap();
+      toast.success(res.message);
+      resetForm();
+      navigate('/success');
+    } catch (error: any) {
+      toast.error(error.error as string);
+    }
   };
   return (
     <div className="w-full">
@@ -27,52 +56,36 @@ export default function ChangePasswordForm() {
       </div>
       <form
         className="bg-white max-w-[500px] rounded-[8px] relative flex flex-col items-center justify-center mx-auto h-[500px]"
-        onSubmit={handleSubmit(onSumbit)}
+        onSubmit={handleSubmit}
       >
         <div className="flex w-[400px] mx-auto flex-col mb-8 gap-y-2">
           <h2 className="font-montserrat text-[32px] leading-[39px] text-[#272626] font-bold">
             Reset your password
           </h2>
         </div>
-        <div className="flex w-[400px] relative mx-auto flex-col mb-6 gap-y-2">
-          <label className="text-[12px]">New Password</label>
-          <div
-            className="absolute right-4 cursor-pointer top-10"
-            onClick={() => setClose(!close)}
-          >
-            <IconWrap src={HideIcon} />
-          </div>
-          <input
-            {...register('password', { required: true })}
-            className="rounded-md py-2 border outline-none h-[48px] border-[#A1A1A1] w-full placeholder-[#A1A1A1] px-2"
-            placeholder="********"
-            type={close ? 'text' : 'password'}
-          />
-        </div>
-        <div className="flex relative w-[400px] mx-auto mb-6 flex-col gap-y-2">
-          <label className="text-[12px]">Confirm Password</label>
-          <input
-            {...register('password', { required: true, minLength: 6 })}
-            className="rounded-md py-2 h-[48px] border w-full outline-none border-[#A1A1A1] placeholder-[#A1A1A1] px-2"
-            placeholder="********"
-            type={hide ? 'text' : 'password'}
-          />
-          <div
-            className="absolute right-4 cursor-pointer top-10"
-            onClick={() => setHide(!hide)}
-          >
-            <IconWrap src={HideIcon} />
-          </div>
-          <label className="text-[#A1A1A1] text-right text-[13px] cursor-pointer px-1">
-            <span className="font-[500] text-[#32C87D]">Save Password</span>
-          </label>
-        </div>
+        <PasswordInput
+          label="Password"
+          error={errors.password ? errors.password : ''}
+          touched={touched.password}
+          name="password"
+          onChange={handleChange}
+          value={values.password}
+          onBlur={handleBlur}
+        />
+        <PasswordInput
+          label="Confirm Password"
+          error={errors.confirm_password ? errors.confirm_password : ''}
+          touched={touched.confirm_password}
+          name="confirm_password"
+          onChange={handleChange}
+          value={values.confirm_password}
+          onBlur={handleBlur}
+        />
         <button
           type="submit"
-          onClick={() => navigate('/success')}
-          className="text-white bg-[#32C87D] w-[400px] mx-auto py-3 mb-2 mt-2 rounded-md"
+          className="text-white bg-[#32C87D] w-[400px] flex items-center justify-center mx-auto py-3 mb-2 mt-2 rounded-md"
         >
-          Reset my password
+          {isLoading ? <ButtonLoader /> : 'Reset my password'}
         </button>
         <div className="absolute bottom-4">
           <IconWrap src={SecureIcon} />

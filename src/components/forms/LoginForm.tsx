@@ -89,6 +89,7 @@ export default function LoginForm() {
             onChange={handleChange}
             value={values.password}
             onBlur={handleBlur}
+            isForget
           />
           <button
             type="submit"

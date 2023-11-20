@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initialState: AdminSlice = {
   user: null,
   access_token: null,
+  email: null,
 };
 
 export const authSlice = createSlice({

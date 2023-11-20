@@ -3,4 +3,6 @@ export const tagTypes = {
   Balance: 'Balance',
   Stats: 'Stats',
   Campaign: 'Campaigns',
+  GraphData: 'GraphData',
+  Faqs: 'Faqs',
 };

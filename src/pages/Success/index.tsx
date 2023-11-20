@@ -1,8 +1,11 @@
 import { LogoIcon, SuccessIcon } from '../../assets';
 import backgroundImage from '../../assets/background.svg';
 import IconWrap from '../../components/ui/svgWrapper';
+import { useNavigate } from 'react-router-dom';
 
 export default function ResetPassword() {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -24,6 +27,7 @@ export default function ResetPassword() {
           </p>
           <button
             type="submit"
+            onClick={() => navigate('/dashboard')}
             className="text-white bg-[#32C87D] w-[400px] mx-auto py-3 mb-2 mt-6 rounded-md"
           >
             Continue

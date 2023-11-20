@@ -8,7 +8,7 @@ export const userApi = baseApi.injectEndpoints({
       query: (query) => {
         const params = generateQueryString(query);
         return {
-          url: `/users/?${params}`,
+          url: `/admin/users/?${params}`,
           method: 'GET',
         };
       },

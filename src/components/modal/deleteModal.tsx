@@ -1,7 +1,16 @@
 import IconWrap from '../ui/svgWrapper';
 import { Danger } from '../../assets';
+import ButtonLoader from '../button/buttonLoader';
 
-const DeleteModal = ({ text, close }: { text: string; close: () => void }) => {
+const DeleteModal = ({
+  text,
+  loading,
+  action,
+}: {
+  text: string;
+  loading?: boolean;
+  action?: () => void;
+}) => {
   return (
     <div className="flex items-center justify-center w-[448px] h-[323px] flex-col rounded-[8px] p-[32px] bg-white">
       <IconWrap src={Danger} style="mb-4" />
@@ -11,9 +20,9 @@ const DeleteModal = ({ text, close }: { text: string; close: () => void }) => {
       <span className="text-[16px] text-shade-500 text-center">{text}</span>
       <button
         className="text-white bg-danger-100 w-full flex items-center justify-center mx-auto py-3 mb-2 mt-5 rounded-md"
-        onClick={close}
+        onClick={action}
       >
-        Proceed
+        {loading ? <ButtonLoader /> : 'Proceed'}
       </button>
     </div>
   );

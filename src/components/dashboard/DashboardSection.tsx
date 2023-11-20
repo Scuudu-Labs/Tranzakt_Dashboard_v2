@@ -1,11 +1,11 @@
 import AreaChartCard from '../charts/AreaChartCard';
 import AmountInfoCard from './InfoCard';
-import { sampleAreaChartData } from '../../data';
 import PieChartCard from '../charts/PieChartCard';
 import TransactionCard from './transactionCard';
 import BarCharts from '../charts/barChart';
 import {
   useGetBalanceQuery,
+  useGetGraphDataQuery,
   useGetStatisticsQuery,
 } from '../../redux/api/balanceOverview';
 import { currencyFormatter } from '../../lib/text_formater';
@@ -21,7 +21,10 @@ enum Direction {
 
 export default function DashboardSection({ filterType }: IProp) {
   const { data } = useGetBalanceQuery(filterType);
-  const { data: stats } = useGetStatisticsQuery();
+  const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
+    period: filterType,
+  });
+  const { data: stats, isLoading: loading } = useGetStatisticsQuery();
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -60,12 +63,11 @@ export default function DashboardSection({ filterType }: IProp) {
               filterType={filterType}
             />
           </div>
-          <div>
-            <AreaChartCard
-              data={sampleAreaChartData}
-              label="Transaction Statistics ₦"
-            />
-          </div>
+          <AreaChartCard
+            loading={fetching}
+            data={graphData as IFormatData[]}
+            label="Transaction Statistics ₦"
+          />
         </div>
         <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
@@ -95,8 +97,9 @@ export default function DashboardSection({ filterType }: IProp) {
       </div>
       <div className="flex gap-6 my-6">
         <PieChartCard
+          loading={loading}
           label={'KYC Status'}
-          sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
           type="KYC"
           data={{
             percentCompleted: stats?.data?.[0]?.percentageCompletedKYC ?? 0,
@@ -107,8 +110,9 @@ export default function DashboardSection({ filterType }: IProp) {
         />
 
         <PieChartCard
+          loading={loading}
           label={'KYB Status'}
-          sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
           type="KYB"
           data={{
             percentCompleted: stats?.data?.[1]?.percentageCompletedKYB ?? 0,
