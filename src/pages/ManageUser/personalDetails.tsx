@@ -1,3 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { toast } from 'react-toastify';
+import {
+  useActivateAUserMutation,
+  useDeActivateAUserMutation,
+} from '../../redux/api/mangerUser';
+import { useParams } from 'react-router-dom';
+import ButtonLoader from '../../components/button/buttonLoader';
+
+enum IToggleStatus {
+  ACTIVE = 'ACTIVE',
+  DEACTIVATED = 'DEACTIVATED',
+}
+
 const DisplayBox = ({ title, value }: { title: string; value: string }) => {
   return (
     <div className="w-full flex flex-col px-[16px] py-[10px] h-[70px]  border-[0.5px] border-[#A1A1A1] rounded-[8px]">
@@ -11,7 +25,29 @@ const DisplayBox = ({ title, value }: { title: string; value: string }) => {
   );
 };
 
-const PersonalDetails = () => {
+const PersonalDetails = ({ status }: { status: string }) => {
+  const { id } = useParams();
+
+  const [activateAUser, { isLoading: activating }] = useActivateAUserMutation();
+  const [deActivateAUser, { isLoading: deActivating }] =
+    useDeActivateAUserMutation();
+
+  const statusToggleAction = async () => {
+    if (status === IToggleStatus.ACTIVE) {
+      try {
+        await deActivateAUser(id as string).unwrap();
+      } catch (error: any) {
+        toast.error(error);
+      }
+    } else {
+      try {
+        await activateAUser(id as string).unwrap();
+      } catch (error: any) {
+        toast.error(error);
+      }
+    }
+  };
+
   return (
     <div className="w-full rounded-[8px] py-4  bg-white  border-[#EAEAEA] border shadow-sm">
       <h1 className="text-[#3F3F3F] px-4 text-[18px]  font-montserrat mb-3">
@@ -33,10 +69,16 @@ const PersonalDetails = () => {
           </div>
           <div className="col-span-2">
             <button
+              onClick={statusToggleAction}
               type="submit"
-              className="text-white bg-[#32C87D] w-full mx-auto py-3 mb-2 mt-2 rounded-md"
+              className={`text-white flex items-center justify-center gap-x-3 w-full mx-auto py-3 mb-2 mt-2 rounded-md ${
+                status !== IToggleStatus.ACTIVE
+                  ? 'bg-[#32C87D]'
+                  : 'bg-[#FF2636]'
+              }`}
             >
-              Activate
+              {status !== IToggleStatus.ACTIVE ? 'Activate' : 'Deactivate'}
+              {(activating || deActivating) && <ButtonLoader />}
             </button>
           </div>
         </div>

@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BellIcon, DropIcon, SearchIcon, TLogoIcon } from '../../assets';
+import { DropIcon, SearchIcon, TLogoIcon } from '../../assets';
 import { useEffect, useRef, useState } from 'react';
 import ProfileCard from '../card/profileCard';
-import NotificationCard from '../card/notificationCard';
 import IconWrap from '../ui/svgWrapper';
 import ModalWraper from '../modal';
 
 export default function TopNavbar() {
   const [openProfile, setOpenProfile] = useState(false);
-  const [notify, setNotify] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
 
@@ -16,7 +14,6 @@ export default function TopNavbar() {
     if (profileRef.current?.contains(e.target)) return;
     if (notificationRef.current?.contains(e.target)) return;
     setOpenProfile(false);
-    setNotify(false);
   };
   useEffect(() => {
     window.addEventListener('mousedown', clickOutside);
@@ -29,11 +26,11 @@ export default function TopNavbar() {
           <ProfileCard reference={profileRef} />
         </ModalWraper>
       )}
-      {notify && (
+      {/* {notify && (
         <ModalWraper show={notify} close={() => setNotify(false)}>
           <NotificationCard reference={notificationRef} />
         </ModalWraper>
-      )}
+      )} */}
       <div className="sticky  top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
         <div className="mx-4">
           <IconWrap src={TLogoIcon} />
@@ -50,7 +47,7 @@ export default function TopNavbar() {
             />
           </div>
           <div className="flex items-center  justify-center gap-x-5 px-5">
-            <div
+            {/* <div
               className="h-[50px] w-[50px] rounded-full relative bg-[#F2FFF7] cursor-pointer flex items-center justify-center "
               onClick={() => setNotify(!notify)}
             >
@@ -59,7 +56,7 @@ export default function TopNavbar() {
               </div>
 
               <IconWrap src={BellIcon} style="w-[20px] h-[20px]" />
-            </div>
+            </div> */}
 
             <div
               className="flex items-center"

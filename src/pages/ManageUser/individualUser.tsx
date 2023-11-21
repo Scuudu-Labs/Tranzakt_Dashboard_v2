@@ -6,11 +6,16 @@ import PersonalDetails from './personalDetails';
 import { GoBackIcon, MailIcon, NetworkIcon, ShowIcon } from '../../assets';
 import IconWrap from '../../components/ui/svgWrapper';
 import { useGetAUserQuery } from '../../redux/api/mangerUser';
+import { useState } from 'react';
 
 const EachUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: user } = useGetAUserQuery(id as string);
+  const [show, setShow] = useState(false);
+  const toggleCurrency = () => {
+    setShow(!show);
+  };
   return (
     <MainContainer>
       <div
@@ -49,7 +54,10 @@ const EachUser = () => {
               <span className="text-[#3F3F3F] text-[12px]  font-montserrat">
                 Account Status:
               </span>
-              <StatusTag text="deactivated" />
+              <StatusTag
+                text={user?.data?.status ?? '...'}
+                id={user?.data?.status ?? '...'}
+              />
             </div>
             <div className="flex items-center">
               <span className="text-[#A1A1A1] text-[12px]  font-montserrat">
@@ -68,10 +76,10 @@ const EachUser = () => {
                 WALLET BALANCE
               </span>
               <span className="text-white font-montserrat font-bold text-[26px]">
-                ₦145,000
+                {show ? '₦145,000' : '* * * * * *'}
               </span>
             </div>
-            <div className="cursor-pointer">
+            <div className="cursor-pointer" onClick={toggleCurrency}>
               <IconWrap src={ShowIcon} />
             </div>
           </div>
@@ -79,7 +87,7 @@ const EachUser = () => {
       </div>
       <div className="grid grid-cols-2 w-full gap-4 my-6">
         <TransactionHistory />
-        <PersonalDetails />
+        <PersonalDetails status={user?.data?.status ?? ''} />
       </div>
     </MainContainer>
   );
