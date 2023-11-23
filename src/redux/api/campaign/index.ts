@@ -12,7 +12,19 @@ export const campaignApi = baseApi.injectEndpoints({
       },
       providesTags: [{ type: tagTypes.Campaign }],
     }),
+    addCampaign: builder.mutation<ISuccessResponse<ICampaign[]>, ICampaignForm>(
+      {
+        query: (data) => {
+          return {
+            url: `/admin/campaign`,
+            method: 'POST',
+            data: data,
+          };
+        },
+        invalidatesTags: [{ type: tagTypes.Campaign }],
+      }
+    ),
   }),
 });
 
-export const { useGetAllCampaignsQuery } = campaignApi;
+export const { useGetAllCampaignsQuery, useAddCampaignMutation } = campaignApi;

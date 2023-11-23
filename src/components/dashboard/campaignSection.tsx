@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import CampaignCard from '../modal/campaignCard';
 import IconWrap from '../ui/svgWrapper';
 import { plusIcon } from '../../assets';
-import ModalWraper from '../modal';
 import CampaignTable from '../tables/CampaignTable';
 import { useGetAllCampaignsQuery } from '../../redux/api/campaign';
 import EmptyStateContainer from './emptyState';
@@ -13,11 +11,6 @@ export default function CampaignSection() {
   const { data: campaigns, isLoading } = useGetAllCampaignsQuery();
   return (
     <div className="w-full px-4">
-      {openModal && (
-        <ModalWraper close={close} show={openModal}>
-          <CampaignCard close={close} />
-        </ModalWraper>
-      )}{' '}
       {campaigns?.data && campaigns.data.length > 0 ? (
         <>
           <div className="flex items-center w-full justify-between py-4">
@@ -33,7 +26,12 @@ export default function CampaignSection() {
               New Campaign
             </button>
           </div>{' '}
-          <CampaignTable campaigns={campaigns} isLoading={isLoading} />
+          <CampaignTable
+            campaigns={campaigns}
+            isLoading={isLoading}
+            modal={openModal}
+            closeCreateModal={close}
+          />
         </>
       ) : (
         <EmptyStateContainer open={open} />

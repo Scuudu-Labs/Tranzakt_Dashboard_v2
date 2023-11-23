@@ -11,9 +11,16 @@ import DeleteModal from '../modal/deleteModal';
 type IProps = {
   campaigns: ISuccessResponse<ICampaign[]>;
   isLoading: boolean;
+  modal: boolean;
+  closeCreateModal: () => void;
 };
 
-const CampaignTable = ({ campaigns, isLoading }: IProps) => {
+const CampaignTable = ({
+  campaigns,
+  isLoading,
+  closeCreateModal,
+  modal,
+}: IProps) => {
   const [pageSize, setPageSize] = useState(5);
   const [, setPage] = useState(1);
   const [action, setAction] = useState({
@@ -33,6 +40,10 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
         id: campaign.id,
         title: campaign.title,
         duration: duration,
+        cta_title: campaign.cta_title,
+        cta_url: campaign.cta_url,
+        ends_at: campaign.ends_at,
+        starts_at: campaign.starts_at,
         status: 'active',
         impression: 40,
       };
@@ -105,6 +116,11 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
 
   return (
     <div className="mt-3">
+      {modal && (
+        <ModalWraper close={closeCreateModal} show={modal}>
+          <CampaignCard close={close} />
+        </ModalWraper>
+      )}
       {action.edit && (
         <ModalWraper
           show={action.edit}
