@@ -38,7 +38,7 @@ const EachUser = () => {
             </div>
             <div className="flex items-center mb-3 gap-x-3 ">
               <span className="text-[#3F3F3F] text-[12px]  font-montserrat">
-                KYC status:
+                KYC status
               </span>
               <StatusTag text="completed" />
             </div>

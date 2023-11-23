@@ -23,14 +23,26 @@ const CampaignTable = ({
 }: IProps) => {
   const [pageSize, setPageSize] = useState(5);
   const [, setPage] = useState(1);
+  const [id, setId] = useState('');
   const [action, setAction] = useState({
     view: false,
     edit: false,
     delete: false,
   });
-  const viewAction = () => {
+  const viewAction = (id: string) => {
     setAction({ ...action, view: true });
+    setId(id);
   };
+  const editAction = (id: string) => {
+    setAction({ ...action, edit: true });
+    setId(id);
+  };
+
+  const deleteAction = (id: string) => {
+    setAction({ ...action, delete: true });
+    setId(id);
+  };
+
   const dataSource = useMemo(() => {
     return campaigns?.data?.map((campaign) => {
       const duration = `${formatDate(campaign.starts_at)} - ${formatDate(
@@ -49,7 +61,6 @@ const CampaignTable = ({
       };
     });
   }, [campaigns]);
-
   const columns = [
     {
       title: 'Title',
@@ -81,19 +92,19 @@ const CampaignTable = ({
 
     {
       title: 'Action',
-      dataIndex: 'action',
+      dataIndex: 'id',
       key: 'id',
-      render: () => (
+      render: (key: string) => (
         <div className="flex gap-x-8 items-center">
           <IconWrap
             src={EditIcon}
             style="cursor-pointer"
-            click={() => setAction({ ...action, edit: true })}
+            click={() => editAction(key)}
           />
           <IconWrap
             src={DeleteIcon}
             style="cursor-pointer"
-            click={() => setAction({ ...action, delete: true })}
+            click={() => deleteAction(key)}
           />
         </div>
       ),
@@ -101,11 +112,11 @@ const CampaignTable = ({
 
     {
       title: '',
-      dataIndex: 'view',
-      key: 'index',
-      render: () => (
+      dataIndex: 'id',
+      key: 'id',
+      render: (key: string) => (
         <span
-          onClick={() => viewAction()}
+          onClick={() => viewAction(key)}
           className="py-4 text-[#32C87D] hover:text-[#32C87D] cursor-pointer px-8 font-montserrat underline font-bold"
         >
           View
@@ -113,7 +124,6 @@ const CampaignTable = ({
       ),
     },
   ];
-
   return (
     <div className="mt-3">
       {modal && (
@@ -126,7 +136,10 @@ const CampaignTable = ({
           show={action.edit}
           close={() => setAction({ ...action, edit: false })}
         >
-          <CampaignCard close={() => setAction({ ...action, edit: false })} />
+          <CampaignCard
+            id={id}
+            close={() => setAction({ ...action, edit: false })}
+          />
         </ModalWraper>
       )}
       {action.view && (
@@ -134,7 +147,10 @@ const CampaignTable = ({
           show={action.view}
           close={() => setAction({ ...action, view: false })}
         >
-          <CampaignCard close={() => setAction({ ...action, view: false })} />
+          <CampaignCard
+            id={id}
+            close={() => setAction({ ...action, view: false })}
+          />
         </ModalWraper>
       )}
       {action.delete && (
@@ -143,6 +159,7 @@ const CampaignTable = ({
           close={() => setAction({ ...action, delete: false })}
         >
           <DeleteModal
+            id={id}
             text="You are about to to delete this advert. Do you want to proceed?"
             action={() => setAction({ ...action, delete: false })}
           />

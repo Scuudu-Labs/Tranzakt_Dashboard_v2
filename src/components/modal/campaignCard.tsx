@@ -7,14 +7,18 @@ import { useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import { campaignFormSchema } from './modal.schema';
 import { toast } from 'react-toastify';
-import { useAddCampaignMutation } from '../../redux/api/campaign';
+import {
+  useAddCampaignMutation,
+  useGetOneCampaignQuery,
+} from '../../redux/api/campaign';
 import ButtonLoader from '../button/buttonLoader';
 
 interface IProps {
   close: () => void;
+  id?: string;
 }
 
-const CampaignCard = ({ close }: IProps) => {
+const CampaignCard = ({ close, id }: IProps) => {
   const [imageUrl, setImageUrl] = useState<{
     url: string;
     base64: string | ArrayBuffer | null;
@@ -22,14 +26,19 @@ const CampaignCard = ({ close }: IProps) => {
 
   const [addCampaign, { isLoading }] = useAddCampaignMutation();
   const [imageErr, setImageErr] = useState('');
+  const { data, isLoading: fetching } = useGetOneCampaignQuery(id as string, {
+    skip: id === null,
+  });
+
+  console.log(data, fetching);
 
   const formik = useFormik<ICampaignForm>({
     initialValues: {
-      title,
-      cta_title,
-      cta_url,
-      ends_at,
-      starts_at,
+      title: data?.data?.title ?? '',
+      cta_title: data?.data?.cta_title ?? '',
+      cta_url: data?.data?.cta_url ?? '',
+      ends_at: data?.data?.ends_at ?? '',
+      starts_at: data?.data?.starts_at ?? '',
     },
     validationSchema: campaignFormSchema,
     onSubmit: () => {
@@ -130,24 +139,24 @@ const CampaignCard = ({ close }: IProps) => {
         />
         <TextInput
           error={errors.starts_at ?? ''}
+          type="datetime-local"
           touched={touched.starts_at}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.starts_at}
           name="starts_at"
           label="Start Date"
-          type="date"
           placeholder="24/08/2023"
         />
         <TextInput
           error={errors.ends_at ?? ''}
           touched={touched.ends_at}
           onChange={handleChange}
+          type="datetime-local"
           onBlur={handleBlur}
           value={values.ends_at}
           name="ends_at"
           label="End Date"
-          type="date"
           placeholder="24/08/2023"
         />
         <button

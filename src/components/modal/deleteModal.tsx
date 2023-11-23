@@ -5,12 +5,15 @@ import ButtonLoader from '../button/buttonLoader';
 const DeleteModal = ({
   text,
   loading,
+  id,
   action,
 }: {
   text: string;
+  id: string;
   loading?: boolean;
   action?: () => void;
 }) => {
+  console.log(id);
   return (
     <div className="flex items-center justify-center w-[448px] h-[323px] flex-col rounded-[8px] p-[32px] bg-white">
       <IconWrap src={Danger} style="mb-4" />
