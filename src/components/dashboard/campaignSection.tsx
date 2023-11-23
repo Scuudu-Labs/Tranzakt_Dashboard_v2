@@ -20,7 +20,7 @@ export default function CampaignSection() {
             <button
               type="submit"
               className="text-white bg-[#32C87D] w-[210px] gap-x-3 flex items-center justify-center  py-3  mt-2 rounded-md"
-              onClick={() => setOpenModal(!openModal)}
+              onClick={() => setOpenModal(true)}
             >
               <IconWrap src={plusIcon} />
               New Campaign

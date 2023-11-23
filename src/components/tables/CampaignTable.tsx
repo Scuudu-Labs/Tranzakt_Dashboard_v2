@@ -118,7 +118,7 @@ const CampaignTable = ({
     <div className="mt-3">
       {modal && (
         <ModalWraper close={closeCreateModal} show={modal}>
-          <CampaignCard close={close} />
+          <CampaignCard close={closeCreateModal} />
         </ModalWraper>
       )}
       {action.edit && (

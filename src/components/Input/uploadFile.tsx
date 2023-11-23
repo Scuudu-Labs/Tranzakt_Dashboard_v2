@@ -3,6 +3,7 @@ import IconWrap from '../ui/svgWrapper';
 import { UploadIcon } from '../../assets';
 type IProps = {
   label: string;
+  err?: string;
   url?: string;
   onDrop:
     | (<T extends File>(
@@ -13,7 +14,7 @@ type IProps = {
     | undefined;
 };
 
-const UploadFile = ({ label, onDrop, url }: IProps) => {
+const UploadFile = ({ label, onDrop, url, err }: IProps) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
   return (
     <div className="flex w-full mb-4  mx-auto flex-col   gap-y-2">
@@ -41,6 +42,7 @@ const UploadFile = ({ label, onDrop, url }: IProps) => {
           </div>
         )}
       </div>
+      <span className="text-red-400">{err && err}</span>
     </div>
   );
 };

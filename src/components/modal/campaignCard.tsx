@@ -10,24 +10,18 @@ import { toast } from 'react-toastify';
 import { useAddCampaignMutation } from '../../redux/api/campaign';
 import ButtonLoader from '../button/buttonLoader';
 
-interface IProps extends ICampaign {
+interface IProps {
   close: () => void;
 }
 
-const CampaignCard = ({
-  close,
-  title = '',
-  cta_title = '',
-  cta_url = '',
-  ends_at = '',
-  starts_at = '',
-}: IProps) => {
+const CampaignCard = ({ close }: IProps) => {
   const [imageUrl, setImageUrl] = useState<{
     url: string;
     base64: string | ArrayBuffer | null;
   }>({ url: '', base64: null });
 
   const [addCampaign, { isLoading }] = useAddCampaignMutation();
+  const [imageErr, setImageErr] = useState('');
 
   const formik = useFormik<ICampaignForm>({
     initialValues: {
@@ -49,7 +43,6 @@ const CampaignCard = ({
     reader.readAsDataURL(acceptedFiles[0]);
     reader.onload = () => {
       const img = (reader.result as string)?.split(',')[1];
-      console.log(img);
       setImageUrl({ url: objectURL, base64: img });
     };
     reader.onerror = function (error: any) {
@@ -67,8 +60,15 @@ const CampaignCard = ({
     handleSubmit,
   } = formik;
 
+  console.log(errors);
+
   const onSubmitForm = async () => {
     console.log(values, imageUrl);
+    if (imageUrl.url.length === 0) {
+      setImageErr('image url is required');
+      return;
+    }
+
     values['base64_image_string'] = imageUrl.base64;
     try {
       await addCampaign(values).unwrap();
@@ -102,7 +102,12 @@ const CampaignCard = ({
           label="Campaign Title"
           placeholder="Enter title"
         />
-        <UploadFile label="Upload Image" onDrop={onDrop} url={imageUrl.url} />
+        <UploadFile
+          label="Upload Image"
+          onDrop={onDrop}
+          url={imageUrl.url}
+          err={imageErr}
+        />
         <TextInput
           error={errors.cta_title ?? ''}
           name="cta_title"
@@ -130,7 +135,7 @@ const CampaignCard = ({
           onBlur={handleBlur}
           value={values.starts_at}
           name="starts_at"
-          label="startss Date"
+          label="Start Date"
           type="date"
           placeholder="24/08/2023"
         />
