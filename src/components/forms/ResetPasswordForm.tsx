@@ -36,8 +36,8 @@ export default function LoginForm() {
       localStorage.setItem('email', JSON.stringify(res?.data?.email));
       resetForm();
       navigate('/verify_account');
-    } catch (error) {
-      toast.error(error as string);
+    } catch (error: { error: string }) {
+      toast.error(error.error);
     }
   };
 

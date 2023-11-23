@@ -47,7 +47,7 @@ export default function LoginForm() {
       dispatch(setToken(res?.data?.auth_token as string));
       dispatch(setUser(res.data));
       navigate('/dashboard');
-    } catch (error: any) {
+    } catch (error: { error: string }) {
       toast.error(error.error);
     }
   };
