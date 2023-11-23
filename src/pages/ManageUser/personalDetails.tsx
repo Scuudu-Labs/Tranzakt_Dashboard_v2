@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from 'react-toastify';
 import {
   useActivateAUserMutation,
@@ -35,13 +36,13 @@ const PersonalDetails = ({ status }: { status: string }) => {
     if (status === IToggleStatus.ACTIVE) {
       try {
         await deActivateAUser(id as string).unwrap();
-      } catch (error: { error: string }) {
+      } catch (error: any) {
         toast.error(error.error);
       }
     } else {
       try {
         await activateAUser(id as string).unwrap();
-      } catch (error: { error: string }) {
+      } catch (error: any) {
         toast.error(error.error);
       }
     }

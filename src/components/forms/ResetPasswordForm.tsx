@@ -36,7 +36,8 @@ export default function LoginForm() {
       localStorage.setItem('email', JSON.stringify(res?.data?.email));
       resetForm();
       navigate('/verify_account');
-    } catch (error: { error: string }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error.error);
     }
   };

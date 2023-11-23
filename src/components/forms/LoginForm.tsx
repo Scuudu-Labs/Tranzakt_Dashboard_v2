@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LogoIcon, SecureIcon } from '../../assets';
 import IconWrap from '../ui/svgWrapper';
 import { initialLogin, loginFormSchema } from './forms.schema';
@@ -47,7 +46,8 @@ export default function LoginForm() {
       dispatch(setToken(res?.data?.auth_token as string));
       dispatch(setUser(res.data));
       navigate('/dashboard');
-    } catch (error: { error: string }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error.error);
     }
   };
