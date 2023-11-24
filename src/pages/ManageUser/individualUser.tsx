@@ -16,6 +16,7 @@ const EachUser = () => {
   const toggleCurrency = () => {
     setShow(!show);
   };
+  console.log(user);
   return (
     <MainContainer>
       <div
@@ -41,7 +42,7 @@ const EachUser = () => {
             <div className="flex mb-2 items-center">
               <IconWrap src={MailIcon} />
               <span className="text-[#3F3F3F] text-[14px] font-[500] ml-[2px] font-montserrat">
-                alessaabubakar@gmail.com
+                {user?.data?.email}
               </span>
             </div>
             <div className="flex items-center mb-3 gap-x-3 ">
@@ -55,8 +56,8 @@ const EachUser = () => {
                 Account Status:
               </span>
               <StatusTag
-                text={user?.data?.status ?? '...'}
-                id={user?.data?.status ?? '...'}
+                text={user?.data?.account_status ?? '...'}
+                id={user?.data?.account_status ?? '...'}
               />
             </div>
             <div className="flex items-center">
@@ -76,7 +77,11 @@ const EachUser = () => {
                 WALLET BALANCE
               </span>
               <span className="text-white font-montserrat font-bold text-[26px]">
-                {show ? '₦145,000' : '* * * * * *'}
+                {show
+                  ? `₦${new Intl.NumberFormat('en-NG').format(
+                      user?.data?.wallet_balance ?? 0
+                    )}`
+                  : '* * * * * *'}
               </span>
             </div>
             <div className="cursor-pointer" onClick={toggleCurrency}>
@@ -87,7 +92,7 @@ const EachUser = () => {
       </div>
       <div className="grid grid-cols-2 w-full gap-4 my-6">
         <TransactionHistory />
-        <PersonalDetails status={user?.data?.status ?? ''} />
+        <PersonalDetails userInfo={user?.data} />
       </div>
     </MainContainer>
   );

@@ -25,7 +25,7 @@ const DisplayBox = ({ title, value }: { title: string; value: string }) => {
   );
 };
 
-const PersonalDetails = ({ status }: { status: string }) => {
+const PersonalDetails = ({ userInfo }: { userInfo: IUser }) => {
   const { id } = useParams();
 
   const [activateAUser, { isLoading: activating }] = useActivateAUserMutation();
@@ -33,7 +33,7 @@ const PersonalDetails = ({ status }: { status: string }) => {
     useDeActivateAUserMutation();
 
   const statusToggleAction = async () => {
-    if (status === IToggleStatus.ACTIVE) {
+    if (userInfo.account_status === IToggleStatus.ACTIVE) {
       try {
         await deActivateAUser(id as string).unwrap();
       } catch (error: any) {
@@ -55,15 +55,18 @@ const PersonalDetails = ({ status }: { status: string }) => {
       </h1>
       <div className="h-[380px] overflow-auto">
         <div className="grid grid-rows-5  overflow-y-auto  px-4 grid-cols-2 gap-4">
-          <DisplayBox title="first name" value="Alessa" />
-          <DisplayBox title="Last name" value="Abubakar" />
-          <DisplayBox title="DOB" value="2/02/2002" />
-          <DisplayBox title="Gender" value="Female" />
+          <DisplayBox title="first name" value={userInfo?.first_name ?? ''} />
+          <DisplayBox title="Last name" value={userInfo?.last_name ?? ''} />
+          <DisplayBox title="DOB" value={userInfo?.dob?.split('T')[0] ?? ''} />
+          <DisplayBox title="Gender" value={userInfo?.gender ?? ''} />
           <div className="col-span-2">
-            <DisplayBox title="Email" value="alessaabubakar@gmail.com" />
+            <DisplayBox title="Email" value={userInfo?.email ?? ''} />
           </div>
-          <DisplayBox title="Phone Number" value="+2349012345678" />
-          <DisplayBox title="User ID" value="#1234" />
+          <DisplayBox
+            title="Phone Number"
+            value={userInfo?.phone_number ?? ''}
+          />
+          <DisplayBox title="User ID" value={userInfo?.user_id} />
           <div className="col-span-2">
             <DisplayBox title="Occupation" value="Cooperate Worker" />
           </div>
