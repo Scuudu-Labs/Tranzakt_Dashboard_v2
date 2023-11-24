@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 interface IUser {
   user_id: string;
   full_name: string;

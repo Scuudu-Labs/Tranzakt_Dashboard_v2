@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DropIcon, SearchIcon, TLogoIcon } from '../../assets';
 import { useEffect, useRef, useState } from 'react';
 import ProfileCard from '../card/profileCard';
@@ -10,6 +9,7 @@ export default function TopNavbar() {
   const profileRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const clickOutside = (e: any) => {
     if (profileRef.current?.contains(e.target)) return;
     if (notificationRef.current?.contains(e.target)) return;
