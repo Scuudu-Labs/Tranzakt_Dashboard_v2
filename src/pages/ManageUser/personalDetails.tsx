@@ -76,12 +76,14 @@ const PersonalDetails = ({ userInfo }: { userInfo: IUser }) => {
               onClick={statusToggleAction}
               type="submit"
               className={`text-white flex items-center justify-center gap-x-3 w-full mx-auto py-3 mb-2 mt-2 rounded-md ${
-                status !== IToggleStatus.ACTIVE
+                userInfo.account_status !== IToggleStatus.ACTIVE
                   ? 'bg-[#32C87D]'
                   : 'bg-[#FF2636]'
               }`}
             >
-              {status !== IToggleStatus.ACTIVE ? 'Activate' : 'Deactivate'}
+              {userInfo.account_status !== IToggleStatus.ACTIVE
+                ? 'Activate'
+                : 'Deactivate'}
               {(activating || deActivating) && <ButtonLoader />}
             </button>
           </div>

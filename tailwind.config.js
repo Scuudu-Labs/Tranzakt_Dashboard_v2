@@ -10,6 +10,7 @@ export default {
         shade: {
           50: '#A1A1A1',
           100: '#C4C4C4',
+          150: '#F2F2F2',
           200: '#3F3F3F',
           300: '#E3E3E3',
           400: '#EAEAEA',
@@ -17,6 +18,9 @@ export default {
         },
         danger: {
           100: '#FF2636',
+        },
+        green: {
+          100: '#CEF3E0',
         },
       },
       fontFamily: {
