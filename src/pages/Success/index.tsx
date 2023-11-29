@@ -27,7 +27,7 @@ export default function ResetPassword() {
           </p>
           <button
             type="submit"
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/')}
             className="text-white bg-[#32C87D] w-[400px] mx-auto py-3 mb-2 mt-6 rounded-md"
           >
             Continue

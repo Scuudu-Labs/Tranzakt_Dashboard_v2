@@ -7,7 +7,7 @@ const StatusTag = ({ text, id }: { text: string; id?: string }) => {
       : 'text-[#FF2636] bg-[#FFE8E8]';
   return (
     <button
-      className={`capitalize px-[12px] py-[4px] rounded-[12px] text-[12px] ${style}`}
+      className={`lowercase px-[12px] py-[4px] rounded-[12px] text-[12px] ${style}`}
     >
       {text}
     </button>

@@ -45,6 +45,7 @@ export default function ManagerUserTable({
   const dataSource = useMemo(() => {
     return (
       users?.data?.users?.map((user, index) => {
+        console.log(user, 'fff');
         return {
           sn: `#0${index + 1 < 10 ? `0${index + 1}` : index + 1} `,
           name: user.full_name,
@@ -55,6 +56,8 @@ export default function ManagerUserTable({
       }) ?? []
     );
   }, [users]);
+
+  console.log(dataSource, 'ddd');
 
   const clickOutside = (e: MouseEvent) => {
     if (filterRef.current?.contains(e.target as Node)) return;
@@ -96,7 +99,7 @@ export default function ManagerUserTable({
     },
     {
       title: 'View',
-      dataIndex: 'view',
+      dataIndex: 'index',
       key: 'index',
       render: (index: number) => (
         <Link
