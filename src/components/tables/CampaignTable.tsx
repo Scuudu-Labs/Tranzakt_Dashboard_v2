@@ -176,14 +176,13 @@ const CampaignTable = ({
             setPage(1);
             setPageSize(size);
           },
-          total: 3,
+          total: campaigns?.data?.length,
           pageSize: pageSize,
           onChange: (page) => {
             setPage(page);
           },
         }}
       />
-      ;
     </div>
   );
 };

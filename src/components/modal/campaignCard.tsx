@@ -19,6 +19,10 @@ interface IProps {
 }
 
 const CampaignCard = ({ close, id }: IProps) => {
+  const { data: campaign, isLoading: loading } = useGetOneCampaignQuery(
+    id as string
+  );
+  console.log(campaign, loading);
   const [imageUrl, setImageUrl] = useState<{
     url: string;
     base64: string | ArrayBuffer | null;
