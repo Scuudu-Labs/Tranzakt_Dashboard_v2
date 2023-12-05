@@ -37,6 +37,19 @@ export const campaignApi = baseApi.injectEndpoints({
         invalidatesTags: [{ type: tagTypes.Campaign }],
       }
     ),
+    updateCampaign: builder.mutation<
+      ISuccessResponse<ICampaign>,
+      { id: string; data: ICampaignForm }
+    >({
+      query: (data) => {
+        return {
+          url: `/admin/campaign/${data.id}`,
+          method: 'PUT',
+          data: data.data,
+        };
+      },
+      invalidatesTags: [{ type: tagTypes.Campaign }],
+    }),
   }),
 });
 
@@ -44,4 +57,5 @@ export const {
   useGetAllCampaignsQuery,
   useAddCampaignMutation,
   useGetOneCampaignQuery,
+  useUpdateCampaignMutation,
 } = campaignApi;

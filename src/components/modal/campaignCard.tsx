@@ -3,26 +3,24 @@ import IconWrap from '../ui/svgWrapper';
 import { closeIcon } from '../../assets';
 import TextInput from '../Input/TextInput';
 import UploadFile from '../Input/uploadFile';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { campaignFormSchema } from './modal.schema';
 import { toast } from 'react-toastify';
 import {
   useAddCampaignMutation,
   useGetOneCampaignQuery,
+  useUpdateCampaignMutation,
 } from '../../redux/api/campaign';
 import ButtonLoader from '../button/buttonLoader';
 
 interface IProps {
   close: () => void;
   id?: string;
+  view?: boolean;
 }
 
-const CampaignCard = ({ close, id }: IProps) => {
-  const { data: campaign, isLoading: loading } = useGetOneCampaignQuery(
-    id as string
-  );
-  console.log(campaign, loading);
+const CampaignCard = ({ view, close, id }: IProps) => {
   const [imageUrl, setImageUrl] = useState<{
     url: string;
     base64: string | ArrayBuffer | null;
@@ -30,19 +28,16 @@ const CampaignCard = ({ close, id }: IProps) => {
 
   const [addCampaign, { isLoading }] = useAddCampaignMutation();
   const [imageErr, setImageErr] = useState('');
-  const { data, isLoading: fetching } = useGetOneCampaignQuery(id as string, {
-    skip: id === null,
-  });
-
-  console.log(data, fetching);
+  const { data, isLoading: fetching } = useGetOneCampaignQuery(id as string);
+  const [updateCampaign, { isLoading: updating }] = useUpdateCampaignMutation();
 
   const formik = useFormik<ICampaignForm>({
     initialValues: {
-      title: data?.data?.title ?? '',
-      cta_title: data?.data?.cta_title ?? '',
-      cta_url: data?.data?.cta_url ?? '',
-      ends_at: data?.data?.ends_at ?? '',
-      starts_at: data?.data?.starts_at ?? '',
+      title: '',
+      cta_title: '',
+      cta_url: '',
+      ends_at: '',
+      starts_at: '',
     },
     validationSchema: campaignFormSchema,
     onSubmit: () => {
@@ -70,13 +65,26 @@ const CampaignCard = ({ close, id }: IProps) => {
     resetForm,
     handleBlur,
     touched,
+    setValues,
     handleSubmit,
   } = formik;
 
-  console.log(errors);
+  useEffect(() => {
+    setValues({
+      title: data?.data?.title ?? '',
+      cta_title: data?.data?.cta_title ?? '',
+      cta_url: data?.data?.cta_url ?? '',
+      ends_at: data?.data?.ends_at?.split('T')[0] ?? '',
+      starts_at: data?.data?.starts_at?.split('T')[0] ?? '',
+    });
+  }, [data]);
+
+  const closeAction = () => {
+    close();
+    resetForm();
+  };
 
   const onSubmitForm = async () => {
-    console.log(values, imageUrl);
     if (imageUrl.url.length === 0) {
       setImageErr('image url is required');
       return;
@@ -84,9 +92,14 @@ const CampaignCard = ({ close, id }: IProps) => {
 
     values['base64_image_string'] = imageUrl.base64;
     try {
-      await addCampaign(values).unwrap();
-      toast.success('Campaign added successfully');
-      close();
+      if (id) {
+        await updateCampaign({ id: id, data: values }).unwrap();
+        toast.success('Campaign updated successfully');
+      } else {
+        await addCampaign(values).unwrap();
+        toast.success('Campaign added successfully');
+      }
+      closeAction();
       resetForm();
     } catch (error: any) {
       toast.error(error.error);
@@ -99,7 +112,7 @@ const CampaignCard = ({ close, id }: IProps) => {
         <h2 className="text-[18px] font-montserrat pb-3 font-semibold">
           Campaign Details
         </h2>
-        <IconWrap src={closeIcon} style="cursor-pointer" close={close} />
+        <IconWrap src={closeIcon} style="cursor-pointer" close={closeAction} />
       </div>
       <form
         onSubmit={handleSubmit}
@@ -114,11 +127,16 @@ const CampaignCard = ({ close, id }: IProps) => {
           touched={touched.title}
           label="Campaign Title"
           placeholder="Enter title"
+          readOnly={view}
         />
         <UploadFile
+          loading={fetching}
           label="Upload Image"
           onDrop={onDrop}
-          url={imageUrl.url}
+          url={
+            imageUrl.url ||
+            `data:image/png;base64,${data?.data?.base64_image_string}`
+          }
           err={imageErr}
         />
         <TextInput
@@ -130,6 +148,7 @@ const CampaignCard = ({ close, id }: IProps) => {
           touched={touched.cta_title}
           label="Link CTA Title"
           placeholder="Enter link title"
+          readOnly={view}
         />
         <TextInput
           error={errors.cta_url ?? ''}
@@ -140,35 +159,40 @@ const CampaignCard = ({ close, id }: IProps) => {
           touched={touched.cta_url}
           label="Link URL"
           placeholder="https://abcdefghij"
+          readOnly={view}
         />
         <TextInput
           error={errors.starts_at ?? ''}
-          type="datetime-local"
+          type="date"
           touched={touched.starts_at}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.starts_at}
           name="starts_at"
           label="Start Date"
+          readOnly={view}
           placeholder="24/08/2023"
         />
         <TextInput
           error={errors.ends_at ?? ''}
           touched={touched.ends_at}
           onChange={handleChange}
-          type="datetime-local"
+          type="date"
+          readOnly={view}
           onBlur={handleBlur}
           value={values.ends_at}
           name="ends_at"
           label="End Date"
           placeholder="24/08/2023"
         />
-        <button
-          type="submit"
-          className="text-white bg-[#32C87D] w-full flex items-center justify-center mx-auto py-3 mb-2 mt-2 rounded-md"
-        >
-          {isLoading ? <ButtonLoader /> : 'Save Campaign'}
-        </button>
+        {!view && (
+          <button
+            type="submit"
+            className="text-white bg-[#32C87D] w-full flex items-center justify-center mx-auto py-3 mb-2 mt-2 rounded-md"
+          >
+            {isLoading || updating ? <ButtonLoader /> : 'Save Campaign'}
+          </button>
+        )}
       </form>
     </div>
   );

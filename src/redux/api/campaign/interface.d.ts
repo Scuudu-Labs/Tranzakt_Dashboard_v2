@@ -4,6 +4,7 @@ interface ICampaign {
   cta_title: string;
   cta_url: string;
   starts_at: string;
+  base64_image_string;
   ends_at: string;
   id: string;
   created_at: string;

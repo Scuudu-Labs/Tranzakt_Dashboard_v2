@@ -12,7 +12,6 @@ export default function CampaignSection() {
   const close = () => setOpenModal(false);
   const open = () => setOpenModal(true);
   const { data: campaigns, isLoading } = useGetAllCampaignsQuery();
-  console.log(campaigns, 'ccc');
   return (
     <div className="w-full px-4">
       {openModal && (
