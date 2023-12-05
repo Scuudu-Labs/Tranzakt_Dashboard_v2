@@ -12,7 +12,50 @@ export const campaignApi = baseApi.injectEndpoints({
       },
       providesTags: [{ type: tagTypes.Campaign }],
     }),
+
+    getOneCampaign: builder.query<ISuccessResponse<ICampaign>, string>({
+      query: (id) => {
+        return {
+          url: `/admin/campaign/${id}`,
+          method: 'GET',
+        };
+      },
+      providesTags: (_result, _err, query) => [
+        { type: tagTypes.Campaign, query },
+      ],
+    }),
+
+    addCampaign: builder.mutation<ISuccessResponse<ICampaign[]>, ICampaignForm>(
+      {
+        query: (data) => {
+          return {
+            url: `/admin/campaign`,
+            method: 'POST',
+            data: data,
+          };
+        },
+        invalidatesTags: [{ type: tagTypes.Campaign }],
+      }
+    ),
+    updateCampaign: builder.mutation<
+      ISuccessResponse<ICampaign>,
+      { id: string; data: ICampaignForm }
+    >({
+      query: (data) => {
+        return {
+          url: `/admin/campaign/${data.id}`,
+          method: 'PUT',
+          data: data.data,
+        };
+      },
+      invalidatesTags: [{ type: tagTypes.Campaign }],
+    }),
   }),
 });
 
-export const { useGetAllCampaignsQuery } = campaignApi;
+export const {
+  useGetAllCampaignsQuery,
+  useAddCampaignMutation,
+  useGetOneCampaignQuery,
+  useUpdateCampaignMutation,
+} = campaignApi;

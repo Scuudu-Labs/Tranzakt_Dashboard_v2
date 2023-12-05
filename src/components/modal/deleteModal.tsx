@@ -8,6 +8,7 @@ const DeleteModal = ({
   action,
 }: {
   text: string;
+  id?: string;
   loading?: boolean;
   action?: () => void;
 }) => {

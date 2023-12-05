@@ -54,7 +54,9 @@ export default function LeftNavbar() {
           icon={
             <IoPeopleOutline
               style={{
-                color: `${pathname === '/manageuser' ? '#fff' : '#A1A1A1'}`,
+                color: `${
+                  pathname.startsWith('/manageuser') ? '#fff' : '#A1A1A1'
+                }`,
               }}
             />
           }

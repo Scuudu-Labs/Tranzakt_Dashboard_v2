@@ -1,8 +1,11 @@
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import IconWrap from '../ui/svgWrapper';
 import { UploadIcon } from '../../assets';
+import ButtonLoader from '../button/buttonLoader';
 type IProps = {
   label: string;
+  loading?: boolean;
+  err?: string;
   url?: string;
   onDrop:
     | (<T extends File>(
@@ -13,7 +16,7 @@ type IProps = {
     | undefined;
 };
 
-const UploadFile = ({ label, onDrop, url }: IProps) => {
+const UploadFile = ({ label, onDrop, url, err, loading }: IProps) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
   return (
     <div className="flex w-full mb-4  mx-auto flex-col   gap-y-2">
@@ -26,11 +29,15 @@ const UploadFile = ({ label, onDrop, url }: IProps) => {
         <input {...getInputProps()} />
         {url ? (
           <div className=" w-full h-[158px]">
-            <img
-              src={url}
-              alt="campaign_image"
-              className="w-full h-full object-cover rounded-[8px]"
-            />
+            {loading ? (
+              <ButtonLoader />
+            ) : (
+              <img
+                src={url || ' '}
+                alt="campaign_image"
+                className="w-full h-full object-cover rounded-[8px]"
+              />
+            )}
           </div>
         ) : (
           <div className="flex items-center justify-center flex-col">
@@ -41,6 +48,7 @@ const UploadFile = ({ label, onDrop, url }: IProps) => {
           </div>
         )}
       </div>
+      <span className="text-red-400">{err && err}</span>
     </div>
   );
 };

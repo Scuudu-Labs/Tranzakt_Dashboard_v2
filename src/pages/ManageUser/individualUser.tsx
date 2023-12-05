@@ -15,7 +15,7 @@ const EachUser = () => {
     <MainContainer>
       <div className="py-3 flex items-center cursor-pointer">
         <span
-          className="text-[#3F3F3F]  tracking-[0.3px] pl-3 pr-2 font-montserrat text-[14px]"
+          className="text-gray-400  tracking-[0.3px] pl-3 pr-2 font-montserrat text-[14px]"
           onClick={() => navigate(-1)}
         >
           Manage User /{' '}
@@ -50,7 +50,10 @@ const EachUser = () => {
             <span className="text-[#3F3F3F] text-[14px] mb-2 font-montserrat">
               KYC Status
             </span>
-            <StatusTag text="completed" />
+            <StatusTag
+              text={user?.data?.kyc_status ? 'completed' : 'pending'}
+              id={user?.data?.kyc_status ? 'ACTIVE' : 'pending'}
+            />
           </div>
 
           <div className="flex items-center flex-col  gap-x-3">

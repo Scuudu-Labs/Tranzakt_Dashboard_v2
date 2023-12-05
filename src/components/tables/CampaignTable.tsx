@@ -16,14 +16,26 @@ type IProps = {
 const CampaignTable = ({ campaigns, isLoading }: IProps) => {
   const [pageSize, setPageSize] = useState(5);
   const [, setPage] = useState(1);
+  const [id, setId] = useState('');
   const [action, setAction] = useState({
     view: false,
     edit: false,
     delete: false,
   });
-  const viewAction = () => {
+  const viewAction = (id: string) => {
     setAction({ ...action, view: true });
+    setId(id);
   };
+  const editAction = (id: string) => {
+    setAction({ ...action, edit: true });
+    setId(id);
+  };
+
+  const deleteAction = (id: string) => {
+    setAction({ ...action, delete: true });
+    setId(id);
+  };
+
   const dataSource = useMemo(() => {
     return campaigns?.data?.map((campaign) => {
       const duration = `${formatDate(campaign.starts_at)} - ${formatDate(
@@ -33,12 +45,15 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
         id: campaign.id,
         title: campaign.title,
         duration: duration,
+        cta_title: campaign.cta_title,
+        cta_url: campaign.cta_url,
+        ends_at: campaign.ends_at,
+        starts_at: campaign.starts_at,
         status: 'active',
         impression: 40,
       };
     });
   }, [campaigns]);
-
   const columns = [
     {
       title: 'Title',
@@ -70,19 +85,19 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
 
     {
       title: 'Action',
-      dataIndex: 'action',
+      dataIndex: 'id',
       key: 'id',
-      render: () => (
+      render: (key: string) => (
         <div className="flex gap-x-8 items-center">
           <IconWrap
             src={EditIcon}
             style="cursor-pointer"
-            click={() => setAction({ ...action, edit: true })}
+            click={() => editAction(key)}
           />
           <IconWrap
             src={DeleteIcon}
             style="cursor-pointer"
-            click={() => setAction({ ...action, delete: true })}
+            click={() => deleteAction(key)}
           />
         </div>
       ),
@@ -90,11 +105,11 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
 
     {
       title: '',
-      dataIndex: 'view',
-      key: 'index',
-      render: () => (
+      dataIndex: 'id',
+      key: 'id',
+      render: (key: string) => (
         <span
-          onClick={() => viewAction()}
+          onClick={() => viewAction(key)}
           className="py-4 text-[#32C87D] hover:text-[#32C87D] cursor-pointer px-8 font-montserrat underline font-bold"
         >
           View
@@ -102,7 +117,6 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
       ),
     },
   ];
-
   return (
     <div className="mt-3">
       {action.edit && (
@@ -110,7 +124,10 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
           show={action.edit}
           close={() => setAction({ ...action, edit: false })}
         >
-          <CampaignCard close={() => setAction({ ...action, edit: false })} />
+          <CampaignCard
+            id={id}
+            close={() => setAction({ ...action, edit: false })}
+          />
         </ModalWraper>
       )}
       {action.view && (
@@ -118,7 +135,11 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
           show={action.view}
           close={() => setAction({ ...action, view: false })}
         >
-          <CampaignCard close={() => setAction({ ...action, view: false })} />
+          <CampaignCard
+            id={id}
+            close={() => setAction({ ...action, view: false })}
+            view
+          />
         </ModalWraper>
       )}
       {action.delete && (
@@ -127,6 +148,7 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
           close={() => setAction({ ...action, delete: false })}
         >
           <DeleteModal
+            id={id}
             text="You are about to to delete this advert. Do you want to proceed?"
             action={() => setAction({ ...action, delete: false })}
           />
@@ -143,14 +165,13 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
             setPage(1);
             setPageSize(size);
           },
-          total: 3,
+          total: campaigns?.data?.length,
           pageSize: pageSize,
           onChange: (page) => {
             setPage(page);
           },
         }}
       />
-      ;
     </div>
   );
 };
