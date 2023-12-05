@@ -83,7 +83,8 @@ const CampaignCard = ({ view, close, id }: IProps) => {
       return;
     }
 
-    values['base64_image_string'] = imageUrl.base64;
+    values['base64_image_string'] =
+      imageUrl.base64 || values.base64_image_string;
     try {
       if (id) {
         await updateCampaign({ id: id, data: values }).unwrap();
