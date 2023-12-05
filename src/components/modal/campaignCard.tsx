@@ -3,7 +3,7 @@ import IconWrap from '../ui/svgWrapper';
 import { closeIcon } from '../../assets';
 import TextInput from '../Input/TextInput';
 import UploadFile from '../Input/uploadFile';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import { campaignFormSchema } from './modal.schema';
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ import ButtonLoader from '../button/buttonLoader';
 
 interface IProps {
   close: () => void;
-  id?: string;
+  id?: string | null;
   view?: boolean;
 }
 
@@ -28,17 +28,21 @@ const CampaignCard = ({ view, close, id }: IProps) => {
 
   const [addCampaign, { isLoading }] = useAddCampaignMutation();
   const [imageErr, setImageErr] = useState('');
-  const { data, isLoading: fetching } = useGetOneCampaignQuery(id as string);
+  const { data, isLoading: fetching } = useGetOneCampaignQuery(id as string, {
+    skip: id === null,
+  });
   const [updateCampaign, { isLoading: updating }] = useUpdateCampaignMutation();
 
   const formik = useFormik<ICampaignForm>({
     initialValues: {
-      title: '',
-      cta_title: '',
-      cta_url: '',
-      ends_at: '',
-      starts_at: '',
+      title: data?.data?.title ?? '',
+      cta_title: data?.data?.cta_title ?? '',
+      cta_url: data?.data?.cta_url ?? '',
+      base64_image_string: data?.data?.base64_image_string ?? '',
+      ends_at: data?.data?.ends_at?.split('T')[0] ?? '',
+      starts_at: data?.data?.starts_at?.split('T')[0] ?? '',
     },
+    enableReinitialize: true,
     validationSchema: campaignFormSchema,
     onSubmit: () => {
       onSubmitForm();
@@ -65,19 +69,8 @@ const CampaignCard = ({ view, close, id }: IProps) => {
     resetForm,
     handleBlur,
     touched,
-    setValues,
     handleSubmit,
   } = formik;
-
-  useEffect(() => {
-    setValues({
-      title: data?.data?.title ?? '',
-      cta_title: data?.data?.cta_title ?? '',
-      cta_url: data?.data?.cta_url ?? '',
-      ends_at: data?.data?.ends_at?.split('T')[0] ?? '',
-      starts_at: data?.data?.starts_at?.split('T')[0] ?? '',
-    });
-  }, [data]);
 
   const closeAction = () => {
     close();
@@ -85,7 +78,7 @@ const CampaignCard = ({ view, close, id }: IProps) => {
   };
 
   const onSubmitForm = async () => {
-    if (imageUrl.url.length === 0) {
+    if (imageUrl.url.length === 0 && values.base64_image_string === null) {
       setImageErr('image url is required');
       return;
     }
@@ -135,7 +128,7 @@ const CampaignCard = ({ view, close, id }: IProps) => {
           onDrop={onDrop}
           url={
             imageUrl.url ||
-            `data:image/png;base64,${data?.data?.base64_image_string}`
+            `data:image/png;base64,${values.base64_image_string}`
           }
           err={imageErr}
         />

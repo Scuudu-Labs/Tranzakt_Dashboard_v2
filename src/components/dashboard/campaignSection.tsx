@@ -16,10 +16,10 @@ export default function CampaignSection() {
     <div className="w-full px-4">
       {openModal && (
         <ModalWraper close={close} show={openModal}>
-          <CampaignCard close={close} />
+          <CampaignCard id={null} close={close} />
         </ModalWraper>
       )}{' '}
-      {campaigns?.data && campaigns.data.length > 0 && !isLoading ? (
+      {!!campaigns?.data?.length && !isLoading ? (
         <>
           <div className="flex items-center w-full justify-between py-4">
             <h2 className="text-[20px] font-montserrat pb-3 font-semibold">
@@ -34,12 +34,7 @@ export default function CampaignSection() {
               New Campaign
             </button>
           </div>{' '}
-          <CampaignTable
-            campaigns={campaigns}
-            isLoading={isLoading}
-            modal={openModal}
-            closeCreateModal={close}
-          />
+          <CampaignTable campaigns={campaigns} isLoading={isLoading} />
         </>
       ) : isLoading ? (
         <div>
