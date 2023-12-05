@@ -71,7 +71,6 @@ const TransactionHistory = ({
   const dataSource = useMemo(() => {
     return (
       transactions?.data?.map((txn) => {
-        console.log(txn.purpose);
         return {
           id: txn.reference,
           name: `${txn.entity.first_name} ${txn.entity.last_name}`,

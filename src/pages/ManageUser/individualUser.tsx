@@ -11,7 +11,6 @@ const EachUser = () => {
   const navigate = useNavigate();
   const { data: user, isLoading } = useGetAUserQuery(id as string);
   const [action, setAction] = useState('txt');
-  console.log(user);
   return (
     <MainContainer>
       <div className="py-3 flex items-center cursor-pointer">
