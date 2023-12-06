@@ -50,6 +50,15 @@ export const campaignApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [{ type: tagTypes.Campaign }],
     }),
+    deleteCampaign: builder.mutation<ISuccessResponse<ICampaign>, string>({
+      query: (id) => {
+        return {
+          url: `/admin/campaign/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: [{ type: tagTypes.Campaign }],
+    }),
   }),
 });
 
@@ -58,4 +67,5 @@ export const {
   useAddCampaignMutation,
   useGetOneCampaignQuery,
   useUpdateCampaignMutation,
+  useDeleteCampaignMutation,
 } = campaignApi;
