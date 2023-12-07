@@ -21,22 +21,22 @@ const ProfileCard = ({
   return (
     <div
       ref={reference}
-      className="w-[309px] min-h-[287px]  -top-[340px] left-[500px] py-[16px] absolute rounded-[8px] shadow-md bg-white flex flex-col items-center justify-center"
+      className="w-[309px] min-h-[287px]  -top-[280px] left-[420px] py-[16px] absolute rounded-[8px] shadow-md bg-white flex flex-col items-center justify-center"
     >
       <div className="w-[71px] h-[71px] mt-4 rounded-[71px] bg-[#EBF9F2] flex items-center justify-center">
         <h2 className="uppercase text-[#3F3F3F] font-montserrat font-semibold text-center text-[25px]">
           OK
         </h2>
       </div>
-      <h3 className="capitalize text-[#3F3F3F] font-montserrat  font-semibold text-center text-[18px] mt-4">
+      <h3 className="capitalize text-[#3F3F3F] font-montserrat   font-semibold text-center text-[18px] mt-4">
         Oloson Kate
       </h3>
       <span className="capitalize text-[#A1A1A1] font-montserrat text-center text-[12px]  my-2">
         UI/UX Designer
       </span>
       <div className="w-full p-4 flex items-center cursor-pointer border-y border-[#E3E3E3] mt-10">
-        <IconWrap src={UserIcon} />
-        <span className="text-[#3F3F3F] font-montserrat font-[500]  text-[16px] ml-4">
+        <IconWrap src={UserIcon} style="text-gray-300  opacity-30" />
+        <span className="text-gray-300 font-montserrat font-[500]  text-[16px] ml-2">
           Admin Profile
         </span>
       </div>
@@ -45,7 +45,7 @@ const ProfileCard = ({
         onClick={onLogOut}
       >
         <Logout />
-        <span className="text-[#FF2636] font-montserrat font-[500]  text-[16px] ml-4">
+        <span className="text-[#FF2636] font-montserrat font-[500]  text-[16px] ml-2">
           Logout
         </span>
       </div>

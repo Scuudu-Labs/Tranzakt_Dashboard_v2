@@ -129,6 +129,9 @@ export default function ManagerUserTable({
       <Table
         columns={columns}
         dataSource={dataSource}
+        locale={{
+          emptyText: 'RESULTS NOT FOUND',
+        }}
         loading={isLoading}
         pagination={{
           defaultCurrent: 1,
