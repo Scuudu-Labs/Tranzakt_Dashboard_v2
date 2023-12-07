@@ -28,15 +28,15 @@ const ProfileCard = ({
           OK
         </h2>
       </div>
-      <h3 className="capitalize text-[#3F3F3F] font-montserrat  font-semibold text-center text-[18px] mt-4">
+      <h3 className="capitalize text-[#3F3F3F] font-montserrat   font-semibold text-center text-[18px] mt-4">
         Oloson Kate
       </h3>
       <span className="capitalize text-[#A1A1A1] font-montserrat text-center text-[12px]  my-2">
         UI/UX Designer
       </span>
       <div className="w-full p-4 flex items-center cursor-pointer border-y border-[#E3E3E3] mt-10">
-        <IconWrap src={UserIcon} />
-        <span className="text-[#3F3F3F] font-montserrat font-[500]  text-[16px] ml-4">
+        <IconWrap src={UserIcon} style="text-gray-300  opacity-30" />
+        <span className="text-gray-300 font-montserrat font-[500]  text-[16px] ml-2">
           Admin Profile
         </span>
       </div>
@@ -45,7 +45,7 @@ const ProfileCard = ({
         onClick={onLogOut}
       >
         <Logout />
-        <span className="text-[#FF2636] font-montserrat font-[500]  text-[16px] ml-4">
+        <span className="text-[#FF2636] font-montserrat font-[500]  text-[16px] ml-2">
           Logout
         </span>
       </div>
