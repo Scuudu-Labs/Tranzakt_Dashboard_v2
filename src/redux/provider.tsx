@@ -11,7 +11,7 @@ export function Providers({ children }: IProps) {
     <Provider store={store}>
       <ToastContainer
         position="top-right"
-        autoClose={false}
+        autoClose={20000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

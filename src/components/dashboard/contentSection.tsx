@@ -6,6 +6,7 @@ import FaqCard from '../modal/faqCard';
 import ModalWraper from '../modal';
 import DynamicContent from './dynamicContent';
 import EditContentCards from '../modal/editContentCards';
+import { useGetAllFaqQuery } from '../../redux/api/faq';
 
 const ContentNavigation = ({
   value,
@@ -33,12 +34,12 @@ export default function ContentSection() {
   const [openModal, setOpenModal] = useState(false);
   const openModalAction = () => setOpenModal(true);
   const closeModalAction = () => setOpenModal(false);
-
+  const { data: faqs, isLoading } = useGetAllFaqQuery();
   const dynamicDisplay: {
     [key: string]: { content: React.ReactNode; modal: React.ReactNode };
   } = {
     faqs: {
-      content: <AllFaqs />,
+      content: <AllFaqs faqs={faqs} isLoading={isLoading} />,
       modal: <FaqCard close={closeModalAction} />,
     },
     terms: {
@@ -119,7 +120,7 @@ export default function ContentSection() {
       <div className="flex px-8  flex-col  w-full p-4 h-[500px] bg-white mt-2 rounded-[16px]">
         <div className="flex py-3">
           <ContentNavigation
-            value={`FAQs ${20}`}
+            value={`FAQs (${faqs?.data?.length ?? 0})`}
             isActive={currentState === 'faqs'}
             setState={() => setCurrentState('faqs')}
           />

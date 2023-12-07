@@ -1,9 +1,12 @@
-import { useGetAllFaqQuery } from '../../redux/api/faq';
 import ButtonLoader from '../button/buttonLoader';
 import Faq from './faq';
 
-const AllFaqs = () => {
-  const { data: faqs, isLoading } = useGetAllFaqQuery();
+type IProp = {
+  faqs: ISuccessResponse<IFAQResponse[]> | undefined;
+  isLoading: boolean;
+};
+
+const AllFaqs = ({ faqs, isLoading }: IProp) => {
   return (
     <div>
       {isLoading && <ButtonLoader />}

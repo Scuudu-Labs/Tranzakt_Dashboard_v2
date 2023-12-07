@@ -20,9 +20,9 @@ const FilterModal = ({
       <div className="flex items-center mb-6 cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('asc')}
+          onChange={() => setChange('name_asc')}
           value={search.sort_by}
-          checked={search.sort_by === 'asc'}
+          checked={search.sort_by === 'name_asc'}
           className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
@@ -32,9 +32,9 @@ const FilterModal = ({
       <div className="flex items-center mb-6 cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('des')}
+          onChange={() => setChange('name_des')}
           value={search.sort_by}
-          checked={search.sort_by === 'des'}
+          checked={search.sort_by === 'name_des'}
           className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
@@ -44,9 +44,9 @@ const FilterModal = ({
       <div className="flex items-center  cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('des')}
+          onChange={() => setChange('date')}
           value={search.sort_by}
-          checked={search.sort_by === 'des'}
+          checked={search.sort_by === 'date'}
           className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">
