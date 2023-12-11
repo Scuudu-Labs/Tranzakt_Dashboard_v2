@@ -9,6 +9,7 @@ import {
   useGetStatisticsQuery,
 } from '../../redux/api/balanceOverview';
 import { currencyFormatter } from '../../lib/text_formater';
+import { useMemo } from 'react';
 
 type IProp = {
   filterType: string;
@@ -25,6 +26,26 @@ export default function DashboardSection({ filterType }: IProp) {
     period: filterType,
   });
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
+  console.log(stats, 'stats');
+  console.log(stats?.data?.[0]);
+  console.log(stats?.data?.[1]);
+  const statsData = useMemo(() => {
+    return {
+      kyb: {
+        percentCompleted: stats?.data?.[1]?.percentageCompletedKYB ?? 0,
+        percentPending: stats?.data?.[1]?.percentagePendingKYB ?? 0,
+        completed: stats?.data?.[1]?.totalCompletedKYB ?? 0,
+        pending: stats?.data?.[1]?.totalPendingKYB ?? 0,
+      },
+      kyc: {
+        percentCompleted: stats?.data?.[0]?.percentageCompletedKYC ?? 0,
+        percentPending: stats?.data?.[0]?.percentagePendingKYC ?? 0,
+        completed: stats?.data?.[0]?.totalCompletedKYC ?? 0,
+        pending: stats?.data?.[0]?.totalPendingKYC ?? 0,
+      },
+    };
+  }, [stats]);
+  console.log(statsData, 'data');
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -102,10 +123,10 @@ export default function DashboardSection({ filterType }: IProp) {
           sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
           type="KYC"
           data={{
-            percentCompleted: stats?.data?.[0]?.percentageCompletedKYC ?? 0,
-            percentPending: stats?.data?.[0]?.percentagePendingKYC ?? 0,
-            completed: stats?.data?.[0]?.totalCompletedKYC ?? 0,
-            pending: stats?.data?.[0]?.totalPendingKYC ?? 0,
+            percentCompleted: statsData.kyc.percentCompleted,
+            percentPending: statsData.kyc.percentPending,
+            completed: statsData.kyc.completed,
+            pending: statsData.kyc.pending,
           }}
         />
 
@@ -115,10 +136,10 @@ export default function DashboardSection({ filterType }: IProp) {
           sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
           type="KYB"
           data={{
-            percentCompleted: stats?.data?.[1]?.percentageCompletedKYB ?? 0,
-            percentPending: stats?.data?.[1]?.percentagePendingKYB ?? 0,
-            completed: stats?.data?.[1]?.totalCompletedKYB ?? 0,
-            pending: stats?.data?.[1]?.totalPendingKYB ?? 0,
+            percentCompleted: statsData.kyb.percentCompleted,
+            percentPending: statsData.kyb.percentPending,
+            completed: statsData.kyb.completed,
+            pending: statsData.kyb.pending,
           }}
         />
         <BarCharts />
