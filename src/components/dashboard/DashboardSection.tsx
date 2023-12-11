@@ -7,6 +7,7 @@ import {
   useGetBalanceQuery,
   useGetGraphDataQuery,
   useGetStatisticsQuery,
+  useGetTransactionFlowsQuery,
 } from '../../redux/api/balanceOverview';
 import { currencyFormatter } from '../../lib/text_formater';
 
@@ -24,7 +25,11 @@ export default function DashboardSection({ filterType }: IProp) {
   const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
     period: filterType,
   });
+  const { data: txflows, isLoading: isFetching } =
+    useGetTransactionFlowsQuery(filterType);
+  console.log(filterType, 'fff');
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
+  console.log(txflows, isFetching, 'tx');
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -72,27 +77,37 @@ export default function DashboardSection({ filterType }: IProp) {
         <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
             label="TOTAL OUTFLOW"
-            amount="₦500,964.00"
+            amount={
+              txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ?? 0
+            }
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction ===
-              Direction.DOWN
+              txflows?.data?.total_in_and_out_flows?.out_flow
+                ?.percentage_change_direction === Direction.DOWN
             }
             filterType={filterType}
             change={
-              (data?.data?.businesses?.balance_percentage_change as number) ?? 0
+              txflows?.data?.total_in_and_out_flows?.out_flow
+                ?.percentage_change ?? 0
             }
           />
           <AmountInfoCard
             label="TOTAL INFLOW"
-            amount="₦500,964.00"
-            change={data?.data?.businesses?.balance_percentage_change ?? 0}
+            amount={
+              txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ?? 0
+            }
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction ===
-              Direction.DOWN
+              txflows?.data?.total_in_and_out_flows?.in_flow
+                ?.percentage_change_direction === Direction.DOWN
             }
             filterType={filterType}
+            change={
+              txflows?.data?.total_in_and_out_flows?.in_flow
+                ?.percentage_change ?? 0
+            }
           />
-          <TransactionCard />
+          <TransactionCard
+            txFlows={txflows?.data?.internal_and_external_flows as IFlow}
+          />
         </div>
       </div>
       <div className="flex gap-6 my-6">

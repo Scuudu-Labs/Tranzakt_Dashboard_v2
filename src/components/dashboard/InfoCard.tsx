@@ -1,7 +1,7 @@
 import { formatText } from '../../lib/text_formater';
 
 export default function AmountInfoCard(props: {
-  amount: string;
+  amount: string | number;
   change: number;
   label: string;
   filterType: string;
