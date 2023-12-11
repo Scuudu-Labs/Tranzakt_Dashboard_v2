@@ -46,6 +46,15 @@ export const balanceApi = baseApi.injectEndpoints({
         { type: tagTypes.GraphData, query },
       ],
     }),
+    getTransactionFlows: builder.query<ISuccessResponse<ITxFlows>, string>({
+      query: (query) => {
+        return {
+          url: `/admin/transaction-flows/?period=${query}`,
+          method: 'GET',
+        };
+      },
+      providesTags: [{ type: tagTypes.TXFlows }],
+    }),
   }),
 });
 
@@ -53,4 +62,5 @@ export const {
   useGetBalanceQuery,
   useGetStatisticsQuery,
   useGetGraphDataQuery,
+  useGetTransactionFlowsQuery,
 } = balanceApi;
