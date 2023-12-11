@@ -23,7 +23,7 @@ const FilterModal = ({
           onChange={() => setChange('ACTIVE')}
           value={search.status}
           checked={search.status === 'ACTIVE'}
-          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+          className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Activated</span>
       </div>
@@ -33,7 +33,7 @@ const FilterModal = ({
           onChange={() => setChange('DEACTIVATED')}
           value={search.status}
           checked={search.status === 'DEACTIVATED'}
-          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+          className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Deactivated</span>
       </div>
