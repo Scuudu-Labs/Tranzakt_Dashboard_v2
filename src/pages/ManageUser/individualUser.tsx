@@ -5,6 +5,7 @@ import TransactionHistory from './transactionHistory';
 import { useGetAUserQuery } from '../../redux/api/mangerUser';
 import { useState } from 'react';
 import PersonalDetails from './personalDetails';
+import { amountFormatter } from '../../lib/text_formater';
 
 const EachUser = () => {
   const { id } = useParams();
@@ -72,7 +73,7 @@ const EachUser = () => {
             </span>
             <span className="text-black font-montserrat font-bold text-[26px]">
               {`₦${new Intl.NumberFormat('en-NG').format(
-                user?.data?.wallet_balance ?? 0
+                amountFormatter(user?.data?.wallet_balance ?? 0)
               )}`}
             </span>
           </div>
