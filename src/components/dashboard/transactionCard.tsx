@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const TransactionCard = () => {
+const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
   const [state, setState] = useState('external');
   return (
     <div className="w-full h-full flex flex-col rounded-[16px] bg-white border-[1px] py-[13px] border-[#E3E3E3]">
@@ -34,7 +34,9 @@ const TransactionCard = () => {
           withdrawals
         </p>
         <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] pb-2 ">
-          ₦34,000.00
+          {state === 'external'
+            ? txFlows?.external?.[0].total_amount ?? 0
+            : txFlows?.internal?.[0].total_amount ?? 0}
         </h2>
       </div>
       <div className="px-[16px] pt-3">
@@ -42,7 +44,9 @@ const TransactionCard = () => {
           Bill payment
         </p>
         <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] ">
-          ₦20,964.00
+          {state === 'external'
+            ? txFlows?.external?.[1]?.total_amount ?? 0
+            : txFlows?.internal[1]?.total_amount}
         </h2>
       </div>
     </div>

@@ -39,3 +39,41 @@ interface IFormatData {
   amount: number;
   valueLabel: string;
 }
+
+interface ITxFlows {
+  total_in_and_out_flows: {
+    in_flow: {
+      total_amount: number;
+      previous_total_amount: number;
+      percentage_change: number;
+      percentage_change_direction: string;
+    };
+    out_flow: {
+      total_amount: number;
+      previous_total_amount: number;
+      percentage_change: number;
+      percentage_change_direction: string;
+    };
+  };
+  internal_and_external_flows: {
+    internal: {
+      total_amount: number;
+      kind: string;
+    }[];
+    external: {
+      total_amount: number;
+      kind: string;
+    }[];
+  };
+}
+
+interface IFlow {
+  internal: {
+    total_amount: number;
+    kind: string;
+  }[];
+  external: {
+    total_amount: number;
+    kind: string;
+  }[];
+}
