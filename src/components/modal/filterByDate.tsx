@@ -34,7 +34,7 @@ const DateFilterModal = ({
             type="radio"
             onChange={() => setType(date)}
             checked={type === date}
-            className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+            className="w-4 h-4 text-green-600 accent-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
           />
           <span className="font-montserrat capitalize text-[#111111] ml-2">
             {formatText(date)}

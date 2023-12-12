@@ -9,7 +9,7 @@ import {
   useGetStatisticsQuery,
   useGetTransactionFlowsQuery,
 } from '../../redux/api/balanceOverview';
-import { currencyFormatter } from '../../lib/text_formater';
+import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 
 type IProp = {
   filterType: string;
@@ -25,11 +25,8 @@ export default function DashboardSection({ filterType }: IProp) {
   const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
     period: filterType,
   });
-  const { data: txflows, isLoading: isFetching } =
-    useGetTransactionFlowsQuery(filterType);
-  console.log(filterType, 'fff');
+  const { data: txflows } = useGetTransactionFlowsQuery(filterType);
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
-  console.log(txflows, isFetching, 'tx');
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -37,7 +34,9 @@ export default function DashboardSection({ filterType }: IProp) {
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
               label="TOTAL BALANCE"
-              amount={currencyFormatter(data?.data?.users?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.users?.balance ?? 0)
+              )}
               change={data?.data?.users?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.users?.balance_percentage_change_direction ===
@@ -49,7 +48,9 @@ export default function DashboardSection({ filterType }: IProp) {
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
               change={data?.data?.customers?.balance_percentage_change ?? 0}
-              amount={currencyFormatter(data?.data?.customers?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.customers?.balance ?? 0)
+              )}
               filterType={filterType}
               isReduction={
                 data?.data?.customers?.balance_percentage_change_direction ===
@@ -59,7 +60,9 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
-              amount={currencyFormatter(data?.data?.businesses?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.businesses?.balance ?? 0)
+              )}
               change={data?.data?.businesses?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.businesses?.balance_percentage_change_direction ===
@@ -77,9 +80,12 @@ export default function DashboardSection({ filterType }: IProp) {
         <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
             label="TOTAL OUTFLOW"
-            amount={
-              txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ?? 0
-            }
+            amount={currencyFormatter(
+              amountFormatter(
+                txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ??
+                  0
+              )
+            )}
             isReduction={
               txflows?.data?.total_in_and_out_flows?.out_flow
                 ?.percentage_change_direction === Direction.DOWN
@@ -92,9 +98,12 @@ export default function DashboardSection({ filterType }: IProp) {
           />
           <AmountInfoCard
             label="TOTAL INFLOW"
-            amount={
-              txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ?? 0
-            }
+            amount={currencyFormatter(
+              amountFormatter(
+                txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ??
+                  0
+              )
+            )}
             isReduction={
               txflows?.data?.total_in_and_out_flows?.in_flow
                 ?.percentage_change_direction === Direction.DOWN

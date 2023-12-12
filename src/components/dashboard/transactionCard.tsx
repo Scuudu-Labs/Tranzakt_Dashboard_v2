@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 
 const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
   const [state, setState] = useState('external');
@@ -35,8 +36,12 @@ const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
         </p>
         <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] pb-2 ">
           {state === 'external'
-            ? txFlows?.external?.[0].total_amount ?? 0
-            : txFlows?.internal?.[0].total_amount ?? 0}
+            ? currencyFormatter(
+                amountFormatter(txFlows?.external?.[0].total_amount ?? 0)
+              )
+            : currencyFormatter(
+                amountFormatter(txFlows?.internal?.[0].total_amount ?? 0)
+              )}
         </h2>
       </div>
       <div className="px-[16px] pt-3">
@@ -45,8 +50,12 @@ const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
         </p>
         <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] ">
           {state === 'external'
-            ? txFlows?.external?.[1]?.total_amount ?? 0
-            : txFlows?.internal[1]?.total_amount}
+            ? currencyFormatter(
+                amountFormatter(txFlows?.external?.[1].total_amount ?? 0)
+              )
+            : currencyFormatter(
+                amountFormatter(txFlows?.internal?.[1].total_amount ?? 0)
+              )}
         </h2>
       </div>
     </div>

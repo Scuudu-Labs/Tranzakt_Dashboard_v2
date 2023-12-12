@@ -11,6 +11,7 @@ interface IUser {
   dob: string;
   gender: string;
   kyc_status: boolean;
+  completed_kyc: boolean;
   phone_number: string;
   txn: ITxnData;
 }

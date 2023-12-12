@@ -4,8 +4,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 const FilterModal = ({
   reference,
+  close,
 }: {
   reference: LegacyRef<HTMLDivElement>;
+  close: () => void;
 }) => {
   const dispatch = useAppDispatch();
   const { search } = useAppSelector((state) => state.query);
@@ -20,7 +22,10 @@ const FilterModal = ({
       <div className="flex items-center mb-4 cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('name_asc')}
+          onChange={() => {
+            setChange('name_asc');
+            close();
+          }}
           value={search.sort_by}
           checked={search.sort_by === 'name_asc'}
           className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
@@ -32,7 +37,10 @@ const FilterModal = ({
       <div className="flex items-center mb-4 cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('name_des')}
+          onChange={() => {
+            setChange('name_des');
+            close();
+          }}
           value={search.sort_by}
           checked={search.sort_by === 'name_des'}
           className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
@@ -44,7 +52,10 @@ const FilterModal = ({
       <div className="flex mb-4  items-center  cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('newest')}
+          onChange={() => {
+            setChange('newest');
+            close();
+          }}
           value={search.sort_by}
           checked={search.sort_by === 'newest'}
           className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
@@ -56,7 +67,10 @@ const FilterModal = ({
       <div className="flex items-center  cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('oldest')}
+          onChange={() => {
+            setChange('oldest');
+            close();
+          }}
           value={search.sort_by}
           checked={search.sort_by === 'oldest'}
           className="w-4 h-4 text-green-600  focus:outline-none accent-green-600  dark:bg-gray-600 dark:border-gray-500"
