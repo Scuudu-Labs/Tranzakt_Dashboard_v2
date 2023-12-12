@@ -59,7 +59,12 @@ export default function ManageUserPage() {
             </div>
             <span className="pt-1">Filter</span>
           </button>
-          {showFilter && <FilterModal reference={filterRef} />}
+          {showFilter && (
+            <FilterModal
+              reference={filterRef}
+              close={() => setShowFilter(false)}
+            />
+          )}
         </div>
         <ManagerUserTable searchValue={value} />
       </div>
