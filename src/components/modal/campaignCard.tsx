@@ -129,7 +129,9 @@ const CampaignCard = ({ view, close, id }: IProps) => {
           onDrop={onDrop}
           url={
             imageUrl.url ||
-            `data:image/png;base64,${values.base64_image_string}`
+            (values.base64_image_string &&
+              `data:image/png;base64,${values.base64_image_string}`) ||
+            ''
           }
           err={imageErr}
         />
