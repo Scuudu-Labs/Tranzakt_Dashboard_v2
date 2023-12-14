@@ -174,6 +174,7 @@ const CampaignCard = ({ view, close, id }: IProps) => {
           touched={touched.ends_at}
           onChange={handleChange}
           type="date"
+          min={values.starts_at}
           readOnly={view}
           onBlur={handleBlur}
           value={values.ends_at}
