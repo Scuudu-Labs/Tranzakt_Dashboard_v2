@@ -17,7 +17,12 @@ type IProps = {
 };
 
 const UploadFile = ({ label, onDrop, url, err, loading }: IProps) => {
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.png', '.jpg'],
+    },
+    onDrop,
+  });
   return (
     <div className="flex w-full mb-4  mx-auto flex-col   gap-y-2">
       <label className="text-[14px] font-montserrat font-[500]">{label}</label>
@@ -27,17 +32,14 @@ const UploadFile = ({ label, onDrop, url, err, loading }: IProps) => {
         {...getRootProps()}
       >
         <input {...getInputProps()} />
-        {url ? (
+        {loading && <ButtonLoader />}
+        {url && url.length > 0 ? (
           <div className=" w-full h-[158px]">
-            {loading ? (
-              <ButtonLoader />
-            ) : (
-              <img
-                src={url || ' '}
-                alt="campaign_image"
-                className="w-full h-full object-cover rounded-[8px]"
-              />
-            )}
+            <img
+              src={url}
+              alt="campaign_image"
+              className="w-full h-full object-cover rounded-[8px]"
+            />
           </div>
         ) : (
           <div className="flex items-center justify-center flex-col">
