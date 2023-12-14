@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SortIcon } from '../../assets';
-import StatusTag from '../ui/statusTag';
+import StatusTag, { KYCStatusTag } from '../ui/statusTag';
 import IconWrap from '../ui/svgWrapper';
 import { useState } from 'react';
 import { Table } from 'antd';
@@ -51,6 +51,7 @@ export default function ManagerUserTable({
           status: user.status,
           date: user.date,
           index: user.user_id,
+          kyc_complete: user.completed_kyc,
         };
       }) ?? []
     );
@@ -78,14 +79,22 @@ export default function ManagerUserTable({
       key: 'name',
     },
     {
-      title: 'Status',
+      title: 'User Status',
       dataIndex: 'status',
       key: 'status',
       render: (text: string) => (
         <StatusTag
           id={text}
-          text={text === 'ACTIVE' ? 'Completed' : 'Deactivated'}
+          text={text === 'ACTIVE' ? 'Activated' : 'Deactivated'}
         />
+      ),
+    },
+    {
+      title: 'KYC Status',
+      dataIndex: 'kyc_complete',
+      key: 'status',
+      render: (text: boolean) => (
+        <KYCStatusTag id={text} text={text ? 'Completed' : 'Pending'} />
       ),
     },
     {
@@ -124,7 +133,9 @@ export default function ManagerUserTable({
           </p>
           <IconWrap src={SortIcon} />
         </div>
-        {sort && <FilterModal reference={filterRef} />}
+        {sort && (
+          <FilterModal reference={filterRef} close={() => setSort(false)} />
+        )}
       </div>
       <Table
         columns={columns}

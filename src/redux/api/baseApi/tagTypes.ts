@@ -5,4 +5,5 @@ export const tagTypes = {
   Campaign: 'Campaigns',
   GraphData: 'GraphData',
   Faqs: 'Faqs',
+  TXFlows: 'TXFlows',
 };

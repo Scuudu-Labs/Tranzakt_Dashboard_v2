@@ -7,9 +7,10 @@ import {
   useGetBalanceQuery,
   useGetGraphDataQuery,
   useGetStatisticsQuery,
+  useGetTransactionFlowsQuery,
 } from '../../redux/api/balanceOverview';
-import { currencyFormatter } from '../../lib/text_formater';
 import { useMemo } from 'react';
+import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 
 type IProp = {
   filterType: string;
@@ -25,24 +26,24 @@ export default function DashboardSection({ filterType }: IProp) {
   const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
     period: filterType,
   });
+  const { data: txflows } = useGetTransactionFlowsQuery(filterType);
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
   const statsData = useMemo(() => {
     return {
       kyb: {
-        percentCompleted: stats?.data?.[1]?.percentageCompletedKYB,
-        percentPending: stats?.data?.[1]?.percentagePendingKYB,
-        completed: stats?.data?.[1]?.totalCompletedKYB,
-        pending: stats?.data?.[1]?.totalPendingKYB,
+        percentCompleted: stats?.data?.business?.percentageCompletedKYB,
+        percentPending: stats?.data?.business?.percentagePendingKYB,
+        completed: stats?.data?.business?.totalCompletedKYB,
+        pending: stats?.data?.business?.totalPendingKYB,
       },
       kyc: {
-        percentCompleted: stats?.data?.[0]?.percentageCompletedKYC,
-        percentPending: stats?.data?.[0]?.percentagePendingKYC,
-        completed: stats?.data?.[0]?.totalCompletedKYC,
-        pending: stats?.data?.[0]?.totalPendingKYC,
+        percentCompleted: stats?.data?.customer?.percentageCompletedKYC,
+        percentPending: stats?.data?.customer?.percentagePendingKYC,
+        completed: stats?.data?.customer?.totalCompletedKYC,
+        pending: stats?.data?.customer?.totalPendingKYC,
       },
     };
   }, [stats?.data]);
-  console.log(statsData, 'data');
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -50,7 +51,9 @@ export default function DashboardSection({ filterType }: IProp) {
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
               label="TOTAL BALANCE"
-              amount={currencyFormatter(data?.data?.users?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.users?.balance ?? 0)
+              )}
               change={data?.data?.users?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.users?.balance_percentage_change_direction ===
@@ -62,7 +65,9 @@ export default function DashboardSection({ filterType }: IProp) {
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
               change={data?.data?.customers?.balance_percentage_change ?? 0}
-              amount={currencyFormatter(data?.data?.customers?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.customers?.balance ?? 0)
+              )}
               filterType={filterType}
               isReduction={
                 data?.data?.customers?.balance_percentage_change_direction ===
@@ -72,7 +77,9 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
-              amount={currencyFormatter(data?.data?.businesses?.balance ?? 0)}
+              amount={currencyFormatter(
+                amountFormatter(data?.data?.businesses?.balance ?? 0)
+              )}
               change={data?.data?.businesses?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.businesses?.balance_percentage_change_direction ===
@@ -90,34 +97,50 @@ export default function DashboardSection({ filterType }: IProp) {
         <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
             label="TOTAL OUTFLOW"
-            amount="₦500,964.00"
+            amount={currencyFormatter(
+              amountFormatter(
+                txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ??
+                  0
+              )
+            )}
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction ===
-              Direction.DOWN
+              txflows?.data?.total_in_and_out_flows?.out_flow
+                ?.percentage_change_direction === Direction.DOWN
             }
             filterType={filterType}
             change={
-              (data?.data?.businesses?.balance_percentage_change as number) ?? 0
+              txflows?.data?.total_in_and_out_flows?.out_flow
+                ?.percentage_change ?? 0
             }
           />
           <AmountInfoCard
             label="TOTAL INFLOW"
-            amount="₦500,964.00"
-            change={data?.data?.businesses?.balance_percentage_change ?? 0}
+            amount={currencyFormatter(
+              amountFormatter(
+                txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ??
+                  0
+              )
+            )}
             isReduction={
-              data?.data?.users?.balance_percentage_change_direction ===
-              Direction.DOWN
+              txflows?.data?.total_in_and_out_flows?.in_flow
+                ?.percentage_change_direction === Direction.DOWN
             }
             filterType={filterType}
+            change={
+              txflows?.data?.total_in_and_out_flows?.in_flow
+                ?.percentage_change ?? 0
+            }
           />
-          <TransactionCard />
+          <TransactionCard
+            txFlows={txflows?.data?.internal_and_external_flows as IFlow}
+          />
         </div>
       </div>
       <div className="flex gap-6 my-6">
         <PieChartCard
           loading={loading}
           label={'KYC Status'}
-          sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.customer?.totalUsers) ?? 0}
           type="KYC"
           data={{
             percentCompleted: statsData.kyc.percentCompleted ?? 0,
@@ -130,7 +153,7 @@ export default function DashboardSection({ filterType }: IProp) {
         <PieChartCard
           loading={loading}
           label={'KYB Status'}
-          sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.business?.totalUsers) ?? 0}
           type="KYB"
           data={{
             percentCompleted: statsData.kyb.percentCompleted ?? 0,

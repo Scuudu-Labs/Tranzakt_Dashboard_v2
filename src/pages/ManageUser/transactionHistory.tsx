@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Table } from 'antd';
 import { formatDate } from '../../lib/dateFormater';
+import { amountFormatter } from '../../lib/text_formater';
 
 const TransactionHistory = ({
   transactions,
@@ -76,7 +77,9 @@ const TransactionHistory = ({
           name: `${txn.entity.first_name} ${txn.entity.last_name}`,
           date: formatDate(txn.created_at),
           type: txn.purpose,
-          amount: `₦${new Intl.NumberFormat('en-NG').format(txn.amount ?? 0)}`,
+          amount: `₦${new Intl.NumberFormat('en-NG').format(
+            amountFormatter(txn.amount ?? 0)
+          )}`,
         };
       }) ?? []
     );

@@ -10,3 +10,7 @@ export const currencyFormatter = (currency: number) => {
     .format(currency)
     .replace(/(\.|,)00$/g, '');
 };
+
+export const amountFormatter = (amount: number) => {
+  return amount / 100;
+};

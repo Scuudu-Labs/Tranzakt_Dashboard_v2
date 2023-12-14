@@ -4,8 +4,10 @@ import { setSearch } from '../../redux/slice/querySearch';
 
 const FilterModal = ({
   reference,
+  close,
 }: {
   reference: LegacyRef<HTMLDivElement>;
+  close: () => void;
 }) => {
   const dispatch = useAppDispatch();
   const { search } = useAppSelector((state) => state.query);
@@ -20,20 +22,26 @@ const FilterModal = ({
       <div className="flex items-center mb-4 cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('ACTIVE')}
-          value={search.status}
+          onChange={() => {
+            setChange('ACTIVE');
+            close();
+          }}
           checked={search.status === 'ACTIVE'}
-          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+          value={search.status}
+          className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Activated</span>
       </div>
       <div className="flex items-center cursor-pointer">
         <input
           type="radio"
-          onChange={() => setChange('DEACTIVATED')}
+          onChange={() => {
+            setChange('DEACTIVATED');
+            close();
+          }}
           value={search.status}
           checked={search.status === 'DEACTIVATED'}
-          className="w-4 h-4 text-green-600  focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+          className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Deactivated</span>
       </div>
