@@ -14,16 +14,30 @@ interface IBalanceOverView {
 }
 
 interface IStats {
-  totalUsers: number;
-  role: string;
-  totalCompletedKYC: number;
-  totalPendingKYC: number;
-  percentageCompletedKYC: number;
-  percentagePendingKYC: number;
-  totalCompletedKYB: number;
-  totalPendingKYB: number;
-  percentageCompletedKYB: number;
-  percentagePendingKYB: number;
+  customer: {
+    totalUsers: number;
+    role: string;
+    totalCompletedKYC: number;
+    totalPendingKYC: number;
+    percentageCompletedKYC: number;
+    percentagePendingKYC: number;
+    totalCompletedKYB: number;
+    totalPendingKYB: number;
+    percentageCompletedKYB: number;
+    percentagePendingKYB: number;
+  };
+  business: {
+    totalUsers: number;
+    role: string;
+    totalCompletedKYC: number;
+    totalPendingKYC: number;
+    percentageCompletedKYC: number;
+    percentagePendingKYC: number;
+    totalCompletedKYB: number;
+    totalPendingKYB: number;
+    percentageCompletedKYB: number;
+    percentagePendingKYB: number;
+  };
 }
 
 interface IGraphData {

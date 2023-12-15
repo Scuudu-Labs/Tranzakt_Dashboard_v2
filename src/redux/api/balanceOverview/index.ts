@@ -15,7 +15,7 @@ export const balanceApi = baseApi.injectEndpoints({
         { type: tagTypes.Balance, query },
       ],
     }),
-    getStatistics: builder.query<ISuccessResponse<IStats[]>, void>({
+    getStatistics: builder.query<ISuccessResponse<IStats>, void>({
       query: () => {
         return {
           url: '/admin/ky-users-statistics',

@@ -9,6 +9,7 @@ import {
   useGetStatisticsQuery,
   useGetTransactionFlowsQuery,
 } from '../../redux/api/balanceOverview';
+import { useMemo } from 'react';
 import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 
 type IProp = {
@@ -27,6 +28,22 @@ export default function DashboardSection({ filterType }: IProp) {
   });
   const { data: txflows } = useGetTransactionFlowsQuery(filterType);
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
+  const statsData = useMemo(() => {
+    return {
+      kyb: {
+        percentCompleted: stats?.data?.business?.percentageCompletedKYB,
+        percentPending: stats?.data?.business?.percentagePendingKYB,
+        completed: stats?.data?.business?.totalCompletedKYB,
+        pending: stats?.data?.business?.totalPendingKYB,
+      },
+      kyc: {
+        percentCompleted: stats?.data?.customer?.percentageCompletedKYC,
+        percentPending: stats?.data?.customer?.percentagePendingKYC,
+        completed: stats?.data?.customer?.totalCompletedKYC,
+        pending: stats?.data?.customer?.totalPendingKYC,
+      },
+    };
+  }, [stats?.data]);
   return (
     <div className="w-full flex flex-col my-2">
       <div className="flex items-center">
@@ -123,26 +140,26 @@ export default function DashboardSection({ filterType }: IProp) {
         <PieChartCard
           loading={loading}
           label={'KYC Status'}
-          sublabel={(stats?.data && stats?.data?.[0]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.customer?.totalUsers) ?? 0}
           type="KYC"
           data={{
-            percentCompleted: stats?.data?.[0]?.percentageCompletedKYC ?? 0,
-            percentPending: stats?.data?.[0]?.percentagePendingKYC ?? 0,
-            completed: stats?.data?.[0]?.totalCompletedKYC ?? 0,
-            pending: stats?.data?.[0]?.totalPendingKYC ?? 0,
+            percentCompleted: statsData.kyc.percentCompleted ?? 0,
+            percentPending: statsData.kyc.percentPending ?? 0,
+            completed: statsData.kyc.completed ?? 0,
+            pending: statsData.kyc.pending ?? 0,
           }}
         />
 
         <PieChartCard
           loading={loading}
           label={'KYB Status'}
-          sublabel={(stats?.data && stats?.data?.[1]?.totalUsers) ?? 0}
+          sublabel={(stats?.data && stats?.data?.business?.totalUsers) ?? 0}
           type="KYB"
           data={{
-            percentCompleted: stats?.data?.[1]?.percentageCompletedKYB ?? 0,
-            percentPending: stats?.data?.[1]?.percentagePendingKYB ?? 0,
-            completed: stats?.data?.[1]?.totalCompletedKYB ?? 0,
-            pending: stats?.data?.[1]?.totalPendingKYB ?? 0,
+            percentCompleted: statsData.kyb.percentCompleted ?? 0,
+            percentPending: statsData.kyb.percentPending ?? 0,
+            completed: statsData.kyb.completed ?? 0,
+            pending: statsData.kyb.pending ?? 0,
           }}
         />
         <BarCharts />
