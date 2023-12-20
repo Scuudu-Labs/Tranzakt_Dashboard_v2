@@ -6,6 +6,7 @@ import { useGetAUserQuery } from '../../redux/api/mangerUser';
 import { useState } from 'react';
 import PersonalDetails from './personalDetails';
 import { amountFormatter } from '../../lib/text_formater';
+import { AmountLoader } from '../../components/ui/loader';
 
 const EachUser = () => {
   const { id } = useParams();
@@ -35,14 +36,14 @@ const EachUser = () => {
             />
             <div className="flex flex-col">
               <h2 className="font-montserrat text-[18px]  font-semibold tracking-[0.3px] text-[#3F3F3F]">
-                {user?.data?.full_name ?? '...'}
+                {isLoading ? <AmountLoader /> : user?.data?.full_name}
               </h2>
               <div className="flex mb-2 items-center">
                 <span className="text-[14px] font-[600] pr-[0.5px] text-[#3F3F3F]">
-                  Email:
+                  {isLoading ? null : 'Email:'}
                 </span>
                 <span className="text-[#3F3F3F] text-[14px] font-[500] ml-[2px] font-montserrat">
-                  {user?.data?.email}
+                  {isLoading ? <AmountLoader /> : user?.data?.email}
                 </span>
               </div>
             </div>
@@ -52,6 +53,7 @@ const EachUser = () => {
               KYC Status
             </span>
             <StatusTag
+              isLoading={isLoading}
               text={user?.data?.kyc_status ? 'completed' : 'pending'}
               id={user?.data?.kyc_status ? 'ACTIVE' : 'pending'}
             />
@@ -62,6 +64,7 @@ const EachUser = () => {
               Account Status
             </span>
             <StatusTag
+              isLoading={isLoading}
               text={user?.data?.account_status ?? '...'}
               id={user?.data?.account_status ?? '...'}
             />
@@ -72,9 +75,13 @@ const EachUser = () => {
               Wallet Balance
             </span>
             <span className="text-black font-montserrat font-bold text-[26px]">
-              {`₦${new Intl.NumberFormat('en-NG').format(
-                amountFormatter(user?.data?.wallet_balance ?? 0)
-              )}`}
+              {isLoading ? (
+                <AmountLoader />
+              ) : (
+                `₦${new Intl.NumberFormat('en-NG').format(
+                  amountFormatter(user?.data?.wallet_balance ?? 0)
+                )}`
+              )}
             </span>
           </div>
         </div>

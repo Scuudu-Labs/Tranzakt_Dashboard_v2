@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
+import { AmountLoader } from '../ui/loader';
 
-const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
+const TransactionCard = ({
+  txFlows,
+  loading,
+}: {
+  txFlows: IFlow;
+  loading: boolean;
+}) => {
   const [state, setState] = useState('external');
   return (
     <div className="w-full h-full flex flex-col rounded-[16px] bg-white border-[1px] py-[13px] border-[#E3E3E3]">
@@ -34,29 +41,37 @@ const TransactionCard = ({ txFlows }: { txFlows: IFlow }) => {
         <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] uppercase font-[500]">
           withdrawals
         </p>
-        <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] pb-2 ">
-          {state === 'external'
-            ? currencyFormatter(
-                amountFormatter(txFlows?.external?.[0].total_amount ?? 0)
-              )
-            : currencyFormatter(
-                amountFormatter(txFlows?.internal?.[0].total_amount ?? 0)
-              )}
-        </h2>
+        {loading ? (
+          <AmountLoader />
+        ) : (
+          <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] pb-2 ">
+            {state === 'external'
+              ? currencyFormatter(
+                  amountFormatter(txFlows?.external?.[0].total_amount ?? 0)
+                )
+              : currencyFormatter(
+                  amountFormatter(txFlows?.internal?.[0].total_amount ?? 0)
+                )}
+          </h2>
+        )}
       </div>
       <div className="px-[16px] pt-3">
         <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] uppercase font-[500]">
           Bill payment
         </p>
-        <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] ">
-          {state === 'external'
-            ? currencyFormatter(
-                amountFormatter(txFlows?.external?.[1].total_amount ?? 0)
-              )
-            : currencyFormatter(
-                amountFormatter(txFlows?.internal?.[1].total_amount ?? 0)
-              )}
-        </h2>
+        {loading ? (
+          <AmountLoader />
+        ) : (
+          <h2 className="font-montserrat font-semibold text-[16px] tracking-[0.5px] ">
+            {state === 'external'
+              ? currencyFormatter(
+                  amountFormatter(txFlows?.external?.[1].total_amount ?? 0)
+                )
+              : currencyFormatter(
+                  amountFormatter(txFlows?.internal?.[1].total_amount ?? 0)
+                )}
+          </h2>
+        )}
       </div>
     </div>
   );

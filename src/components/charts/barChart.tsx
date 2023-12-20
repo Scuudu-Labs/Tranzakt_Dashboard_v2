@@ -32,46 +32,45 @@ const BarCharts = () => {
   const data = [
     {
       name: 'Sun',
-      'Transaction fee': 4000,
-      'Bill payment': 2400,
-      'Withdrawal fee': 400,
+      'Transaction fee': 0,
+      'Bill payment': 0,
+      'Withdrawal fee': 0,
     },
     {
       name: 'Mon',
-      'Transaction fee': 3000,
-      'Bill payment': 1398,
-      'Withdrawal fee': 400,
+      'Transaction fee': 0,
+      'Bill payment': 0,
+      'Withdrawal fee': 0,
     },
     {
       name: 'Tues',
-      'Transaction fee': 2000,
-      'Withdrawal fee': 400,
-      'Bill payment': 9800,
+      'Transaction fee': 0,
+      'Withdrawal fee': 0,
+      'Bill payment': 0,
     },
     {
       name: 'Wed',
-      'Transaction fee': 2780,
-      'Bill payment': 3908,
-      'Withdrawal fee': 400,
+      'Transaction fee': 0,
+      'Bill payment': 0,
+      'Withdrawal fee': 0,
     },
     {
       name: 'Thurs',
-      'Transaction fee': 1890,
-      'Bill payment': 4800,
-      'Withdrawal fee': 400,
+      'Transaction fee': 0,
+      'Bill payment': 0,
+      'Withdrawal fee': 0,
     },
     {
       name: 'Fri',
-      'Transaction fee': 2390,
-      'Bill payment': 3800,
-      'Withdrawal fee': 400,
+      'Transaction fee': 0,
+      'Bill payment': 0,
+      'Withdrawal fee': 0,
     },
     {
       name: 'Sat',
-      'Transaction fee': 3490,
-      'Withdrawal fee': 400,
-      'Bill payment': 4300,
-      amt: 2100,
+      'Transaction fee': 0,
+      'Withdrawal fee': 0,
+      'Bill payment': 0,
     },
   ];
   return (
@@ -81,7 +80,7 @@ const BarCharts = () => {
           TOTAL FEES
         </p>
         <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">
-          ₦12,345.00
+          ₦0
         </h2>
       </div>
       <ResponsiveContainer width="100%" height="100%">

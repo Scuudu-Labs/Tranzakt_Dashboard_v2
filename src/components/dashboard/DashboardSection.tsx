@@ -22,11 +22,12 @@ enum Direction {
 }
 
 export default function DashboardSection({ filterType }: IProp) {
-  const { data } = useGetBalanceQuery(filterType);
+  const { data, isLoading } = useGetBalanceQuery(filterType);
   const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
     period: filterType,
   });
-  const { data: txflows } = useGetTransactionFlowsQuery(filterType);
+  const { data: txflows, isLoading: getting } =
+    useGetTransactionFlowsQuery(filterType);
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
   const statsData = useMemo(() => {
     return {
@@ -54,6 +55,7 @@ export default function DashboardSection({ filterType }: IProp) {
               amount={currencyFormatter(
                 amountFormatter(data?.data?.users?.balance ?? 0)
               )}
+              loading={isLoading}
               change={data?.data?.users?.balance_percentage_change ?? 0}
               isReduction={
                 data?.data?.users?.balance_percentage_change_direction ===
@@ -64,6 +66,7 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
+              loading={isLoading}
               change={data?.data?.customers?.balance_percentage_change ?? 0}
               amount={currencyFormatter(
                 amountFormatter(data?.data?.customers?.balance ?? 0)
@@ -77,6 +80,7 @@ export default function DashboardSection({ filterType }: IProp) {
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
+              loading={isLoading}
               amount={currencyFormatter(
                 amountFormatter(data?.data?.businesses?.balance ?? 0)
               )}
@@ -97,6 +101,7 @@ export default function DashboardSection({ filterType }: IProp) {
         <div className="ml-6 gap-y-4 mt-6 w-full flex flex-col">
           <AmountInfoCard
             label="TOTAL OUTFLOW"
+            loading={getting}
             amount={currencyFormatter(
               amountFormatter(
                 txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ??
@@ -115,6 +120,7 @@ export default function DashboardSection({ filterType }: IProp) {
           />
           <AmountInfoCard
             label="TOTAL INFLOW"
+            loading={getting}
             amount={currencyFormatter(
               amountFormatter(
                 txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ??
@@ -132,6 +138,7 @@ export default function DashboardSection({ filterType }: IProp) {
             }
           />
           <TransactionCard
+            loading={getting}
             txFlows={txflows?.data?.internal_and_external_flows as IFlow}
           />
         </div>
