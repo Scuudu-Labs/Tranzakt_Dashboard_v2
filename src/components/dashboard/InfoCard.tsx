@@ -1,9 +1,11 @@
 import { formatText } from '../../lib/text_formater';
+import { AmountLoader } from '../ui/loader';
 
 export default function AmountInfoCard(props: {
   amount: string | number;
   change: number;
   label: string;
+  loading?: boolean;
   filterType: string;
   isReduction: boolean;
 }) {
@@ -13,7 +15,7 @@ export default function AmountInfoCard(props: {
         {props.label}
       </p>
       <h2 className="font-montserrat font-semibold text-[21px] tracking-[0.5px] pt-1 pb-2 ">
-        {props.amount}
+        {props.loading ? <AmountLoader /> : props.amount}
       </h2>
       <div className="flex items-center">
         <span

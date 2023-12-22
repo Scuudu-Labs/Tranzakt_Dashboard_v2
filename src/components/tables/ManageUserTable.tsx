@@ -20,7 +20,7 @@ export default function ManagerUserTable({
   const filterRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
   const debouncedValue = useDebounce(searchValue, 500);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState(false);
   const queryData: IQueryString = {

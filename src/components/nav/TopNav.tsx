@@ -1,4 +1,4 @@
-import { DropIcon, SearchIcon, TLogoIcon } from '../../assets';
+import { DropIcon, TLogoIcon } from '../../assets';
 import { useEffect, useRef, useState } from 'react';
 import ProfileCard from '../card/profileCard';
 import IconWrap from '../ui/svgWrapper';
@@ -31,12 +31,12 @@ export default function TopNavbar() {
           <NotificationCard reference={notificationRef} />
         </ModalWraper>
       )} */}
-      <div className="sticky  top-0 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
+      <div className="sticky  top-0 z-50 bg-white h-[80px] border-b-[0.5px] border-[#E3E3E3] w-full flex  items-center ">
         <div className="mx-4">
           <IconWrap src={TLogoIcon} />
         </div>
         <div className="flex justify-between px-6 w-full items-center">
-          <div className="w-[648px] relative px-6">
+          {/* <div className="w-[648px] relative px-6">
             <div className="absolute left-10  top-[14px]">
               <IconWrap src={SearchIcon} />
             </div>
@@ -45,9 +45,9 @@ export default function TopNavbar() {
               className="w-full text-[16px] font-montserrat bg-[#F5F7F9] focus:outline-none rounded-[8px] px-[44px] text-[#3F3F3F] border-[#CFCFCF] border py-[11px]"
               placeholder="Query"
             />
-          </div>
-          <div className="flex items-center  justify-center gap-x-5 px-5">
-            {/* <div
+          </div> */}
+          {/* <div className="flex items-center  justify-between gap-x-5 px-5"> */}
+          {/* <div
               className="h-[50px] w-[50px] rounded-full relative bg-[#F2FFF7] cursor-pointer flex items-center justify-center "
               onClick={() => setNotify(!notify)}
             >
@@ -58,19 +58,19 @@ export default function TopNavbar() {
               <IconWrap src={BellIcon} style="w-[20px] h-[20px]" />
             </div> */}
 
-            <div
-              className="flex items-center"
-              onClick={() => setOpenProfile(!openProfile)}
-            >
-              <div className="h-[40px] cursor-pointer mr-2 relative w-[40px] rounded-full bg-[#32C87D] flex items-center justify-center text-sm text-white">
-                OK
-              </div>
-              <div className="cursor-pointer">
-                <IconWrap src={DropIcon} />
-              </div>
+          <div
+            className="flex w-full  items-center justify-end"
+            onClick={() => setOpenProfile(!openProfile)}
+          >
+            <div className="h-[40px] cursor-pointer mr-2 relative w-[40px] rounded-full bg-[#32C87D] flex items-center justify-center text-sm text-white">
+              OK
+            </div>
+            <div className="cursor-pointer">
+              <IconWrap src={DropIcon} />
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </>
   );
