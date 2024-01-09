@@ -57,6 +57,8 @@ export default function ManagerUserTable({
     );
   }, [users]);
 
+  console.log(dataSource);
+
   const clickOutside = (e: MouseEvent) => {
     if (filterRef.current?.contains(e.target as Node)) return;
     setSort(false);
@@ -85,7 +87,13 @@ export default function ManagerUserTable({
       render: (text: string) => (
         <StatusTag
           id={text}
-          text={text === 'ACTIVE' ? 'Activated' : 'Deactivated'}
+          text={
+            text === 'ACTIVE'
+              ? 'Activated'
+              : text === 'DELETED'
+                ? 'Deleted'
+                : 'Deactivated'
+          }
         />
       ),
     },
