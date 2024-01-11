@@ -85,7 +85,13 @@ export default function ManagerUserTable({
       render: (text: string) => (
         <StatusTag
           id={text}
-          text={text === 'ACTIVE' ? 'Activated' : 'Deactivated'}
+          text={
+            text === 'ACTIVE'
+              ? 'Activated'
+              : text === 'DELETED'
+                ? 'Deleted'
+                : 'Deactivated'
+          }
         />
       ),
     },

@@ -1,19 +1,21 @@
 import { useMemo, useState } from 'react';
 import { formatDate } from '../../lib/dateFormater';
-import { Table } from 'antd';
+import { ConfigProvider, Table } from 'antd';
 import StatusTag from '../ui/statusTag';
 import IconWrap from '../ui/svgWrapper';
 import { DeleteIcon, EditIcon } from '../../assets';
 import ModalWraper from '../modal';
 import CampaignCard from '../modal/campaignCard';
 import DeleteModal from '../modal/deleteModal';
+import EmptyStateContainer from '../dashboard/emptyState';
 
 type IProps = {
-  campaigns: ISuccessResponse<ICampaign[]>;
+  campaigns: ISuccessResponse<ICampaign[]> | undefined;
   isLoading: boolean;
+  open: () => void;
 };
 
-const CampaignTable = ({ campaigns, isLoading }: IProps) => {
+const CampaignTable = ({ campaigns, isLoading, open }: IProps) => {
   const [pageSize, setPageSize] = useState(5);
   const [, setPage] = useState(1);
   const [id, setId] = useState('');
@@ -154,24 +156,26 @@ const CampaignTable = ({ campaigns, isLoading }: IProps) => {
           />
         </ModalWraper>
       )}
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        loading={isLoading}
-        pagination={{
-          defaultCurrent: 1,
-          showSizeChanger: true,
-          onShowSizeChange: (_current, size) => {
-            setPage(1);
-            setPageSize(size);
-          },
-          total: campaigns?.data?.length,
-          pageSize: pageSize,
-          onChange: (page) => {
-            setPage(page);
-          },
-        }}
-      />
+      <ConfigProvider renderEmpty={() => <EmptyStateContainer open={open} />}>
+        <Table
+          columns={columns}
+          dataSource={dataSource}
+          loading={isLoading}
+          pagination={{
+            defaultCurrent: 1,
+            showSizeChanger: true,
+            onShowSizeChange: (_current, size) => {
+              setPage(1);
+              setPageSize(size);
+            },
+            total: campaigns?.data?.length,
+            pageSize: pageSize,
+            onChange: (page) => {
+              setPage(page);
+            },
+          }}
+        />
+      </ConfigProvider>
     </div>
   );
 };
