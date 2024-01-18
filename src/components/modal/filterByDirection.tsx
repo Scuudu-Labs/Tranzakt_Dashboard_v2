@@ -2,7 +2,7 @@ import { LegacyRef } from 'react';
 import { setSearch } from '../../redux/slice/querySearch';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
-const FilterModal = ({
+const SortModal = ({
   reference,
   close,
 }: {
@@ -17,7 +17,7 @@ const FilterModal = ({
   return (
     <div
       ref={reference}
-      className="w-[230px] h-[188px] flex flex-col  absolute z-[30] right-6 top-40 shadow-md justify-center bg-white rounded-[8px] p-[16px]"
+      className="w-[230px] h-[188px] flex flex-col  absolute z-[30] right-6  top-[250px] shadow-md justify-center bg-white rounded-[8px] p-[16px]"
     >
       <div className="flex items-center mb-4 cursor-pointer">
         <input
@@ -83,4 +83,4 @@ const FilterModal = ({
   );
 };
 
-export default FilterModal;
+export default SortModal;

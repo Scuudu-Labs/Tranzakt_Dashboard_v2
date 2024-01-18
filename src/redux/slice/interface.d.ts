@@ -15,6 +15,7 @@ interface AdminSlice {
 interface IQuerySearch {
   status: string | null;
   sort_by: string | null;
+  is_deleted: boolean | null;
 }
 
 interface ISearch {

@@ -8,12 +8,14 @@ interface IUser {
   last_name: string;
   wallet_balance: number;
   email: string;
+  completed_kyc_at: string | null;
   dob: string;
   gender: string;
   kyc_status: boolean;
   completed_kyc: boolean;
   phone_number: string;
   txn: ITxnData;
+  is_deleted: boolean;
 }
 
 interface ITxnData {

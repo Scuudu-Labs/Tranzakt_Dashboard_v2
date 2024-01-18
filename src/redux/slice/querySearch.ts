@@ -4,6 +4,7 @@ const initialState: ISearch = {
   search: {
     status: '',
     sort_by: '',
+    is_deleted: false,
   },
 };
 
