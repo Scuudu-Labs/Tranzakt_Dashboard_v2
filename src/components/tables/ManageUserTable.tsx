@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { DeletedStatusTag, KYCStatusTag } from '../ui/statusTag';
+import StatusTag, { KYCStatusTag } from '../ui/statusTag';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useState } from 'react';
 import { Table } from 'antd';
@@ -9,12 +9,10 @@ import { formatDate } from '../../lib/dateFormater';
 import { useRef, useEffect } from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import useDebounce from '../hooks';
-import { PiFunnelLight } from 'react-icons/pi';
 import { BiSortAlt2 } from 'react-icons/bi';
 import SearchInput from '../Input/searchInput';
 import SortModal from '../modal/filterByDirection';
 import FilterModal from '../modal/filter';
-import DeleteCard from '../modal/deleteCard';
 
 export default function ManagerUserTable({
   searchValue,
@@ -28,7 +26,6 @@ export default function ManagerUserTable({
   const sortRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
   const [showFilter, setShowFilter] = useState(false);
-  const [deleted, setDeleted] = useState(false);
   const debouncedValue = useDebounce(searchValue, 500);
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
@@ -45,9 +42,9 @@ export default function ManagerUserTable({
     queryData['status'] = search.status;
   }
 
-  if (search.is_deleted !== null) {
-    queryData['is_deleted'] = search.is_deleted;
-  }
+  // if (search.is_deleted !== null) {
+  //   queryData['is_deleted'] = search.is_deleted;
+  // }
 
   if (search.search_txt !== null) {
     queryData['search_txt'] = debouncedValue;
@@ -77,7 +74,6 @@ export default function ManagerUserTable({
 
     setSort(false);
     setShowFilter(false);
-    setDeleted(false);
   };
 
   useEffect(() => {
@@ -96,31 +92,25 @@ export default function ManagerUserTable({
       dataIndex: 'name',
       key: 'name',
     },
-    // {
-    //   title: 'User Status',
-    //   dataIndex: 'status',
-    //   key: 'status',
-    //   render: (text: string) => (
-    //     <StatusTag
-    //       id={text}
-    //       text={
-    //         text === 'ACTIVE'
-    //           ? 'Activated'
-    //           : text === 'DELETED'
-    //             ? 'Deleted'
-    //             : 'Deactivated'
-    //       }
-    //     />
-    //   ),
-    // },
+
     {
-      title: 'Verification',
+      title: 'Verification...',
       dataIndex: 'date',
       key: 'date',
       render: (text: string) => formatDate(text),
     },
     {
-      title: 'KYC Status',
+      title: () => {
+        return (
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={() => setShowFilter(true)}
+          >
+            <span>KYC Status</span>
+            <RiArrowDropDownLine size={20} className="text-gray-800" />
+          </div>
+        );
+      },
       dataIndex: 'kyc_complete',
       key: 'status',
       render: (text: boolean) => (
@@ -135,17 +125,37 @@ export default function ManagerUserTable({
       render: (text: string) =>
         text === null ? '-- / -- / --' : formatDate(text),
     },
+
     {
-      title: 'Deleted',
-      dataIndex: 'is_deleted',
-      key: 'is_deleted',
-      render: (value: boolean) => (
-        <DeletedStatusTag id={value} text={value === true ? 'True' : 'False'} />
+      title: () => {
+        return (
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={() => setShowFilter(true)}
+          >
+            <span>Account Sta...</span>
+            <RiArrowDropDownLine size={20} className="text-gray-800" />
+          </div>
+        );
+      },
+      dataIndex: 'status',
+      key: 'status',
+      render: (text: string) => (
+        <StatusTag
+          id={text}
+          text={
+            text === 'ACTIVE'
+              ? 'Activated'
+              : text === 'DELETED'
+                ? 'Deleted'
+                : 'Deactivated'
+          }
+        />
       ),
     },
 
     {
-      title: 'View',
+      title: '',
       dataIndex: 'index',
       key: 'index',
       render: (index: number) => (
@@ -165,41 +175,20 @@ export default function ManagerUserTable({
       {showFilter && (
         <FilterModal reference={filterRef} close={() => setShowFilter(false)} />
       )}
-      {deleted && (
-        <DeleteCard reference={deleteRef} close={() => setDeleted(false)} />
-      )}
+
       <div className="flex justify-between mb-7 items-center">
         <p className="text-[18px] font-montserrat pb-3 font-semibold">
           KYC Management
         </p>
         <div className="flex items-center">
           <div
-            className="flex justify-center mr-2 border items-center w-[48px] h-[44px] rounded-[6px] border-[#EAEAEA] gap-x-1 text-xs cursor-pointer"
+            className="flex justify-center border items-center w-[48px] h-[44px] rounded-[6px] border-[#EAEAEA]  text-xs cursor-pointer"
             onClick={() => setSort(!sort)}
           >
             <BiSortAlt2 size={16} />
           </div>
-          <div
-            className="flex justify-center  mr-2 border items-center w-[48px] h-[44px] rounded-[6px] border-[#EAEAEA] gap-x-1 text-xs cursor-pointer"
-            onClick={() => setShowFilter(!showFilter)}
-          >
-            <PiFunnelLight size={16} />
-          </div>
+
           <SearchInput handleChange={onChange} value={searchValue} />
-          <button
-            className={`border text-[14px] h-[44px] justify-center rounded-[8px] ${
-              search.is_deleted
-                ? 'bg-[#32C87D] text-white'
-                : ' border-[#EAEAEA] text-[#3F3F3F]'
-            }  w-[184px] flex items-center`}
-            onClick={() => setDeleted(!deleted)}
-          >
-            Deleted Account
-            <RiArrowDropDownLine
-              size={22}
-              color={search.is_deleted ? '#fff' : '#000'}
-            />
-          </button>
         </div>
       </div>
       <Table

@@ -8,7 +8,7 @@ type IProps = {
 
 const SearchInput = ({ handleChange, value }: IProps) => {
   return (
-    <div className="w-[300px] mx-5 h-[48px] flex items-center relative  ">
+    <div className="w-[400px] ml-3 h-[48px] flex items-center relative  ">
       <input
         type="text"
         name="search"
