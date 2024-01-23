@@ -41,12 +41,9 @@ export default function ManagerUserTable({
   }
 
   if (search.status !== null) {
+    console.log(search.status);
     queryData['status'] = search.status;
   }
-
-  // if (search.is_deleted !== null) {
-  //   queryData['is_deleted'] = search.is_deleted;
-  // }
 
   if (search.search_txt !== null) {
     queryData['search_txt'] = debouncedValue;
@@ -78,7 +75,7 @@ export default function ManagerUserTable({
     setShowFilter(false);
     setAccountFilter(false);
   };
-
+  console.log(dataSource);
   useEffect(() => {
     window.addEventListener('mousedown', clickOutside);
     return () => window.removeEventListener('mousedown', clickOutside);
