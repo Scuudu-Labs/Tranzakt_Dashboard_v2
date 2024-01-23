@@ -54,6 +54,21 @@ interface IFormatData {
   valueLabel: string;
 }
 
+interface IData {
+  total_sum: number;
+  number_of_transactions: number;
+  legend: string;
+  previous_total_amount: number;
+  previous_number_of_transactions: number;
+}
+
+interface IBarChart {
+  // bill_payment: IData[],
+  // transaction_fees: IData[],
+  // withdrawal_fees: IData[]
+  [key: string]: IData[];
+}
+
 interface ITxFlows {
   total_in_and_out_flows: {
     in_flow: {

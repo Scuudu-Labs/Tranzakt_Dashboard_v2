@@ -53,7 +53,20 @@ export const balanceApi = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
-      providesTags: [{ type: tagTypes.TXFlows }],
+      providesTags: (_result, _err, query) => [
+        { type: tagTypes.TXFlows, query },
+      ],
+    }),
+    getBarChatData: builder.query<ISuccessResponse<IBarChart>, string>({
+      query: (query) => {
+        return {
+          url: `/admin/fee-statistics?period=${query}`,
+          method: 'GET',
+        };
+      },
+      providesTags: (_result, _err, query) => [
+        { type: tagTypes.BarChat, query },
+      ],
     }),
   }),
 });
@@ -63,4 +76,5 @@ export const {
   useGetStatisticsQuery,
   useGetGraphDataQuery,
   useGetTransactionFlowsQuery,
+  useGetBarChatDataQuery,
 } = balanceApi;

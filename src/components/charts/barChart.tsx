@@ -8,6 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { useGetBarChatDataQuery } from '../../redux/api/balanceOverview';
+import { useMemo } from 'react';
 
 const ContentLegend = () => (
   <div className="flex items-end top-0 left-[130px] absolute ">
@@ -28,24 +30,44 @@ const ContentLegend = () => (
   </div>
 );
 
-const BarCharts = () => {
+const BarCharts = ({ filterType }: { filterType: string }) => {
+  const { data: chartData, isLoading } = useGetBarChatDataQuery(filterType);
+  console.log(chartData, isLoading);
+  const barData = useMemo(() => {
+    if (chartData && chartData.data) {
+      const initialObject = chartData?.data;
+      // console.log(initialObject[key])
+      const resultData = Object.values(initialObject).map((item, key) => {
+        console.log(item, key);
+      });
+      console.log(resultData);
+      // const resultArray = Object.keys(initialObject).reduce((acc:any, key:string) => {
+      // console.log(initialObject[key], 'keet')
+      // const arrayOfObjects = initialObject[key].map((item: IData) => ({ [key]: item }));
+      // return acc.concat(arrayOfObjects);
+      // }, []);
+      return [];
+    }
+    return [];
+  }, [chartData?.data]);
+  console.log(barData, 'useMemoe');
   const data = [
     {
       name: 'Sun',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
+      'Transaction fee': 10,
+      'Bill payment': 10,
+      'Withdrawal fee': 5,
     },
     {
       name: 'Mon',
-      'Transaction fee': 0,
+      'Transaction fee': 10,
       'Bill payment': 0,
       'Withdrawal fee': 0,
     },
     {
       name: 'Tues',
       'Transaction fee': 0,
-      'Withdrawal fee': 0,
+      'Withdrawal fee': 4,
       'Bill payment': 0,
     },
     {

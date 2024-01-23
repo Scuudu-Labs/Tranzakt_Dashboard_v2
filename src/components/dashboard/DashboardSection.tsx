@@ -169,7 +169,7 @@ export default function DashboardSection({ filterType }: IProp) {
             pending: statsData.kyb.pending ?? 0,
           }}
         />
-        <BarCharts />
+        <BarCharts filterType={filterType} />
       </div>
     </div>
   );
