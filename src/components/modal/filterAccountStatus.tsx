@@ -2,7 +2,7 @@ import { LegacyRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setSearch } from '../../redux/slice/querySearch';
 
-const FilterModal = ({
+const FilterAccountModal = ({
   reference,
   close,
 }: {
@@ -15,14 +15,10 @@ const FilterModal = ({
     dispatch(setSearch({ ...search, status: value }));
   };
 
-  const setChanges = () => {
-    dispatch(setSearch({ ...search, status: null, is_deleted: true }));
-  };
-
   return (
     <div
       ref={reference}
-      className="w-[230px] h-[140px] flex flex-col  absolute z-[30] right-6 top-[250px] shadow-md justify-center bg-white rounded-[8px] p-[16px]"
+      className="w-[230px] h-[120px] flex flex-col  absolute z-[30] right-6 top-[250px] shadow-md justify-center bg-white rounded-[8px] p-[16px]"
     >
       <div className="flex items-center mb-4 cursor-pointer">
         <input
@@ -35,9 +31,9 @@ const FilterModal = ({
           value={search.status}
           className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
-        <span className="font-montserrat text-[#111111] ml-2">Activated</span>
+        <span className="font-montserrat text-[#111111] ml-2">Pending</span>
       </div>
-      <div className="flex items-center mb-4 cursor-pointer">
+      <div className="flex items-center  cursor-pointer">
         <input
           type="radio"
           onChange={() => {
@@ -48,23 +44,10 @@ const FilterModal = ({
           checked={search.status === 'DEACTIVATED'}
           className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
-        <span className="font-montserrat text-[#111111] ml-2">Deactivated</span>
-      </div>
-      <div className="flex items-center  cursor-pointer">
-        <input
-          type="radio"
-          onChange={() => {
-            setChanges('DEACTIVATED');
-            close();
-          }}
-          value={search.status}
-          checked={search.status === 'DEACTIVATED'}
-          className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
-        />
-        <span className="font-montserrat text-[#111111] ml-2">Deleted</span>
+        <span className="font-montserrat text-[#111111] ml-2">Completed</span>
       </div>
     </div>
   );
 };
 
-export default FilterModal;
+export default FilterAccountModal;

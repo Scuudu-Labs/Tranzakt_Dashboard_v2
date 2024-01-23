@@ -13,6 +13,7 @@ import { BiSortAlt2 } from 'react-icons/bi';
 import SearchInput from '../Input/searchInput';
 import SortModal from '../modal/filterByDirection';
 import FilterModal from '../modal/filter';
+import FilterAccountModal from '../modal/filterAccountStatus';
 
 export default function ManagerUserTable({
   searchValue,
@@ -22,10 +23,11 @@ export default function ManagerUserTable({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const filterRef = useRef<HTMLDivElement>(null);
-  const deleteRef = useRef<HTMLDivElement>(null);
+  const accountRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
   const [showFilter, setShowFilter] = useState(false);
+  const [accountFilter, setAccountFilter] = useState(false);
   const debouncedValue = useDebounce(searchValue, 500);
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
@@ -70,10 +72,11 @@ export default function ManagerUserTable({
   const clickOutside = (e: MouseEvent) => {
     if (filterRef.current?.contains(e.target as Node)) return;
     if (sortRef.current?.contains(e.target as Node)) return;
-    if (deleteRef.current?.contains(e.target as Node)) return;
+    if (accountRef.current?.contains(e.target as Node)) return;
 
     setSort(false);
     setShowFilter(false);
+    setAccountFilter(false);
   };
 
   useEffect(() => {
@@ -104,7 +107,7 @@ export default function ManagerUserTable({
         return (
           <div
             className="flex items-center cursor-pointer"
-            onClick={() => setShowFilter(true)}
+            onClick={() => setAccountFilter(true)}
           >
             <span>KYC Status</span>
             <RiArrowDropDownLine size={20} className="text-gray-800" />
@@ -170,12 +173,17 @@ export default function ManagerUserTable({
   ];
 
   return (
-    <div className="w-full bg-white my-6 rounded-[16px] p-6  border border-[#EAEAEA] min-h-fit">
+    <div className="w-full bg-white mb-6 rounded-[16px] rounded-tl-none p-6  border border-[#EAEAEA] min-h-fit">
       {sort && <SortModal reference={sortRef} close={() => setSort(false)} />}
       {showFilter && (
         <FilterModal reference={filterRef} close={() => setShowFilter(false)} />
       )}
-
+      {accountFilter && (
+        <FilterAccountModal
+          reference={accountRef}
+          close={() => setAccountFilter(false)}
+        />
+      )}
       <div className="flex justify-between mb-7 items-center">
         <p className="text-[18px] font-montserrat pb-3 font-semibold">
           KYC Management
