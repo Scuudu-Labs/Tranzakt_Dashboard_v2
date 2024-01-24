@@ -12,8 +12,8 @@ const StatusTag = ({
   const style =
     id === 'ACTIVE'
       ? 'text-[#32C87D] bg-[#EBF9F2]'
-      : text === 'pending'
-        ? 'text-[#F5A122] bg-[#FFF0D2]'
+      : text === 'DELETED'
+        ? 'text-[#A1A1A1] bg-[#EDEDED]'
         : 'text-[#FF2636] bg-[#FFE8E8]';
   return (
     <>
