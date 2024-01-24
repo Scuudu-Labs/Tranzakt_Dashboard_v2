@@ -4,7 +4,8 @@ const initialState: ISearch = {
   search: {
     status: '',
     sort_by: '',
-    is_deleted: false,
+    kyc_or_kyb_status: null,
+    role: 'USER',
   },
 };
 

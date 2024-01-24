@@ -14,8 +14,9 @@ interface AdminSlice {
 
 interface IQuerySearch {
   status: string | null;
+  role: string | null;
   sort_by: string | null;
-  is_deleted: boolean | null;
+  kyc_or_kyb_status: boolean | null;
 }
 
 interface ISearch {

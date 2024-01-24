@@ -13,6 +13,7 @@ interface IUser {
   gender: string;
   kyc_status: boolean;
   completed_kyc: boolean;
+  completed_kyb: BlobEvent;
   phone_number: string;
   txn: ITxnData;
   is_deleted: boolean;
