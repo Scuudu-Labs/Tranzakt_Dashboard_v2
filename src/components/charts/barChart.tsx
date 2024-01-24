@@ -36,11 +36,13 @@ const BarCharts = ({ filterType }: { filterType: string }) => {
   const barData = useMemo(() => {
     if (chartData && chartData.data) {
       const initialObject = chartData?.data;
+      console.log(Object.entries(initialObject).flat(2));
       // console.log(initialObject[key])
-      const resultData = Object.values(initialObject).map((item, key) => {
-        console.log(item, key);
-      });
-      console.log(resultData);
+      // const resultData = Object.values(initialObject).map((item, key) => {
+      //   console.log(item, key);
+      // });
+      // console.log(resultData);
+
       // const resultArray = Object.keys(initialObject).reduce((acc:any, key:string) => {
       // console.log(initialObject[key], 'keet')
       // const arrayOfObjects = initialObject[key].map((item: IData) => ({ [key]: item }));
@@ -50,6 +52,7 @@ const BarCharts = ({ filterType }: { filterType: string }) => {
     }
     return [];
   }, [chartData?.data]);
+
   console.log(barData, 'useMemoe');
   const data = [
     {
@@ -67,8 +70,8 @@ const BarCharts = ({ filterType }: { filterType: string }) => {
     {
       name: 'Tues',
       'Transaction fee': 0,
-      'Withdrawal fee': 4,
       'Bill payment': 0,
+      'Withdrawal fee': 4,
     },
     {
       name: 'Wed',
