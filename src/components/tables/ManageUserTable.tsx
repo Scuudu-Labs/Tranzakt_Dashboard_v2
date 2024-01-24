@@ -22,16 +22,20 @@ export default function ManagerUserTable({
   searchValue: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const initialFilter = {
+    accountStatus: false,
+    sort: false,
+    showFilter: false,
+  };
+  const [filter, setFilter] = useState(initialFilter);
+
   const filterRef = useRef<HTMLDivElement>(null);
   const accountRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
   const { search } = useAppSelector((state) => state.query);
-  const [showFilter, setShowFilter] = useState(false);
-  const [accountFilter, setAccountFilter] = useState(false);
   const debouncedValue = useDebounce(searchValue, 500);
   const [pageSize, setPageSize] = useState(10);
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState(false);
   const queryData: IQueryString = {
     page: page,
     limit: pageSize,
@@ -40,9 +44,16 @@ export default function ManagerUserTable({
     queryData['sort_by'] = search.sort_by;
   }
 
+  if (search.role !== null) {
+    queryData['role'] = search.role;
+  }
+
   if (search.status !== null) {
-    console.log(search.status);
     queryData['status'] = search.status;
+  }
+
+  if (search.kyc_or_kyb_status !== null) {
+    queryData['kyc_or_kyb_status'] = search.kyc_or_kyb_status;
   }
 
   if (search.search_txt !== null) {
@@ -61,6 +72,8 @@ export default function ManagerUserTable({
           date: user.date,
           index: user.user_id,
           kyc_complete: user.completed_kyc,
+          kyc_or_kyb_complete:
+            search.role === 'USER' ? user.completed_kyc : user.completed_kyb,
           completed_kyc_at: user.completed_kyc_at,
         };
       }) ?? []
@@ -70,12 +83,8 @@ export default function ManagerUserTable({
     if (filterRef.current?.contains(e.target as Node)) return;
     if (sortRef.current?.contains(e.target as Node)) return;
     if (accountRef.current?.contains(e.target as Node)) return;
-
-    setSort(false);
-    setShowFilter(false);
-    setAccountFilter(false);
+    setFilter(initialFilter);
   };
-  console.log(dataSource);
   useEffect(() => {
     window.addEventListener('mousedown', clickOutside);
     return () => window.removeEventListener('mousedown', clickOutside);
@@ -104,18 +113,18 @@ export default function ManagerUserTable({
         return (
           <div
             className="flex items-center cursor-pointer"
-            onClick={() => setAccountFilter(true)}
+            onClick={() => setFilter((prev) => ({ ...prev, showFilter: true }))}
           >
-            <span>KYC Status</span>
+            <span>{search.role === 'USER' ? 'KYC Status' : 'KYB Status'}</span>
             <RiArrowDropDownLine size={20} className="text-gray-800" />
           </div>
         );
       },
-      dataIndex: 'kyc_complete',
-      key: 'status',
-      render: (text: boolean) => (
-        <KYCStatusTag id={text} text={text ? 'Completed' : 'Pending'} />
-      ),
+      dataIndex: 'kyc_or_kyb_complete',
+      key: 'kyc_or_kyb_complete',
+      render: (text: boolean) => {
+        return <KYCStatusTag id={text} text={text ? 'Completed' : 'Pending'} />;
+      },
     },
 
     {
@@ -131,7 +140,9 @@ export default function ManagerUserTable({
         return (
           <div
             className="flex items-center cursor-pointer"
-            onClick={() => setShowFilter(true)}
+            onClick={() =>
+              setFilter((prev) => ({ ...prev, accountStatus: true }))
+            }
           >
             <span>Account Sta...</span>
             <RiArrowDropDownLine size={20} className="text-gray-800" />
@@ -171,14 +182,24 @@ export default function ManagerUserTable({
 
   return (
     <div className="w-full bg-white mb-6 rounded-[16px] rounded-tl-none p-6  border border-[#EAEAEA] min-h-fit">
-      {sort && <SortModal reference={sortRef} close={() => setSort(false)} />}
-      {showFilter && (
-        <FilterModal reference={filterRef} close={() => setShowFilter(false)} />
+      {filter.sort && (
+        <SortModal
+          reference={sortRef}
+          close={() => setFilter((prev) => ({ ...prev, sort: false }))}
+        />
       )}
-      {accountFilter && (
+      {filter.accountStatus && (
+        <FilterModal
+          reference={filterRef}
+          close={() => setFilter((prev) => ({ ...prev, accountStatus: false }))}
+        />
+      )}
+      {filter.showFilter && (
         <FilterAccountModal
           reference={accountRef}
-          close={() => setAccountFilter(false)}
+          close={() => () =>
+            setFilter((prev) => ({ ...prev, showFilter: false }))
+          }
         />
       )}
       <div className="flex justify-between mb-7 items-center">
@@ -188,7 +209,7 @@ export default function ManagerUserTable({
         <div className="flex items-center">
           <div
             className="flex justify-center border items-center w-[48px] h-[44px] rounded-[6px] border-[#EAEAEA]  text-xs cursor-pointer"
-            onClick={() => setSort(!sort)}
+            onClick={() => setFilter((prev) => ({ ...prev, sort: true }))}
           >
             <BiSortAlt2 size={16} />
           </div>

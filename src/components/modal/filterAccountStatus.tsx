@@ -11,8 +11,9 @@ const FilterAccountModal = ({
 }) => {
   const dispatch = useAppDispatch();
   const { search } = useAppSelector((state) => state.query);
-  const setChange = (value: string) => {
-    dispatch(setSearch({ ...search, status: value }));
+  const setChange = (value: boolean | null) => {
+    dispatch(setSearch({ ...search, kyc_or_kyb_status: value }));
+    close();
   };
 
   return (
@@ -24,11 +25,22 @@ const FilterAccountModal = ({
         <input
           type="radio"
           onChange={() => {
-            setChange('ACTIVE');
-            close();
+            setChange(null);
           }}
-          checked={search.status === 'ACTIVE'}
-          value={search.status}
+          checked={search.kyc_or_kyb_status === null}
+          value={search.kyc_or_kyb_status}
+          className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
+        />
+        <span className="font-montserrat text-[#111111] ml-2">All</span>
+      </div>
+      <div className="flex items-center mb-4 cursor-pointer">
+        <input
+          type="radio"
+          onChange={() => {
+            setChange(false);
+          }}
+          checked={search.kyc_or_kyb_status === false}
+          value={search.kyc_or_kyb_status}
           className="w-4 h-4 text-green-600  accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Pending</span>
@@ -37,11 +49,10 @@ const FilterAccountModal = ({
         <input
           type="radio"
           onChange={() => {
-            setChange('DEACTIVATED');
-            close();
+            setChange(true);
           }}
-          value={search.status}
-          checked={search.status === 'DEACTIVATED'}
+          value={search.kyc_or_kyb_status}
+          checked={search.kyc_or_kyb_status === true}
           className="w-4 h-4 text-green-600 accent-green-600 focus:outline-none  dark:bg-gray-600 dark:border-gray-500"
         />
         <span className="font-montserrat text-[#111111] ml-2">Completed</span>
