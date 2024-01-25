@@ -16,7 +16,7 @@ type IProps = {
 };
 
 const CampaignTable = ({ campaigns, isLoading, open }: IProps) => {
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [, setPage] = useState(1);
   const [id, setId] = useState('');
   const [action, setAction] = useState({
