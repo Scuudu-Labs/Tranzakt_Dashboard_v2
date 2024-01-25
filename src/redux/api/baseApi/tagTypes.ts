@@ -6,4 +6,5 @@ export const tagTypes = {
   GraphData: 'GraphData',
   Faqs: 'Faqs',
   TXFlows: 'TXFlows',
+  BarChat: 'BarChat',
 };

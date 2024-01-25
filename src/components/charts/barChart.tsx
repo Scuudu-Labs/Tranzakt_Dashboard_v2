@@ -8,6 +8,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { useGetBarChatDataQuery } from '../../redux/api/balanceOverview';
+import { useMemo } from 'react';
+import ButtonLoader from '../button/buttonLoader';
 
 const ContentLegend = () => (
   <div className="flex items-end top-0 left-[130px] absolute ">
@@ -28,51 +31,17 @@ const ContentLegend = () => (
   </div>
 );
 
-const BarCharts = () => {
-  const data = [
-    {
-      name: 'Sun',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
-    },
-    {
-      name: 'Mon',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
-    },
-    {
-      name: 'Tues',
-      'Transaction fee': 0,
-      'Withdrawal fee': 0,
-      'Bill payment': 0,
-    },
-    {
-      name: 'Wed',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
-    },
-    {
-      name: 'Thurs',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
-    },
-    {
-      name: 'Fri',
-      'Transaction fee': 0,
-      'Bill payment': 0,
-      'Withdrawal fee': 0,
-    },
-    {
-      name: 'Sat',
-      'Transaction fee': 0,
-      'Withdrawal fee': 0,
-      'Bill payment': 0,
-    },
-  ];
+const BarCharts = ({ filterType }: { filterType: string }) => {
+  const { data: chartData, isLoading } = useGetBarChatDataQuery(filterType);
+  const barData = useMemo(() => {
+    const value = chartData?.data?.reduce((acc, item) => {
+      const sum =
+        item.bill_payment + item.transaction_fee + item.withdrawal_fee;
+      return (acc += sum);
+    }, 0);
+    return value;
+  }, [chartData?.data]);
+
   return (
     <div className="bg-white  flex flex-col  w-full  rounded-[16px] py-4 ">
       <div className="px-4 mb-4">
@@ -80,33 +49,39 @@ const BarCharts = () => {
           TOTAL FEES
         </p>
         <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">
-          ₦0
+          ₦{barData}
         </h2>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={800}
-          height={900}
-          data={data}
-          margin={{
-            right: 16,
-            left: 16,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend
-            iconType="circle"
-            wrapperStyle={{ top: -60, color: '#000' }}
-            content={<ContentLegend />}
-          />
-          <Bar dataKey="Transaction fee" fill="#32C87D" />
-          <Bar dataKey="Withdrawal fee" fill="#268EE9" />
-          <Bar dataKey="Bill payment" fill="#B7FFD5" />
-        </BarChart>
-      </ResponsiveContainer>
+      {isLoading ? (
+        <div className="h-[200px] flex items-center justify-center w-[800px]">
+          <ButtonLoader />
+        </div>
+      ) : (
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            width={850}
+            height={900}
+            data={chartData?.data as IBarChart[]}
+            margin={{
+              right: 16,
+              left: 16,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="legend" />
+            <YAxis />
+            <Tooltip />
+            <Legend
+              iconType="circle"
+              wrapperStyle={{ top: -60, color: '#000' }}
+              content={<ContentLegend />}
+            />
+            <Bar dataKey="transaction_fee" fill="#32C87D" />
+            <Bar dataKey="withdrawal_fee" fill="#268EE9" />
+            <Bar dataKey="bill_payment" fill="#B7FFD5" />
+          </BarChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };
