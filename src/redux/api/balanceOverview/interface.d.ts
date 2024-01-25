@@ -63,10 +63,10 @@ interface IData {
 }
 
 interface IBarChart {
-  // bill_payment: IData[],
-  // transaction_fees: IData[],
-  // withdrawal_fees: IData[]
-  [key: string]: IData[];
+  bill_payment: number;
+  transaction_fee: number;
+  withdrawal_fee: number;
+  legend: string;
 }
 
 interface ITxFlows {

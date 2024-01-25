@@ -41,6 +41,12 @@ export default function PieChartCard(props: {
         <div className="h-[120px] w-full flex items-center justify-center">
           <ButtonLoader />
         </div>
+      ) : completed_data.value === 0 && pending_data.value === 0 ? (
+        <div className="h-full w-full flex items-center justify-center">
+          <span className="text-gray-400 font-semibold tracking-widest">
+            NO DATA
+          </span>
+        </div>
       ) : (
         <PieChart width={160} height={160}>
           <Pie

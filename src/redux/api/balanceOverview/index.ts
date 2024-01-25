@@ -57,7 +57,7 @@ export const balanceApi = baseApi.injectEndpoints({
         { type: tagTypes.TXFlows, query },
       ],
     }),
-    getBarChatData: builder.query<ISuccessResponse<IBarChart>, string>({
+    getBarChatData: builder.query<ISuccessResponse<IBarChart[]>, string>({
       query: (query) => {
         return {
           url: `/admin/fee-statistics?period=${query}`,
