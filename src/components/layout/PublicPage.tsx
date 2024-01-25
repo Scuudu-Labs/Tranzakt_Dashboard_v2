@@ -8,9 +8,9 @@ const PublicPage = ({
   children: React.ReactNode;
   link?: string;
 }) => {
-  const { access_token } = useAppSelector((state) => state.auth);
+  const { access_token, user } = useAppSelector((state) => state.auth);
   const location = useLocation();
-  if (access_token) {
+  if (access_token && user.role === ('SUPER_ADMIN' || 'ADMIN')) {
     return <Navigate to={`/${link}`} state={{ from: location }} replace />;
   }
   return children;
