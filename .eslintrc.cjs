@@ -21,6 +21,7 @@ module.exports = {
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
     semi: 0,
+    "@typescript-eslint/no-explicit-any": "off"
   },
   settings: {
     react: {

@@ -55,3 +55,9 @@ interface IUserQuery extends Partial<IQuerySearch> {
 interface IQueryString {
   [key: string]: string | number | boolean;
 }
+
+interface ISearches {
+  start_date: string | null;
+  end_date: string | null;
+  period: string | null;
+}

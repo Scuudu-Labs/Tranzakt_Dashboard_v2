@@ -50,3 +50,20 @@ export const formatRangeDate = (date: Record<string, number>) => {
   const day = date.$D > 9 ? date.$D : `0${date.$D}`;
   return `${year}-${month}-${day}`;
 };
+
+export const formatDates = (timestamp: string) => {
+  const date = new Date(timestamp);
+  const hrs =
+    date.getHours() > 12 ? `${date.getHours() - 12}` : `${date.getHours()}`;
+  const timing = date.getHours() >= 12 ? 'pm' : 'am';
+  const formattedTimestamp = `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${date
+    .getDate()
+    .toString()
+    .padStart(2, '0')} | ${hrs.padStart(2, '0')}:${date
+    .getMinutes()
+    .toString()
+    .padStart(2, '0')}${timing}`;
+  return formattedTimestamp;
+};
