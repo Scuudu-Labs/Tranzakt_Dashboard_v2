@@ -4,17 +4,21 @@ import { tagTypes } from '../baseApi/tagTypes';
 
 export const balanceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getBalance: builder.query<ISuccessResponse<IBalanceOverView>, string>({
-      query: (query) => {
-        return {
-          url: `/admin/users-balances?period=${query}`,
-          method: 'GET',
-        };
-      },
-      providesTags: (_result, _err, query) => [
-        { type: tagTypes.Balance, query },
-      ],
-    }),
+    getBalance: builder.query<ISuccessResponse<IBalanceOverView>, IQueryString>(
+      {
+        query: (query) => {
+          const params = generateQueryString(query);
+
+          return {
+            url: `/admin/users-balances?${params}`,
+            method: 'GET',
+          };
+        },
+        providesTags: (_result, _err, query) => [
+          { type: tagTypes.Balance, query },
+        ],
+      }
+    ),
     getStatistics: builder.query<ISuccessResponse<IStats>, void>({
       query: () => {
         return {
@@ -46,10 +50,14 @@ export const balanceApi = baseApi.injectEndpoints({
         { type: tagTypes.GraphData, query },
       ],
     }),
-    getTransactionFlows: builder.query<ISuccessResponse<ITxFlows>, string>({
+    getTransactionFlows: builder.query<
+      ISuccessResponse<ITxFlows>,
+      IQueryString
+    >({
       query: (query) => {
+        const params = generateQueryString(query);
         return {
-          url: `/admin/transaction-flows/?period=${query}`,
+          url: `/admin/transaction-flows/?${params}`,
           method: 'GET',
         };
       },
@@ -57,10 +65,12 @@ export const balanceApi = baseApi.injectEndpoints({
         { type: tagTypes.TXFlows, query },
       ],
     }),
-    getBarChatData: builder.query<ISuccessResponse<IBarChart[]>, string>({
+    getBarChatData: builder.query<ISuccessResponse<IBarChart[]>, IQueryString>({
       query: (query) => {
+        const params = generateQueryString(query);
+
         return {
-          url: `/admin/fee-statistics?period=${query}`,
+          url: `/admin/fee-statistics?${params}`,
           method: 'GET',
         };
       },

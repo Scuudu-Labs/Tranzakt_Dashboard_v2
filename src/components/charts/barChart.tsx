@@ -31,8 +31,8 @@ const ContentLegend = () => (
   </div>
 );
 
-const BarCharts = ({ filterType }: { filterType: string }) => {
-  const { data: chartData, isLoading } = useGetBarChatDataQuery(filterType);
+const BarCharts = ({ query }: { query: IQueryString }) => {
+  const { data: chartData, isLoading } = useGetBarChatDataQuery(query);
   const barData = useMemo(() => {
     const value = chartData?.data?.reduce((acc, item) => {
       const sum =

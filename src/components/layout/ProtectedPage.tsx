@@ -4,7 +4,6 @@ import { useAppSelector } from '../../redux/hooks';
 const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
   const { access_token, user } = useAppSelector((state) => state.auth);
   const location = useLocation();
-  console.log(user);
   if (!access_token || user.role !== ('SUPER_ADMIN' || 'ADMIN')) {
     return <Navigate to={'/'} state={{ from: location }} replace />;
   }

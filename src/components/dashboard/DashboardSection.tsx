@@ -10,10 +10,14 @@ import {
   useGetTransactionFlowsQuery,
 } from '../../redux/api/balanceOverview';
 import { useMemo } from 'react';
-import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
+import {
+  amountFormatter,
+  currencyFormatter,
+  formatText,
+} from '../../lib/text_formater';
 
 type IProp = {
-  filterType: string;
+  query: IQueryString;
 };
 
 enum Direction {
@@ -21,13 +25,12 @@ enum Direction {
   DOWN = 'down',
 }
 
-export default function DashboardSection({ filterType }: IProp) {
-  const { data, isLoading } = useGetBalanceQuery(filterType);
-  const { data: graphData, isLoading: fetching } = useGetGraphDataQuery({
-    period: filterType,
-  });
+export default function DashboardSection({ query }: IProp) {
+  const { data, isLoading } = useGetBalanceQuery(query);
+  const { data: graphData, isLoading: fetching } = useGetGraphDataQuery(query);
+
   const { data: txflows, isLoading: getting } =
-    useGetTransactionFlowsQuery(filterType);
+    useGetTransactionFlowsQuery(query);
   const { data: stats, isLoading: loading } = useGetStatisticsQuery();
   const statsData = useMemo(() => {
     return {
@@ -61,7 +64,13 @@ export default function DashboardSection({ filterType }: IProp) {
                 data?.data?.users?.balance_percentage_change_direction ===
                 Direction.DOWN
               }
-              filterType={filterType}
+              filterType={formatText(
+                (query.start_date as string)
+                  ? `${query.start_date as string} / ${
+                      query.end_date as string
+                    }`
+                  : (query.period as string) ?? ''
+              )}
             />
 
             <AmountInfoCard
@@ -71,7 +80,13 @@ export default function DashboardSection({ filterType }: IProp) {
               amount={currencyFormatter(
                 amountFormatter(data?.data?.customers?.balance ?? 0)
               )}
-              filterType={filterType}
+              filterType={formatText(
+                (query.start_date as string)
+                  ? `${query.start_date as string} / ${
+                      query.end_date as string
+                    }`
+                  : (query.period as string) ?? ''
+              )}
               isReduction={
                 data?.data?.customers?.balance_percentage_change_direction ===
                 Direction.DOWN
@@ -89,7 +104,13 @@ export default function DashboardSection({ filterType }: IProp) {
                 data?.data?.businesses?.balance_percentage_change_direction ===
                 Direction.DOWN
               }
-              filterType={filterType}
+              filterType={formatText(
+                (query.start_date as string)
+                  ? `${query.start_date as string} / ${
+                      query.end_date as string
+                    }`
+                  : (query.period as string) ?? ''
+              )}
             />
           </div>
           <AreaChartCard
@@ -112,7 +133,11 @@ export default function DashboardSection({ filterType }: IProp) {
               txflows?.data?.total_in_and_out_flows?.out_flow
                 ?.percentage_change_direction === Direction.DOWN
             }
-            filterType={filterType}
+            filterType={formatText(
+              (query.start_date as string)
+                ? `${query.start_date as string} / ${query.end_date as string}`
+                : (query.period as string) ?? ''
+            )}
             change={
               txflows?.data?.total_in_and_out_flows?.out_flow
                 ?.percentage_change ?? 0
@@ -131,7 +156,11 @@ export default function DashboardSection({ filterType }: IProp) {
               txflows?.data?.total_in_and_out_flows?.in_flow
                 ?.percentage_change_direction === Direction.DOWN
             }
-            filterType={filterType}
+            filterType={formatText(
+              (query.start_date as string)
+                ? `${query.start_date as string} / ${query.end_date as string}`
+                : (query.period as string) ?? ''
+            )}
             change={
               txflows?.data?.total_in_and_out_flows?.in_flow
                 ?.percentage_change ?? 0
@@ -169,7 +198,7 @@ export default function DashboardSection({ filterType }: IProp) {
             pending: statsData.kyb.pending ?? 0,
           }}
         />
-        <BarCharts filterType={filterType} />
+        <BarCharts query={query} />
       </div>
     </div>
   );

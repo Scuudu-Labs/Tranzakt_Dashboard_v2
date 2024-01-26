@@ -8,14 +8,29 @@ import { formatText } from '../../lib/text_formater';
 
 export default function DashboardPage() {
   const [showModal, setShowModal] = useState(false);
-  const [filterType, setFilterType] = useState('today');
+  const [dateRange, setDateRange] = useState(false);
+  const [filterType, setFilterType] = useState<ISearches>({
+    period: 'today',
+    start_date: null,
+    end_date: null,
+  });
   const filterRef = useRef<HTMLDivElement>(null);
-  const open = () => setShowModal(true);
+  const toggle = () => setShowModal(!showModal);
   const close = () => setShowModal(false);
   const clickOutside = (e: MouseEvent) => {
     if (filterRef.current?.contains(e.target as Node)) return;
-    setShowModal(false);
+    // setShowModal(false);
   };
+
+  const queryData: IQueryString = {};
+
+  if (filterType.period) {
+    queryData['period'] = filterType.period;
+  }
+  if (filterType.start_date && filterType.end_date) {
+    queryData['start_date'] = filterType.start_date;
+    queryData['end_date'] = filterType.end_date;
+  }
 
   useEffect(() => {
     window.addEventListener('mousedown', clickOutside);
@@ -27,6 +42,8 @@ export default function DashboardPage() {
         <DateFilterModal
           close={close}
           reference={filterRef}
+          dateRange={dateRange}
+          setDateRange={setDateRange}
           setType={setFilterType}
           type={filterType}
         />
@@ -37,16 +54,22 @@ export default function DashboardPage() {
         </h2>
         <button
           className="bg-white rounded-[8px] flex gap-x-2 px-5 h-[44px]  justify-center py-2 min-w-[160px] items-center border-2 border-[#EAEAEA]"
-          onClick={open}
+          onClick={toggle}
         >
           <div className="text-xl">
             <IconWrap src={DateIcon} />
           </div>
-          <div className="capitalize px-1">{formatText(filterType)}</div>
+          <div className="capitalize px-1">
+            {formatText(
+              filterType.start_date
+                ? `${filterType.start_date} / ${filterType.end_date}`
+                : filterType.period ?? ''
+            )}
+          </div>
           <IconWrap src={DropIcon} />
         </button>
       </div>
-      <DashboardSection filterType={filterType} />
+      <DashboardSection query={queryData} />
     </MainContainer>
   );
 }
