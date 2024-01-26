@@ -19,7 +19,7 @@ const FilterModal = ({
   return (
     <div
       ref={reference}
-      className="w-[230px] h-[170px] flex flex-col  absolute z-[30] right-6 top-[250px] shadow-md justify-center bg-white rounded-[8px] p-[16px]"
+      className="w-[230px] h-[170px] flex flex-col  absolute z-[30] right-6 top-[304px] shadow-md justify-center bg-white rounded-[8px] p-[16px]"
     >
       <div className="flex items-center mb-4  cursor-pointer">
         <input
