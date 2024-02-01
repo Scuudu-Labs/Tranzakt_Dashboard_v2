@@ -11,6 +11,7 @@ import {
 import { useGetBarChatDataQuery } from '../../redux/api/balanceOverview';
 import { useMemo } from 'react';
 import ButtonLoader from '../button/buttonLoader';
+import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 
 const ContentLegend = () => (
   <div className="flex items-end top-0 left-[130px] absolute ">
@@ -39,7 +40,17 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
         item.bill_payment + item.transaction_fee + item.withdrawal_fee;
       return (acc += sum);
     }, 0);
-    return value;
+    return currencyFormatter(amountFormatter(value ?? 0));
+  }, [chartData?.data]);
+
+  const transformedData = useMemo(() => {
+    const data = chartData?.data?.map((result) => ({
+      ...result,
+      bill_payment: amountFormatter(result.bill_payment),
+      transaction_fee: amountFormatter(result.transaction_fee),
+      withdrawal_fee: amountFormatter(result.withdrawal_fee),
+    }));
+    return data;
   }, [chartData?.data]);
 
   return (
@@ -49,7 +60,7 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
           TOTAL FEES
         </p>
         <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">
-          ₦{barData}
+          {barData}
         </h2>
       </div>
       {isLoading ? (
@@ -61,7 +72,7 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
           <BarChart
             width={850}
             height={900}
-            data={chartData?.data as IBarChart[]}
+            data={transformedData as IBarChart[]}
             margin={{
               right: 16,
               left: 16,
