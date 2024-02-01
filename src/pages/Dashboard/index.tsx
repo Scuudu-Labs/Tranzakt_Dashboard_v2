@@ -14,12 +14,12 @@ export default function DashboardPage() {
     start_date: null,
     end_date: null,
   });
+
   const filterRef = useRef<HTMLDivElement>(null);
   const toggle = () => setShowModal(!showModal);
   const close = () => setShowModal(false);
   const clickOutside = (e: MouseEvent) => {
     if (filterRef.current?.contains(e.target as Node)) return;
-    // setShowModal(false);
   };
 
   const queryData: IQueryString = {};

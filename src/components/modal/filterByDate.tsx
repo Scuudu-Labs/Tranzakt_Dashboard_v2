@@ -3,7 +3,7 @@ import { formatText } from '../../lib/text_formater';
 import IconWrap from '../ui/svgWrapper';
 import { DateIcon } from '../../assets';
 import { DatePicker } from 'antd';
-import { dateFilterFormat } from '../../lib/dateFormater';
+import { formatRangeDate } from '../../lib/dateFormater';
 
 const DateFilterModal = ({
   reference,
@@ -22,12 +22,11 @@ const DateFilterModal = ({
 }) => {
   const handleDateChange = (date: any) => {
     setType({
-      period: null,
-      start_date: dateFilterFormat(date[0]?.$y, date[0]?.$M, date[0]?.$D),
-      end_date: dateFilterFormat(date[1]?.$y, date[1]?.$M, date[1]?.$D),
+      period: 'custom_date',
+      start_date: formatRangeDate(date[0]),
+      end_date: formatRangeDate(date[1]),
     });
   };
-
   const dates = ['today', 'yesterday', 'last_week', 'last_month', 'last_year'];
   const closeAction = (date: string) => {
     setType((prev) => {

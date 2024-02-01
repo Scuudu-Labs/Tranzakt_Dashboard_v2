@@ -32,6 +32,8 @@ export const dateFilterFormat = (year: number, month: number, day: number) => {
   let newMonth, newDay;
   if (month && month + 1 < 10) {
     newMonth = `0${month + 1}`;
+  } else if (month && month === 0) {
+    newMonth = `0${month + 1}`;
   } else {
     newMonth = month;
   }
@@ -40,14 +42,14 @@ export const dateFilterFormat = (year: number, month: number, day: number) => {
   } else {
     newDay = day;
   }
-
   return `${year}-${newMonth}-${newDay}`;
 };
 
 export const formatRangeDate = (date: Record<string, number>) => {
   const year = date.$y;
-  const month = date.$M + 1 > 9 ? +date.$M + 1 : `0${+date.$M + 1}`;
+  const month = date.$M + 1 > 9 ? date.$M + 1 : `0${date.$M + 1}`;
   const day = date.$D > 9 ? date.$D : `0${date.$D}`;
+
   return `${year}-${month}-${day}`;
 };
 
