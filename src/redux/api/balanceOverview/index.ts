@@ -1,4 +1,5 @@
 import { generateQueryString } from '../../../lib/generateQueryKey';
+import { amountFormatter } from '../../../lib/text_formater';
 import { baseApi } from '../baseApi';
 import { tagTypes } from '../baseApi/tagTypes';
 
@@ -40,7 +41,7 @@ export const balanceApi = baseApi.injectEndpoints({
         const formatedData = response?.data?.map((data) => {
           return {
             label: data.legend,
-            amount: data.total_amount,
+            amount: amountFormatter(data.total_amount),
             valueLabel: 'amount',
           };
         });
