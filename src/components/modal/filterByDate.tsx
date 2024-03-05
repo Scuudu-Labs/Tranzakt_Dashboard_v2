@@ -27,7 +27,13 @@ const DateFilterModal = ({
       end_date: formatRangeDate(date[1]),
     });
   };
-  const dates = ['today', 'yesterday', 'last_week', 'last_month', 'last_year'];
+  const dates = [
+    'today',
+    'yesterday',
+    'last_week',
+    'last 30 days',
+    'last_year',
+  ];
   const closeAction = (date: string) => {
     setType((prev) => {
       return {

@@ -113,7 +113,7 @@ export default function ContentSection() {
             onClick={openModalAction}
           >
             <IconWrap src={plusIcon} />
-            Add Faq
+            Add FAQ
           </button>
         )}
       </div>{' '}
