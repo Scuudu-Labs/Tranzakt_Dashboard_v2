@@ -46,9 +46,9 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
   const transformedData = useMemo(() => {
     const data = chartData?.data?.map((result) => ({
       ...result,
-      bill_payment: amountFormatter(result.bill_payment),
-      transaction_fee: amountFormatter(result.transaction_fee),
-      withdrawal_fee: amountFormatter(result.withdrawal_fee),
+      'bill payment': amountFormatter(result.bill_payment),
+      'transaction fee': amountFormatter(result.transaction_fee),
+      'withdrawal fee': amountFormatter(result.withdrawal_fee),
     }));
     return data;
   }, [chartData?.data]);
@@ -87,9 +87,9 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
               wrapperStyle={{ top: -60, color: '#000' }}
               content={<ContentLegend />}
             />
-            <Bar dataKey="transaction_fee" fill="#32C87D" />
-            <Bar dataKey="withdrawal_fee" fill="#268EE9" />
-            <Bar dataKey="bill_payment" fill="#B7FFD5" />
+            <Bar dataKey="transaction fee" fill="#32C87D" />
+            <Bar dataKey="withdrawal fee" fill="#268EE9" />
+            <Bar dataKey="bill payment" fill="#B7FFD5" />
           </BarChart>
         </ResponsiveContainer>
       )}

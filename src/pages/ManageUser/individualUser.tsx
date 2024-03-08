@@ -13,6 +13,7 @@ const EachUser = () => {
   const navigate = useNavigate();
   const { data: user, isLoading } = useGetAUserQuery(id as string);
   const [action, setAction] = useState('txt');
+  console.log(user, 'users');
   return (
     <MainContainer>
       <div className="py-3 flex items-center cursor-pointer">
@@ -30,7 +31,11 @@ const EachUser = () => {
         <div className="flex items-center  justify-between w-[82%] h-[120px] py-[12px] px-[28px]  mt-2">
           <div className="flex items-center">
             <img
-              src="/profile.svg"
+              src={
+                user?.data?.image
+                  ? `data:image/png;base64,${user?.data?.image}`
+                  : ''
+              }
               alt="my_profile"
               className="w-[65px] h-[65px] rounded-[100px] mr-4"
             />
@@ -50,13 +55,21 @@ const EachUser = () => {
           </div>
           <div className="flex items-center flex-col gap-x-3 ">
             <span className="text-[#3F3F3F] text-[14px] mb-2 font-montserrat">
-              KYC Status
+              {user?.data?.role === 'USER' ? 'KYC STATUS' : 'KYB STATUS'}
             </span>
-            <StatusTag
-              isLoading={isLoading}
-              text={user?.data?.kyc_status ? 'completed' : 'pending'}
-              id={user?.data?.kyc_status ? 'ACTIVE' : 'pending'}
-            />
+            {user?.data?.role === 'USER' ? (
+              <StatusTag
+                isLoading={isLoading}
+                text={user?.data?.kyc_status ? 'completed' : 'pending'}
+                id={user?.data?.kyc_status ? 'ACTIVE' : 'pending'}
+              />
+            ) : (
+              <StatusTag
+                isLoading={isLoading}
+                text={user?.data?.completed_kyb ? 'completed' : 'pending'}
+                id={user?.data?.completed_kyb ? 'ACTIVE' : 'pending'}
+              />
+            )}
           </div>
 
           <div className="flex items-center flex-col  gap-x-3">
