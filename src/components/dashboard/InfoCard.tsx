@@ -1,4 +1,3 @@
-import { formatText } from '../../lib/text_formater';
 import { AmountLoader } from '../ui/loader';
 
 export default function AmountInfoCard(props: {
@@ -9,6 +8,13 @@ export default function AmountInfoCard(props: {
   filterType: string;
   isReduction: boolean;
 }) {
+  const filterObject: { [k: string]: string } = {
+    today: 'preious day',
+    yesterday: 'previous day',
+    'last week': 'previous week',
+    'last month': 'previous month',
+    'last year': 'previous year',
+  };
   return (
     <div className="w-full h-[107px] flex flex-col rounded-[16px] bg-white border-[1px] p-[16px] border-[#EAEAEA]">
       <p className="text-[#A1A1A1] font-montserrat text-[11px] tracking-[0.3px] font-[500]">
@@ -26,7 +32,7 @@ export default function AmountInfoCard(props: {
           {`${props.isReduction ? '' : '+'} ${props.change}%`}
         </span>
         <span className="text-[#A1A1A1] text-[12px] lowercase font-[400] tracking-[0.3px] ml-2">
-          than {formatText(props.filterType)}
+          than {filterObject[props.filterType]}
         </span>
       </div>
     </div>
