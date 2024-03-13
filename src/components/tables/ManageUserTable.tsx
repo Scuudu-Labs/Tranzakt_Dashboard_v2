@@ -204,7 +204,7 @@ export default function ManagerUserTable({
       )}
       <div className="flex justify-between mb-7 items-center">
         <p className="text-[18px] font-montserrat pb-3 font-semibold">
-          KYC Management
+          {search.role === 'USER' ? 'KYC Management' : 'KYB Management '}
         </p>
         <div className="flex items-center">
           <div
