@@ -55,6 +55,7 @@ export default function DashboardSection({ query }: IProp) {
           <div className="flex gap-x-3 w-full">
             <AmountInfoCard
               label="TOTAL BALANCE"
+              info="Money from all users, with percentage indicating balance increase based on selected filters"
               amount={currencyFormatter(
                 amountFormatter(data?.data?.users?.balance ?? 0)
               )}
@@ -76,6 +77,7 @@ export default function DashboardSection({ query }: IProp) {
             <AmountInfoCard
               label="CUSTOMERS BALANCE"
               loading={isLoading}
+              info="Total money from all customers with percentage indicating balance increase based on selected filters"
               change={data?.data?.customers?.balance_percentage_change ?? 0}
               amount={currencyFormatter(
                 amountFormatter(data?.data?.customers?.balance ?? 0)
@@ -95,6 +97,7 @@ export default function DashboardSection({ query }: IProp) {
 
             <AmountInfoCard
               label="MERCHANTS BALANCE"
+              info="Total money from all merchants with percentage indicating balance increase based on selected filters"
               loading={isLoading}
               amount={currencyFormatter(
                 amountFormatter(data?.data?.businesses?.balance ?? 0)
@@ -123,6 +126,7 @@ export default function DashboardSection({ query }: IProp) {
           <AmountInfoCard
             label="TOTAL OUTFLOW"
             loading={getting}
+            info="Total amount of money leaving the system from both the customers and merchants"
             amount={currencyFormatter(
               amountFormatter(
                 txflows?.data?.total_in_and_out_flows?.out_flow?.total_amount ??
@@ -146,6 +150,7 @@ export default function DashboardSection({ query }: IProp) {
           <AmountInfoCard
             label="TOTAL INFLOW"
             loading={getting}
+            info="Total amount of money entering the system from both the customers and merchants"
             amount={currencyFormatter(
               amountFormatter(
                 txflows?.data?.total_in_and_out_flows?.in_flow?.total_amount ??
@@ -176,6 +181,7 @@ export default function DashboardSection({ query }: IProp) {
         <PieChartCard
           loading={loading}
           label={'KYC Status'}
+          info="Charges taken from the users when performing a transaction"
           sublabel={(stats?.data && stats?.data?.customer?.totalUsers) ?? 0}
           type="KYC"
           data={{
@@ -189,6 +195,7 @@ export default function DashboardSection({ query }: IProp) {
         <PieChartCard
           loading={loading}
           label={'KYB Status'}
+          info="Users' business account verification. Chart displays completion percentage and pending statuses."
           sublabel={(stats?.data && stats?.data?.business?.totalUsers) ?? 0}
           type="KYB"
           data={{

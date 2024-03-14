@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
 import { AmountLoader } from '../ui/loader';
+import { ReactComponent as InfoSvg } from '../../assets/icons/info.svg';
 
 const TransactionCard = ({
   txFlows,
@@ -10,11 +11,29 @@ const TransactionCard = ({
   loading: boolean;
 }) => {
   const [state, setState] = useState('external');
+  const [hover, setHover] = useState(false);
+
+  const setMouse = () => setHover(true);
+  const unsetMouse = () => setHover(false);
   return (
     <div className="w-full h-full flex flex-col rounded-[16px] bg-white border-[1px] py-[13px] border-[#E3E3E3]">
-      <h2 className="font-montserrat font-semibold tex-[24px] border-b pb-3 border-[#E3E3E3] px-[16px] tracking-[0.5px] py-2">
-        Transactions
-      </h2>
+      <div className="flex relative border-b pb-1 border-[#E3E3E3] items-center">
+        <h2 className="font-montserrat font-semibold tex-[24px]  pl-[16px] tracking-[0.5px] py-2">
+          Transactions
+        </h2>
+        <button className="cursor-pointer p-2 group">
+          <InfoSvg onMouseOver={setMouse} onMouseOut={unsetMouse} />
+        </button>
+        <div
+          className={`absolute top-10 z-50 tooltip w-[270px] left-3 whitespace-normal break-words rounded-lg  bg-[#2AA768] px-4 py-3 font-montserrat text-[12px] font-normal  text-white focus:outline-none ${
+            hover ? 'visible' : 'invisible'
+          }`}
+        >
+          External section displays outflow, while internal section shows inflow
+          breakdown.
+        </div>
+      </div>
+
       <div className="px-[16px] flex items-center gap-x-2 py-[14px]">
         <span
           className={`mr-2 ${
