@@ -1,5 +1,7 @@
 import { PieChart, Pie } from 'recharts';
 import ButtonLoader from '../button/buttonLoader';
+import { ReactComponent as InfoSvg } from '../../assets/icons/info.svg';
+import { useState } from 'react';
 
 interface PieChartData {
   label: string;
@@ -17,6 +19,7 @@ export default function PieChartCard(props: {
   label: string;
   sublabel?: number;
   type: string;
+  info?: string;
   loading: boolean;
 }) {
   const completed_data: PieChartData = {
@@ -25,6 +28,9 @@ export default function PieChartCard(props: {
     fill: '#32C87D',
   };
 
+  const [hover, setHover] = useState(false);
+  const setMouse = () => setHover(true);
+  const unsetMouse = () => setHover(false);
   const pending_data: PieChartData = {
     label: `${props.data.percentPending}% pending ${props.type}`,
     value: props.data.pending,
@@ -33,7 +39,21 @@ export default function PieChartCard(props: {
   return (
     <div className="max-w-[266px] w-full border border-[#EAEAEA] rounded-[16px] px-[18px] min-h-[300px] bg-white  flex flex-col items-center py-5">
       <div className="flex flex-col w-full">
-        <p className="font-[600]">{props.label}</p>
+        <div className="flex relative items-center">
+          <p className="text-[#3F3F3F] -ml-1 font-montserrat text-[16px] tracking-[0.3px] font-[600]">
+            {props.label}
+          </p>
+          <button className="cursor-pointer p-2 group">
+            <InfoSvg onMouseOver={setMouse} onMouseOut={unsetMouse} />
+          </button>
+          <div
+            className={`absolute top-6 z-50 tooltip w-[220px] left-3 whitespace-normal break-words rounded-lg  bg-[#2AA768] px-4 py-3 font-montserrat text-[12px] font-normal  text-white focus:outline-none ${
+              hover ? 'visible' : 'invisible'
+            }`}
+          >
+            {props.info}
+          </div>
+        </div>
         <p className="text-xs text-[#A1A1A1]">{props.sublabel} users</p>
       </div>
 

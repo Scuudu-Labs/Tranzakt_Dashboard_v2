@@ -9,9 +9,10 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { useGetBarChatDataQuery } from '../../redux/api/balanceOverview';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import ButtonLoader from '../button/buttonLoader';
 import { amountFormatter, currencyFormatter } from '../../lib/text_formater';
+import { ReactComponent as InfoSvg } from '../../assets/icons/info.svg';
 
 const ContentLegend = () => (
   <div className="flex items-end top-0 left-[130px] absolute ">
@@ -53,12 +54,29 @@ const BarCharts = ({ query }: { query: IQueryString }) => {
     return data;
   }, [chartData?.data]);
 
+  const [hover, setHover] = useState(false);
+
+  const setMouse = () => setHover(true);
+  const unsetMouse = () => setHover(false);
+
   return (
     <div className="bg-white  flex flex-col  w-full  rounded-[16px] py-4 ">
       <div className="px-4 mb-4">
-        <p className="text-[#A1A1A1] font-montserrat text-[12px] tracking-[0.3px] font-[500]">
-          TOTAL FEES
-        </p>
+        <div className="flex relative items-center">
+          <p className="text-[#A1A1A1] -ml-1 font-montserrat text-[12px] tracking-[0.3px] font-[500]">
+            TOTAL FEES
+          </p>
+          <button className="cursor-pointer p-2 group">
+            <InfoSvg onMouseOver={setMouse} onMouseOut={unsetMouse} />
+          </button>
+          <div
+            className={`absolute top-6 z-50 tooltip w-[220px] whitespace-normal break-words rounded-lg  bg-[#2AA768] px-4 py-3 font-montserrat text-[12px] font-normal  text-white focus:outline-none ${
+              hover ? 'visible' : 'invisible'
+            }`}
+          >
+            Charges taken from the users when performing a transaction
+          </div>
+        </div>
         <h2 className="font-montserrat font-semibold tex-[18px] tracking-[0.5px] ">
           {barData}
         </h2>
